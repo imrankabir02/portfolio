@@ -2,32 +2,39 @@ import { EXPERIENCES } from "../constants"
 
 const Experience = () => {
     return (
-        <div id="experience" className="pb-4 border-b border-neutral-900">
-            <h1 className="my-20 text-4xl text-center">
-                Experience
+        <div id="experience" className="pb-12 text-white lg:pb-20 bg-gradient-to-r from-slate-925 to-gray-800">
+            <h1 className="my-20 text-4xl font-bold text-center text-blue-100">
+                My Experience
             </h1>
-            <div>
+            <div className="container mx-auto">
                 {EXPERIENCES.map((experience, index) => (
-                    <div key={index} className="flex flex-wrap mb-8 lg:justify-center">
-                        <div className="w-full lg:w-1/4">
-                            <p className="mb-2 text-sm text-neutral-400">
-                                {experience.year}
-                            </p>
+                    <div
+                        key={index}
+                        className={`flex flex-col lg:flex-row mb-12 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out bg-slate-910 hover:bg-gray-700 hover:scale-105 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                            }`}
+                    >
+                        {/* Year Section */}
+                        <div className="w-full p-6 text-center text-gray-100 rounded-t-lg bg-slate-950 lg:w-1/4 lg:rounded-t-none lg:rounded-l-lg lg:rounded-r-none">
+                            <p className="text-lg font-semibold">{experience.year}</p>
                         </div>
-                        <div className="w-full max-w-xl lg:w-3/4">
-                            <h6 className="mb-2">
-                                {experience.role} - {" "}
-                                <span>
-                                    {experience.company}
-                                </span>
+
+                        {/* Experience Content */}
+                        <div className="w-full p-6 lg:w-3/4">
+                            <h6 className="mb-2 text-xl font-semibold text-white">
+                                {experience.role} -{' '}
+                                <span className="text-indigo-400">{experience.company}</span>
                             </h6>
-                            <p className="mb-4 text-neutral-400">
+                            <p className="mb-4 leading-relaxed text-gray-300">
                                 {experience.description}
                             </p>
 
-                            <div className="flex flex-wrap gap-2">
+                            {/* Technologies Used */}
+                            <div className="flex flex-wrap gap-3">
                                 {experience.technologies.map((tech, idx) => (
-                                    <span key={idx} className="px-2 py-1 mt-4 mr-2 text-sm font-medium text-purple-600 rounded bg-neutral-900">
+                                    <span
+                                        key={idx}
+                                        className="px-3 py-1 mt-2 text-sm font-medium text-white bg-indigo-500 rounded-full shadow hover:bg-indigo-400"
+                                    >
                                         {tech}
                                     </span>
                                 ))}
@@ -40,4 +47,4 @@ const Experience = () => {
     )
 }
 
-export default Experience
+export default Experience;
