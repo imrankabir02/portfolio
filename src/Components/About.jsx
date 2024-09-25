@@ -17,7 +17,7 @@ const About = () => {
                     <img
                         src={aboutImg}
                         alt="Imran Kabir"
-                        className="object-cover w-64 h-64 transition-transform transform border-4 border-gray-700 rounded-full shadow-lg hover:scale-105 md:w-80 md:h-80 lg:w-96 lg:h-96"
+                        className="object-cover w-64 h-64 transition-all duration-500 transform border-4 border-gray-700 rounded-full shadow-lg hover:scale-105 md:w-80 md:h-80 lg:w-96 lg:h-96"
                     />
                 </div>
 

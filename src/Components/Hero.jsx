@@ -24,11 +24,11 @@ const Hero = () => {
                     <span className="block mt-6 text-3xl font-medium tracking-tight text-center text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text lg:text-4xl lg:text-left">
                         {MY_DETAILS.title}
                         <br />
-                    {/* </span> */}
+                        {/* </span> */}
 
-                    {/* Company */}
-                    {/* <span className="block mt-2 text-2xl font-light tracking-tight text-center text-indigo-400 lg:text-3xl lg:text-left"> */}
-                        
+                        {/* Company */}
+                        {/* <span className="block mt-2 text-2xl font-light tracking-tight text-center text-indigo-400 lg:text-3xl lg:text-left"> */}
+
                         <a href="https://codextric.com/" target="_blank" rel="noopener noreferrer">
                             {MY_DETAILS.company}
                         </a>
@@ -36,7 +36,8 @@ const Hero = () => {
 
                     {/* MY_DETAILS Information */}
                     <p className="max-w-xl py-6 text-lg leading-relaxed text-center text-gray-300 lg:text-left">
-                        <div className="p-6 space-y-6 bg-gray-800 rounded-lg shadow-md">
+                        {/* Box with transform and transition effects */}
+                        <div className="p-6 space-y-6 transition-all duration-500 transform bg-gray-800 rounded-lg shadow-md hover:scale-105 hover:bg-gray-700">
 
                             {/* Email */}
                             <div className="flex items-center gap-4">
@@ -68,18 +69,19 @@ const Hero = () => {
                         </div>
                     </p>
 
+
                     {/* Social Links */}
                     <div className="flex items-center gap-6 text-3xl">
-                        <a href="https://www.linkedin.com/in/imrankabir02" target="_blank" rel="noopener noreferrer" className="transition-colors text-sky-500 hover:text-sky-400">
+                        <a href="https://www.linkedin.com/in/imrankabir02" target="_blank" rel="noopener noreferrer" className="transition-all duration-500 transform text-sky-500 hover:text-sky-400 hover:scale-110">
                             <FaLinkedin />
                         </a>
-                        <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-colors hover:text-gray-300">
+                        <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover:text-gray-300 hover:scale-110">
                             <FaGithub />
                         </a>
-                        <a href="https://www.facebook.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-blue-600 transition-colors hover:text-blue-400">
+                        <a href="https://www.facebook.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-blue-600 transition-all duration-500 transform hover:text-blue-400 hover:scale-110">
                             <FaFacebook />
                         </a>
-                        <a href="https://www.instagram.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-pink-600 transition-colors hover:text-pink-400">
+                        <a href="https://www.instagram.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-pink-600 transition-all duration-500 transform hover:text-pink-400 hover:scale-110">
                             <FaInstagram />
                         </a>
                     </div>
@@ -90,7 +92,7 @@ const Hero = () => {
                     <img
                         src={profilePic}
                         alt="Imran Kabir"
-                        className="object-cover w-48 h-48 transition-transform transform border-4 border-gray-700 rounded-full shadow-xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96"
+                        className="object-cover w-48 h-48 transition-all duration-500 transform border-4 border-gray-700 rounded-full shadow-xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96"
                     />
                 </div>
             </div>
