@@ -8,7 +8,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="fixed top-0 z-50 w-full text-white shadow-lg bg-gradient-to-r from-slate-900 to-slate-1000">
+        <nav className="fixed top-0 z-50 w-4/5 text-white shadow-lg bg-gradient-to-r from-slate-900 to-slate-1000">
             <div className="container flex items-center justify-between h-16 px-6 mx-auto">
                 {/* Desktop Navigation Links */}
                 <div className="justify-center hidden w-full space-x-8 text-lg font-medium md:flex">
