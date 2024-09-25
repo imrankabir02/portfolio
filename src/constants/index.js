@@ -23,7 +23,21 @@ export const EXPERIENCES = [
     company: "Phone Tech BD Ltd",
     description: `Developing and maintaining server-side applications using PHP, Laravel, and MySQL.
     Utilizing Livewire occasionally for front-end components. Delivering high-quality code with a focus on continuous improvement`,
-    technologies: ["Php", "Laravel", "Livewire", "MySQL", "Javascript"],
+    technologies: [
+      "Php",
+      "Laravel",
+      "Livewire",
+      "MySQL",
+      "Javascript",
+      "Github",
+    ],
+  },
+  {
+    year: "JJun. 2023 – Aug. 2023",
+    role: "Internship",
+    company: "Unicorn Software and Solutions ",
+    description: `Collaborated on back-end development and performed SQL database CRUD operations.`,
+    technologies: ["Php", "Laravel", "MySQL", "Javascript", "Github"],
   },
 ];
 
@@ -32,26 +46,26 @@ export const EDUCATIONS = [
     title: "B.Sc in CSE",
     name: "Khulna University",
     location: "Khulna-9208, Bangladesh",
-    year: "January, 2018 - March 2023"
+    year: "January, 2018 - March 2023",
   },
   {
     title: "HSC",
     name: "Digraj Degree College",
     location: "Mongla, Bagerhat",
-    year: "July, 2014 - August, 2016"
+    year: "July, 2014 - August, 2016",
   },
   {
     title: "SSC",
     name: "Sreefaltala Pilot Secondary School",
     location: "Rampal, Bagerhat",
-    year: "Feruary 2012 - June 2014"
+    year: "Feruary 2012 - June 2014",
   },
   {
     title: "JSC",
     name: "Hurka SN High School",
     location: "Rampal, Bagerhat",
-    year: "January, 2009 - February, 2012"
-  }
+    year: "January, 2009 - February, 2012",
+  },
 ];
 
 export const PROJECTS = [
