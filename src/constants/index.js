@@ -33,7 +33,7 @@ export const EXPERIENCES = [
     ],
   },
   {
-    year: "JJun. 2023 – Aug. 2023",
+    year: "June 2023 – August 2023",
     role: "Internship",
     company: "Unicorn Software and Solutions ",
     description: `Collaborated on back-end development and performed SQL database CRUD operations.`,
