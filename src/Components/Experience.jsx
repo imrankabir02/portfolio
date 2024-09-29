@@ -1,4 +1,4 @@
-import { EXPERIENCES } from "../constants"
+import { EXPERIENCES } from "../constants";
 
 const Experience = () => {
     return (
@@ -6,7 +6,7 @@ const Experience = () => {
             <h1 className="my-20 text-4xl font-bold text-center text-blue-100">
                 My Experience
             </h1>
-            <div className="container mx-auto">
+            <div className="px-6 mx-auto lg:flex-row lg:items-center lg:justify-between max-w-7xl">
                 {EXPERIENCES.map((experience, index) => (
                     <div
                         key={index}
@@ -14,12 +14,12 @@ const Experience = () => {
                             }`}
                     >
                         {/* Year Section */}
-                        <div className="w-full p-6 text-center text-gray-100 rounded-t-lg bg-slate-950 lg:w-1/4 lg:rounded-t-none lg:rounded-l-lg lg:rounded-r-none">
+                        <div className="w-full p-6 text-center text-gray-100 rounded-t-lg bg-slate-950 lg:w-1/5 lg:rounded-t-none lg:rounded-l-lg lg:rounded-r-none">
                             <p className="text-lg font-semibold">{experience.year}</p>
                         </div>
 
                         {/* Experience Content */}
-                        <div className="w-full p-6 lg:w-3/4">
+                        <div className="w-full p-6 lg:w-4/5"> {/* Adjusted width here */}
                             <h6 className="mb-2 text-xl font-semibold text-white">
                                 {experience.role} -{' '}
                                 <span className="text-indigo-400">{experience.company}</span>
@@ -44,7 +44,7 @@ const Experience = () => {
                 ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default Experience;
