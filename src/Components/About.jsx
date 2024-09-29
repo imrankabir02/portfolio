@@ -1,4 +1,4 @@
-import aboutImg from "../assets/Kabir.png";
+import aboutImg from "../assets/image.png";
 import { ABOUT_TEXT } from "../constants";
 import cvFile from "../assets/ImranCV.pdf";
 import { SKILLSETS } from "../constants"

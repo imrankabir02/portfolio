@@ -1,5 +1,5 @@
 import { MY_DETAILS } from "../constants";
-import profilePic from '../assets/image.png';
+import profilePic from '../assets/Kabir.png';
 import { MdOutlineMailOutline } from "react-icons/md";
 import { MdPhone } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";

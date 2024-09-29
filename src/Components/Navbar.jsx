@@ -10,12 +10,12 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if(isOpen) {
+            if (isOpen) {
                 setIsOpen(false);
             }
         };
         window.addEventListener('scroll', handleScroll);
-    
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -54,6 +54,9 @@ const Navbar = () => {
                         <li><a href="#experience" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Experience</a></li>
                         <li><a href="#educations" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Educations</a></li>
                         <li><a href="#hero" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Contact Me</a></li>
+                        <a href={cvFile}
+                            download="ImranKabirCV.pdf" className="text-lg text-gray-300 transition-all duration-500 transform hover:scale-125 hover:text-pink-400"
+                        >My CV</a>
                     </ul>
                 </div>
             )}
