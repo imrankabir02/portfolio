@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cvFile from '../assets/ImranCV.pdf'
 
 const Navbar = () => {
@@ -7,6 +7,20 @@ const Navbar = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if(isOpen) {
+                setIsOpen(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [isOpen]);
+
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 w-full text-white shadow-lg bg-gradient-to-r from-slate-900 to-slate-1000">
