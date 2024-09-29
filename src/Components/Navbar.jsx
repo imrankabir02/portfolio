@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cvFile from '../assets/ImranCV.pdf'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="fixed top-0 z-50 w-4/5 text-white shadow-lg bg-gradient-to-r from-slate-900 to-slate-1000">
+        <nav className="fixed top-0 left-0 right-0 z-50 w-full text-white shadow-lg bg-gradient-to-r from-slate-900 to-slate-1000">
             <div className="container flex items-center justify-between h-16 px-6 mx-auto">
                 {/* Desktop Navigation Links */}
                 <div className="justify-center hidden w-full space-x-8 text-lg font-medium md:flex">
@@ -17,6 +18,9 @@ const Navbar = () => {
                     <a href="#experience" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Experience</a>
                     <a href="#educations" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Educations</a>
                     <a href="#hero" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Contact Me</a>
+                    <a href={cvFile}
+                        download="ImranKabirCV.pdf" className="text-lg text-gray-300 transition-all duration-500 transform hover:scale-125 hover:text-pink-400"
+                    >My CV</a>
                 </div>
 
                 {/* Mobile Menu Button */}

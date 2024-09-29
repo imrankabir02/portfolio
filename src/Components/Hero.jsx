@@ -3,10 +3,8 @@ import profilePic from '../assets/image.png';
 import { MdOutlineMailOutline } from "react-icons/md";
 import { MdPhone } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { SiLeetcode, SiHackerrank } from "react-icons/si";
 
 const Hero = () => {
     return (
@@ -78,11 +76,11 @@ const Hero = () => {
                         <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover:text-gray-300 hover:scale-110">
                             <FaGithub />
                         </a>
-                        <a href="https://www.facebook.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-blue-600 transition-all duration-500 transform hover:text-blue-400 hover:scale-110">
-                            <FaFacebook />
+                        <a href="https://leetcode.com/u/imrankabir02/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 transition-all duration-500 transform hover:text-yellow-400 hover:scale-110">
+                        <SiLeetcode />
                         </a>
-                        <a href="https://www.instagram.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-pink-600 transition-all duration-500 transform hover:text-pink-400 hover:scale-110">
-                            <FaInstagram />
+                        <a href="https://www.hackerrank.com/profile/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-green-600 transition-all duration-500 transform hover:text-green-400 hover:scale-110">
+                            <SiHackerrank />
                         </a>
                     </div>
                 </div>
