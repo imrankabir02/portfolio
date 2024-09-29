@@ -11,7 +11,21 @@ export const MY_DETAILS = {
 
 // export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
-export const ABOUT_TEXT = `I am a Computer Science graduate from Khulna University with a focus on backend development and full-stack web technologies. Currently working as a Backend Developer at Phone Tech BD Ltd, I specialize in building efficient server-side applications using Laravel, PHP, and MySQL. My internship at Unicorn Software and Solutions enhanced my skills in configuring web environments and collaborating on back-end development. Proficient in C/C++, Java, JavaScript, and PHP, I have experience developing responsive web applications and personal portfolios. I'm passionate about problem-solving, regularly practicing on LeetCode and HackerRank.`;
+export const ABOUT_TEXT = `I am a Backend Developer specializing in Laravel, PHP, and MySQL, with experience in full-stack web development and problem-solving. I have a strong foundation in backend technologies and a passion for creating efficient server-side applications. My Skillsets: `;
+
+export const SKILLSETS = [
+  "PHP (Laravel, Livewire)",
+  "MySQL",
+  "Java",
+  "C/C++",
+  "JavaScript (React, Alpine.js)",
+  "HTML",
+  "CSS (TailwindCSS)",
+  "Git, Version Control Systems",
+  "API Development & Integration",
+  "Vite, PostCSS",
+  "Problem-solving (LeetCode, HackerRank)",
+];
 
 export const EXPERIENCES = [
   {
@@ -25,7 +39,7 @@ export const EXPERIENCES = [
       "Laravel",
       "Livewire",
       "MySQL",
-      "Javascript",gg
+      "Javascript",
       "Github",
     ],
   },

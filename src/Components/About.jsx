@@ -1,6 +1,7 @@
 import aboutImg from "../assets/Kabir.png";
 import { ABOUT_TEXT } from "../constants";
-import cvFile from "../assets/ImranCV.pdf"
+import cvFile from "../assets/ImranCV.pdf";
+import { SKILLSETS } from "../constants"
 
 const About = () => {
     return (
@@ -26,6 +27,14 @@ const About = () => {
                     <p className="max-w-xl py-6 text-lg font-light leading-relaxed text-gray-300">
                         {ABOUT_TEXT}
                     </p>
+
+                    <div className="flex flex-wrap gap-3">
+                        {SKILLSETS.map((skill, index) => (
+                            <span key={index} className="px-3 py-1 mt-2 text-sm font-medium text-white bg-indigo-500 rounded-full shadow hover:bg-indigo-400">
+                                {skill}
+                            </span>
+                        ))}
+                    </div>
 
                     {/* CV Download Button */}
                     <a
