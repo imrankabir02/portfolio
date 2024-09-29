@@ -9,7 +9,7 @@ export const MY_DETAILS = {
   address: "M.A Bari St, Sonadanga, Khulna",
 };
 
-export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
+// export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
 export const ABOUT_TEXT = `I am a Computer Science graduate from Khulna University with a focus on backend development and full-stack web technologies. Currently working as a Backend Developer at Phone Tech BD Ltd, I specialize in building efficient server-side applications using Laravel, PHP, and MySQL. My internship at Unicorn Software and Solutions enhanced my skills in configuring web environments and collaborating on back-end development. Proficient in C/C++, Java, JavaScript, and PHP, I have experience developing responsive web applications and personal portfolios. I'm passionate about problem-solving, regularly practicing on LeetCode and HackerRank.`;
 
@@ -25,7 +25,7 @@ export const EXPERIENCES = [
       "Laravel",
       "Livewire",
       "MySQL",
-      "Javascript",
+      "Javascript",gg
       "Github",
     ],
   },

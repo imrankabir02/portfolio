@@ -12,7 +12,7 @@ const Skills = () => {
             <div className="space-y-16">
                 {/* Languages */}
                 <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-semibold text-center">Languages</h2>
+                    <h2 className="text-xl font-semibold text-center">Languages</h2>
                     <div className="flex flex-wrap justify-center gap-6 mt-4">
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiJsBadge className="text-6xl text-yellow-500" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiPhp className="text-6xl text-purple-700" /></div>
@@ -28,7 +28,7 @@ const Skills = () => {
 
                 {/* Libraries and Frameworks */}
                 <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-semibold text-center">Libraries and Frameworks</h2>
+                    <h2 className="text-xl font-semibold text-center">Libraries and Frameworks</h2>
                     <div className="flex flex-wrap justify-center gap-6 mt-4">
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><FaLaravel className="text-6xl text-red-600" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiReact className="text-6xl text-cyan-400" /></div>
@@ -39,7 +39,7 @@ const Skills = () => {
 
                 {/* Technologies and Databases */}
                 <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-semibold text-center">Technologies and Databases</h2>
+                    <h2 className="text-xl font-semibold text-center">Technologies and Databases</h2>
                     <div className="flex flex-wrap justify-center gap-6 mt-4">
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiHtml5 className="text-6xl text-red-500" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiCss3 className="text-6xl text-blue-500" /></div>
@@ -50,7 +50,7 @@ const Skills = () => {
 
                 {/* Development Tools */}
                 <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-semibold text-center">Development Tools</h2>
+                    <h2 className="text-xl font-semibold text-center">Development Tools</h2>
                     <div className="flex flex-wrap justify-center gap-6 mt-4">
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><FaGitAlt className="text-6xl text-orange-600" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><SiVisualstudiocode className="text-6xl text-blue-600" /></div>
@@ -59,7 +59,7 @@ const Skills = () => {
 
                 {/* Operating Systems */}
                 <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-semibold text-center">Operating Systems</h2>
+                    <h2 className="text-xl font-semibold text-center">Operating Systems</h2>
                     <div className="flex flex-wrap justify-center gap-6 mt-4">
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><FaWindows className="text-6xl text-blue-600" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><SiUbuntu className="text-6xl text-orange-600" /></div>
