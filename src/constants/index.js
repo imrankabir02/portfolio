@@ -23,7 +23,6 @@ export const SKILLSETS = [
   "CSS (TailwindCSS)",
   "Git, Version Control Systems",
   "API Development & Integration",
-  "Vite, PostCSS",
   "Problem-solving (LeetCode, HackerRank)",
 ];
 
