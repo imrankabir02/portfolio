@@ -27,7 +27,7 @@ const Hero = () => {
                         {/* Company */}
                         {/* <span className="block mt-2 text-2xl font-light tracking-tight text-center text-indigo-400 lg:text-3xl lg:text-left"> */}
 
-                        <a href="https://codextric.com/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://codextric.com/about/" target="_blank" rel="noopener noreferrer">
                             {MY_DETAILS.company}
                         </a>
                     </span>
@@ -77,7 +77,7 @@ const Hero = () => {
                             <FaGithub />
                         </a>
                         <a href="https://leetcode.com/u/imrankabir02/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 transition-all duration-500 transform hover:text-yellow-400 hover:scale-110">
-                        <SiLeetcode />
+                            <SiLeetcode />
                         </a>
                         <a href="https://www.hackerrank.com/profile/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-green-600 transition-all duration-500 transform hover:text-green-400 hover:scale-110">
                             <SiHackerrank />
