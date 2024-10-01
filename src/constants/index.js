@@ -49,6 +49,13 @@ export const EXPERIENCES = [
     description: `Collaborated on back-end development and performed SQL database CRUD operations.`,
     technologies: ["Php", "Laravel", "MySQL", "Javascript", "Github"],
   },
+  {
+    year: "July 2022 - October 2022 ",
+    role: "Internship",
+    company: "Khulna University",
+    description: `Wroked in Software Management and Data Management`,
+    technologies: ["Web", "Data", "Network"],
+  },
 ];
 
 export const EDUCATIONS = [
@@ -75,6 +82,18 @@ export const EDUCATIONS = [
     name: "Hurka SN High School",
     location: "Rampal, Bagerhat",
     year: "January, 2009 - February, 2012",
+  },
+  {
+    title: "PSC",
+    name: "Hurka Govt. Primary School",
+    location: "Rampal, Bagerhat",
+    year: "July, 2007 - December, 2008",
+  },
+  {
+    title: "Primary",
+    name: "Shisu Mongal Govt. Primary School",
+    location: "Cantonment, Dhaka",
+    year: "January, 2004 - July, 2007",
   },
 ];
 
