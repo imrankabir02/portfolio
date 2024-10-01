@@ -63,7 +63,7 @@ export const EDUCATIONS = [
     title: "B.Sc in CSE",
     name: "Khulna University",
     location: "Khulna-9208, Bangladesh",
-    year: "January, 2018 - March 2023",
+    year: "January, 2018 - March 2024",
   },
   {
     title: "HSC",
