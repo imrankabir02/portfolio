@@ -52,9 +52,9 @@ export const EXPERIENCES = [
   {
     year: "July 2022 - October 2022 ",
     role: "Internship",
-    company: "Khulna University",
+    company: "ICT Cell, Khulna University",
     description: `Wroked in Software Management and Data Management`,
-    technologies: ["Web", "Data", "Network"],
+    technologies: ["Web", "Data", "Network", "Software Infrastructure"],
   },
 ];
 
