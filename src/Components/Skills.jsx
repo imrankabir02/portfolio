@@ -1,4 +1,4 @@
-import { DiReact, DiJsBadge, DiPhp, DiMysql, DiCss3, DiHtml5 } from "react-icons/di";
+import { DiReact, DiJsBadge, DiPhp, DiMysql, DiCss3, DiHtml5, DiCodeigniter } from "react-icons/di";
 import { FaLaravel, FaJava, FaGitAlt, FaLinux, FaWindows, FaPython } from "react-icons/fa";
 import { SiTailwindcss, SiBootstrap, SiVisualstudiocode, SiC, SiUbuntu } from "react-icons/si";
 
@@ -31,6 +31,7 @@ const Skills = () => {
                     <h2 className="text-xl font-semibold text-center">Libraries and Frameworks</h2>
                     <div className="flex flex-wrap justify-center gap-6 mt-4">
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><FaLaravel className="text-6xl text-red-600" /></div>
+                        <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiCodeigniter className="text-6xl text-red-600" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><DiReact className="text-6xl text-cyan-400" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><SiTailwindcss className="text-6xl text-teal-400" /></div>
                         <div className="p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-outhover:bg-slate-600"><SiBootstrap className="text-6xl text-purple-500" /></div>
