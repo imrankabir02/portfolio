@@ -1,4 +1,4 @@
-import project1 from "../assets/projects/project-1.jpg";
+import project1 from "../assets/projects/bookStore.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
@@ -99,10 +99,10 @@ export const EDUCATIONS = [
 
 export const PROJECTS = [
   {
-    title: "E-Commerce Website",
+    title: "Book Store",
     image: project1,
     description:
-      "A fully functional e-commerce website with features like product listing, shopping cart, and user authentication.",
-    technologies: ["HTML", "CSS", "React", "Node.js", "MongoDB"],
+      "I am building this full functional web application using MERN stack. Soon will be finished. Till then stay tuned...",
+    technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
   },
 ];
