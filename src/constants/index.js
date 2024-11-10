@@ -1,4 +1,5 @@
 import project1 from "../assets/projects/bookStore.png";
+import project2 from "../assets/projects/project2.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
@@ -100,7 +101,18 @@ export const EDUCATIONS = [
 export const PROJECTS = [
   {
     title: "Book Store",
+    appLink: "https://book-store-mern-psi.vercel.app",
+    gitLink: "https://github.com/imrankabir02/book-store-MERN.git",
     image: project1,
+    description:
+      "I am building this full functional web application using MERN stack. Soon will be finished. Till then stay tuned...",
+    technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
+  },
+  {
+    title: "Chat App",
+    appLink: "https://live-chat-delta-pink.vercel.app",
+    gitLink: "https://github.com/imrankabir02/LiveChat.git",
+    image: project2,
     description:
       "I am building this full functional web application using MERN stack. Soon will be finished. Till then stay tuned...",
     technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
