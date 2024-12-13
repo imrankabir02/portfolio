@@ -9,7 +9,7 @@ const Projects = () => {
             <div>
                 {PROJECTS.map((project, index) => (
                     <div className="transition-all duration-500 ease-in-out transform bg-slate-910 hover:bg-slate-910 hover:scale-105">
-                        <div key={index} className="flex flex-wrap mb-8 lg:justify-center">
+                        <div key={index} className="flex flex-wrap mb-8 gap-x-10 lg:justify-center">
                             <div className="w-full lg:w-1/4">
                                 <div>
                                     <a href={project.appLink}>
