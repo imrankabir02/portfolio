@@ -1,5 +1,6 @@
 import project1 from "../assets/projects/bookStore.png";
 import project2 from "../assets/projects/project2.png";
+import project3 from "../assets/projects/project3.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
@@ -99,6 +100,15 @@ export const EDUCATIONS = [
 ];
 
 export const PROJECTS = [
+  {
+    title: "Task Manager",
+    appLink: "https://task-manager-live.vercel.app/tasks",
+    gitLink: "https://github.com/imrankabir02/task-manager.git",
+    image: project3,
+    description:
+      "A full-stack task management application built with Django REST Framework and React with TypeScript.",
+    technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
+  },
   {
     title: "Book Store",
     appLink: "https://book-store-mern-psi.vercel.app",
