@@ -107,7 +107,7 @@ export const PROJECTS = [
     image: project3,
     description:
       "A full-stack task management application built with Django REST Framework and React with TypeScript.",
-    technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
+    technologies: ["React", "TailwindCSS", "Django", "RestAPI", "PostgreSQL"],
   },
   {
     title: "Book Store",
