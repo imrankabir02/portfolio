@@ -2,7 +2,7 @@ import { PROJECTS } from "../constants"
 
 const Projects = () => {
     return (
-        <div className="pb-12 text-white border-b border-neutral-800 lg:pb-20 bg-gradient-to-r from-slate-925 to-gray-900">
+        <div id="projects" className="pb-12 text-white border-b border-neutral-800 lg:pb-20 bg-gradient-to-r from-slate-925 to-gray-900">
             <h1 className="my-20 text-4xl font-semibold text-center text-white">
                 Projects
             </h1>

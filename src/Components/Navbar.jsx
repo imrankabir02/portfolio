@@ -29,6 +29,7 @@ const Navbar = () => {
                 <div className="justify-center hidden w-full space-x-8 text-lg font-medium md:flex">
                     <a href="#about" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">About</a>
                     <a href="#skills" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Skills</a>
+                    <a href="#projects" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Projects</a>
                     <a href="#experience" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Experience</a>
                     <a href="#educations" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Educations</a>
                     <a href="#hero" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Contact Me</a>
@@ -51,6 +52,7 @@ const Navbar = () => {
                     <ul className="flex flex-col items-center space-y-4 text-lg">
                         <li><a href="#about" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">About</a></li>
                         <li><a href="#skills" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Skills</a></li>
+                        <li><a href="#projects" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Projects</a></li>
                         <li><a href="#experience" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Experience</a></li>
                         <li><a href="#educations" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Educations</a></li>
                         <li><a href="#hero" className="transition-all duration-500 transform hover:text-indigo-400 hover:scale-110">Contact Me</a></li>
