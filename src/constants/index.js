@@ -17,13 +17,15 @@ export const ABOUT_TEXT = `I am a Backend Developer specializing in Laravel, PHP
 
 export const SKILLSETS = [
   "PHP (Laravel, Livewire)",
+  "Python (Django)",
   "MySQL",
+  "PostgreSQL",
   "Java",
   "C/C++",
   "JavaScript (React, Alpine.js)",
   "HTML",
   "CSS (TailwindCSS)",
-  "Git, Version Control Systems",
+  "Version Control System (Git)",
   "API Development & Integration",
   "Problem-solving (LeetCode, HackerRank)",
 ];
