@@ -1,13 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    font-family: "Georgia", serif;
+  font-family: "Georgia", serif;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .skillset {
+    @apply p-4 transition-all duration-500 transform border shadow-lg rounded-xl border-neutral-600 hover:scale-125 ease-in-out hover:bg-slate-600;
+  }
 }
