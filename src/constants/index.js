@@ -1,6 +1,7 @@
 import project1 from "../assets/projects/bookStore.png";
 import project2 from "../assets/projects/project2.png";
 import project3 from "../assets/projects/project3.png";
+import project4 from "../assets/projects/project4.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
@@ -102,6 +103,15 @@ export const EDUCATIONS = [
 ];
 
 export const PROJECTS = [
+  {
+    title: "Shifttrek",
+    appLink: "https://www.shifttrek.com/",
+    gitLink: "https://www.shifttrek.com/",
+    image: project4,
+    description:
+      "Shifttrek is a streamlined employee management system designed to optimize workforce scheduling and operations.",
+    technologies: ["Laravel", "Livewire", "AlpineJS", "TailwindCSS", "MySQL"],
+  },
   {
     title: "Task Manager",
     appLink: "https://task-manager-live.vercel.app/tasks",
