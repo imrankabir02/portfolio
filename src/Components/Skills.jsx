@@ -39,7 +39,7 @@ const Skills = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <DiHtml5 className="text-4xl text-orange-500" title="HTML5" />
               <DiCss3 className="text-4xl text-blue-500" title="CSS3" />
-              <DiMysql className="text-4xl text-blue-600" title="MySQL" />
+              <DiMysql className="text-4xl text-blue-900" title="MySQL" />
             </div>
           </div>
 
