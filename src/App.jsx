@@ -52,7 +52,7 @@ const App = () => {
         {/* Main content */}
         <div className="container relative px-8 mx-auto">
           <Navbar />
-          <main className="relative space-y-24 md:space-y-32">
+          <main className="relative space-y-2 md:space-y-2">
             <Hero />
             <About />
             <Skills />
