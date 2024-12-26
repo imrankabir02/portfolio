@@ -4,7 +4,7 @@ const Experience = () => {
   return (
     <div id="experience" className="py-12 lg:py-20">
       <h1 className="mb-12 text-4xl font-bold text-center text-white">
-        My Experience
+        Experiences
       </h1>
       <div className="max-w-6xl px-6 mx-auto space-y-8">
         {EXPERIENCES.map((experience, index) => (
