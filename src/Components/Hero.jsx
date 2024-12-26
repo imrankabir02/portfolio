@@ -36,7 +36,7 @@ const Hero = () => {
                     {/* MY_DETAILS Information */}
                     <p className="max-w-xl py-6 text-lg leading-relaxed text-center text-white lg:text-left">
                         {/* Box with transform and transition effects */}
-                        <div className="p-6 space-y-6 transition-all duration-500 transform rounded-lg shadow-lg bgcard hover:scale-105 hover:bg-gray-700">
+                        <div className="p-6 space-y-6 transition-all duration-500 transform rounded-lg shadow-lg bgcard">
 
                             {/* Email */}
                             <div className="flex items-center gap-4">
