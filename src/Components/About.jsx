@@ -5,7 +5,7 @@ import { SKILLSETS } from "../constants";
 const About = () => {
   return (
     <div id="about" className="py-12 lg:py-20">
-      <div className="max-w-6xl px-6 mx-auto">
+      <div className="max-w-6xl px-6 mx-auto ">
         <h1 className="mb-8 text-4xl font-bold text-center text-white">
           About <span className="text-blue-400">Me</span>
         </h1>
