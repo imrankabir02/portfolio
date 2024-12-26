@@ -13,7 +13,7 @@ export const MY_DETAILS = {
 
 // export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
-export const ABOUT_TEXT = `I am a Backend Developer specializing in Laravel, PHP, and MySQL, with experience in full-stack web development and problem-solving. I have a strong foundation in backend technologies and a passion for creating efficient server-side applications. My Skillsets: `;
+export const ABOUT_TEXT = `Hello, I am Mridha Imran Kabir, a Full-stack back-end developer. I worked on 2 complete projects from the scratch and worked on multiple features on 3 different projects at, my current company, Phone Tech BD Ltd. Mainly, I worked on TALL stack (Tailwind CSS, Alpinejs, Laravel, Livewire) and used Nodejs, Django, React and Vue 3 for my personal purpose. I do problem solving in leetcode and hackerrank. I am looking for a position where I can grow my skills and contribute to the greater community. My Skillsets: `;
 
 export const SKILLSETS = [
   "PHP (Laravel, Livewire)",

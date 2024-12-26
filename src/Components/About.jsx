@@ -1,54 +1,42 @@
-import aboutImg from "../assets/image.png";
 import { ABOUT_TEXT } from "../constants";
 import cvFile from "../assets/ImranCV.pdf";
-import { SKILLSETS } from "../constants"
+import { SKILLSETS } from "../constants";
 
 const About = () => {
-    return (
-        <div id="about" className="pb-12 text-white border-b border-neutral-800 lg:pb-20 bg-gradient-to-r from-slate-925 to-gray-900">
-            <h1 className="my-20 text-4xl font-bold text-center">
-                About<span className="text-indigo-400"> Me</span>
-            </h1>
+  return (
+    <div id="about" className="py-12 lg:py-20">
+      <div className="max-w-6xl px-6 mx-auto">
+        <h1 className="mb-8 text-4xl font-bold text-center text-white">
+          About <span className="text-blue-400">Me</span>
+        </h1>
 
-            {/* Main container for image and text */}
-            <div className="flex flex-col px-6 mx-auto lg:flex-row lg:items-center lg:justify-between max-w-7xl">
+        <div className="p-8 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
+          <p className="mb-6 text-lg font-light leading-relaxed text-white">{ABOUT_TEXT}</p>
 
-                {/* Left side - Image */}
-                <div className="flex justify-center w-full mb-8 lg:w-1/2 lg:justify-start lg:mb-0">
-                    <img
-                        src={aboutImg}
-                        alt="Imran Kabir"
-                        className="object-cover w-64 h-64 transition-all duration-500 transform border-4 border-gray-700 rounded-full shadow-lg hover:scale-105 md:w-80 md:h-80 lg:w-96 lg:h-96"
-                    />
-                </div>
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {SKILLSETS.map((skill, index) => (
+              <span
+                key={index}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-full"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
 
-                {/* Right side - Text */}
-                <div className="flex flex-col justify-center w-full text-center lg:w-1/2 lg:justify-start lg:items-start lg:text-left">
-                    <p className="max-w-xl py-6 text-lg font-light leading-relaxed text-gray-300">
-                        {ABOUT_TEXT}
-                    </p>
-
-                    <div className="flex flex-wrap gap-3">
-                        {SKILLSETS.map((skill, index) => (
-                            <span key={index} className="px-3 py-1 mt-2 text-sm font-medium text-white bg-indigo-500 rounded-full shadow hover:bg-indigo-400">
-                                {skill}
-                            </span>
-                        ))}
-                    </div>
-
-                    {/* CV Download Button */}
-                    <a
-                        href={cvFile}
-                        download="Imran_Kabir_CV.pdf"
-                        className="px-8 py-3 mt-4 text-lg font-semibold text-white transition-transform rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-indigo-500 hover:bg-indigo-600 hover:scale-105"
-                    >
-                        Download CV
-                    </a>
-                </div>
-            </div>
+          <div className="flex justify-center">
+            <a
+              href={cvFile}
+              download="Imran_Kabir_CV.pdf"
+              className="px-8 py-3 text-lg font-semibold text-white transition-transform rounded-full shadow-lg bg-gradient-to-r from-blue-600 to-indigo-500 hover:scale-105"
+            >
+              Download CV
+            </a>
+          </div>
         </div>
-
-    );
+      </div>
+    </div>
+  );
 };
 
 export default About;

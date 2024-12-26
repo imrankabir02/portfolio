@@ -8,7 +8,8 @@ import { SiLeetcode, SiHackerrank } from "react-icons/si";
 
 const Hero = () => {
     return (
-        <div id="hero" className="pb-12 text-white border-b border-neutral-800 lg:pb-20 bg-gradient-to-r from-slate-925 to-slate-1000">
+        <div id="contactme" className="py-12 lg:py-20">
+            <div className="pb-12 text-white border-b border-neutral-800 lg:pb-20 bg-gradient-to-r from-slate-925 to-slate-1000">
             {/* Main container */}
             <div className="flex flex-col px-6 py-12 mx-auto lg:flex-row lg:items-center lg:justify-between max-w-7xl">
                 {/* Left side - Text content */}
@@ -33,16 +34,16 @@ const Hero = () => {
                     </span>
 
                     {/* MY_DETAILS Information */}
-                    <p className="max-w-xl py-6 text-lg leading-relaxed text-center text-gray-300 lg:text-left">
+                    <p className="max-w-xl py-6 text-lg leading-relaxed text-center text-white lg:text-left">
                         {/* Box with transform and transition effects */}
-                        <div className="p-6 space-y-6 transition-all duration-500 transform bg-gray-800 rounded-lg shadow-md hover:scale-105 hover:bg-gray-700">
+                        <div className="p-6 space-y-6 transition-all duration-500 transform rounded-lg shadow-lg bgcard hover:scale-105 hover:bg-gray-700">
 
                             {/* Email */}
                             <div className="flex items-center gap-4">
                                 <MdOutlineMailOutline className="text-2xl text-pink-500" />
                                 <a
                                     href={`mailto:${MY_DETAILS.email}`}
-                                    className="text-lg text-gray-300 transition-colors hover:text-pink-400"
+                                    className="text-lg text-white transition-colors hover:text-pink-400"
                                 >
                                     {MY_DETAILS.email}
                                 </a>
@@ -53,7 +54,7 @@ const Hero = () => {
                                 <MdPhone className="text-2xl text-purple-500" />
                                 <a
                                     href={`tel:${MY_DETAILS.phoneNo}`}
-                                    className="text-lg text-gray-300 transition-colors hover:text-purple-400"
+                                    className="text-lg text-white transition-colors hover:text-purple-400"
                                 >
                                     {MY_DETAILS.phoneNo}
                                 </a>
@@ -62,7 +63,7 @@ const Hero = () => {
                             {/* Address */}
                             <div className="flex items-center gap-4">
                                 <FaLocationDot className="text-2xl text-sky-500" />
-                                <span className="text-lg text-gray-300">{MY_DETAILS.address}</span>
+                                <span className="text-lg text-white">{MY_DETAILS.address}</span>
                             </div>
                         </div>
                     </p>
@@ -73,7 +74,7 @@ const Hero = () => {
                         <a href="https://www.linkedin.com/in/imrankabir02" target="_blank" rel="noopener noreferrer" className="transition-all duration-500 transform text-sky-500 hover:text-sky-400 hover:scale-110">
                             <FaLinkedin />
                         </a>
-                        <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover:text-gray-300 hover:scale-110">
+                        <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover:text-white hover:scale-110">
                             <FaGithub />
                         </a>
                         <a href="https://leetcode.com/u/imrankabir02/" target="_blank" rel="noopener noreferrer" className="text-yellow-600 transition-all duration-500 transform hover:text-yellow-400 hover:scale-110">
@@ -90,12 +91,12 @@ const Hero = () => {
                     <img
                         src={profilePic}
                         alt="Imran Kabir"
-                        className="object-cover w-48 h-48 transition-all duration-500 transform border-4 border-gray-700 rounded-full shadow-xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96"
+                        className="object-cover w-48 h-48 transition-all duration-500 transform shadow-xl rounded-3xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-auto xl:h-auto"
                     />
                 </div>
             </div>
         </div>
-
+</div>
     );
 };
 

@@ -1,43 +1,37 @@
 import { EDUCATIONS } from "../constants";
 
 const Educations = () => {
-    return (
-        <div id="educations" className="pb-20 border-b bg-gradient-to-b from-slate-930 to-gray-800 border-neutral-900">
-            <h1 className="my-20 text-4xl font-bold text-center">Educations</h1>
+  return (
+    <div id="educations" className="py-12 lg:py-20">
+      <h1 className="mb-12 text-4xl font-bold text-center text-white">Educations</h1>
 
-            {/* Tree Structure */}
-            <div className="relative w-full">
-                {EDUCATIONS.map((education, index) => (
-                    <div
-                        key={index}
-                        className={`flex flex-col md:flex-row items-center w-full mb-8 transform transition-all duration-500 ease-in-out hover:scale-105 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                            }`} // Flex direction changes based on index for larger screens
-                    >
-                        {/* Horizontal Connector for Left/Right alignment */}
-                        <div className="hidden w-1/2 bg-slate-925 md:block"></div>
+      <div className="max-w-6xl px-6 mx-auto space-y-8">
+        {EDUCATIONS.map((education, index) => (
+          <div
+            key={index}
+            className="relative p-6 overflow-hidden rounded-lg shadow-lg bgcard"
+          >
+            <div className="absolute inset-0 opacity-25 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+            <div className="relative z-10 flex flex-col lg:flex-row">
+              {/* Year Section */}
+              <div className="w-full mb-4 text-center text-white lg:w-1/5 lg:mb-0 lg:text-left">
+                <p className="text-lg font-semibold">{education.year}</p>
+              </div>
 
-                        {/* Education Content with Hover */}
-                        <div className="w-full p-6 transition-all duration-300 rounded-lg shadow-lg bg-slate-950 md:w-1/3 hover:bg-slate-600 hover:shadow-xl">
-                            <p className="mb-2 text-sm text-neutral-400">{education.year}</p>
-                            <h6 className="mb-1 text-lg font-semibold text-white">
-                                {education.title} -{" "}
-                                <span className="text-indigo-300">{education.name}</span>
-                            </h6>
-                            <p className="text-neutral-400">{education.location}</p>
-                        </div>
-
-                        {/* Tree Trunk (Vertical Line) */}
-                        {index < EDUCATIONS.length - 1 && (
-                            <div
-                                className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-slate-930"
-                                style={{ height: "100%" }} // Adjusting the trunk line to fit the content
-                            ></div>
-                        )}
-                    </div>
-                ))}
+              {/* Education Content */}
+              <div className="w-full lg:w-4/5 lg:pl-8">
+                <h2 className="mb-2 text-xl font-semibold text-white">
+                  {education.title} -{" "}
+                  <span className="text-blue-400">{education.name}</span>
+                </h2>
+                <p className="leading-relaxed text-gray-300">{education.location}</p>
+              </div>
             </div>
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Educations;
