@@ -36,10 +36,8 @@ Powered by [Vercel](https://vercel.com), ensuring fast load times and high avail
 ## 🛠️ Technologies Used
 
 - **Frontend**: Built using modern frameworks and libraries, such as:
-  - HTML5
-  - CSS3
-  - JavaScript
   - React.js
+  - TailwindCSS
 - **Hosting**: Deployed and managed using Vercel.
 
 ---
