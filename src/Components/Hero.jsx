@@ -42,10 +42,10 @@ const Hero = () => {
 
                                 {/* Email */}
                                 <div className="flex items-center gap-4">
-                                    <MdOutlineMailOutline className="text-2xl text-pink-500" />
+                                    <MdOutlineMailOutline className="text-2xl text-pink-700" />
                                     <a
                                         href={`mailto:${MY_DETAILS.email}`}
-                                        className="text-lg text-white transition-colors hover:text-pink-400"
+                                        className="text-lg text-white transition-colors hover:text-pink-700"
                                     >
                                         {MY_DETAILS.email}
                                     </a>
