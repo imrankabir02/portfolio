@@ -69,8 +69,8 @@ const Navbar = () => {
 
             {/* Mobile Dropdown Menu */}
             {isOpen && (
-                <div className="absolute left-0 w-full py-4 text-white bg-gradient-to-b from-purple-700 to-pink-700 top-16 md:hidden">
-                    <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#FFD700,#FFD700_1px,transparent_1px,transparent_10px)]"></div>
+                <div className="absolute left-0 w-full py-4 md:hidden backdrop:blur-md bg-lime-50">
+                    {/* <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#FFD700,#FFD700_1px,transparent_1px,transparent_10px)]"></div> */}
                     <ul className="relative flex flex-col items-center space-y-4 text-lg font-bold">
                         {['About', 'Skills', 'Projects', 'Experience', 'Educations', 'Contact Me'].map((item) => (
                             <li key={item}>

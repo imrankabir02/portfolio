@@ -38,7 +38,7 @@ const Hero = () => {
                         {/* MY_DETAILS Information */}
                         <p className="max-w-xl py-6 text-lg leading-relaxed text-center lg:text-left">
                             {/* Box with transform and transition effects */}
-                            <div className="p-6 space-y-6 transition-all duration-500 transform rounded-lg shadow-lg bgcard">
+                            <div className="p-6 space-y-6 transition-all duration-100 transform rounded-lg shadow-lg bgcard">
 
                                 {/* Email */}
                                 <div className="flex items-center gap-4">
@@ -65,7 +65,7 @@ const Hero = () => {
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
                                     <FaLocationDot className="text-2xl hover:text-sky-500" />
-                                    <span className="text-lg ">{MY_DETAILS.address}</span>
+                                    <span className="text-lg">{MY_DETAILS.address}</span>
                                 </div>
                             </div>
                         </p>
@@ -73,16 +73,16 @@ const Hero = () => {
 
                         {/* Social Links */}
                         <div className="flex items-center gap-6 text-3xl">
-                            <a href="https://www.linkedin.com/in/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover:text-sky-400 hover:scale-110">
+                            <a href="https://www.linkedin.com/in/imrankabir02" target="_blank" rel="noopener noreferrer" className="transition-all duration-100 transform hover:text-sky-500 hover:scale-110">
                                 <FaLinkedin />
                             </a>
-                            <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover: hover:scale-110">
+                            <a href="https://www.github.com/imrankabir02" target="_blank" rel="noopener noreferrer" className="transition-all duration-100 transform hover:scale-110">
                                 <FaGithub />
                             </a>
-                            <a href="https://leetcode.com/u/imrankabir02/" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-all duration-500 transform hover:text-yellow-400 hover:scale-110">
+                            <a href="https://leetcode.com/u/imrankabir02/" target="_blank" rel="noopener noreferrer" className="transition-all duration-100 transform hover:text-yellow-500 hover:scale-110">
                                 <SiLeetcode />
                             </a>
-                            <a href="https://www.hackerrank.com/profile/imrankabir02" target="_blank" rel="noopener noreferrer" className="text-gray-600 transition-all duration-500 transform hover:text-green-400 hover:scale-110">
+                            <a href="https://www.hackerrank.com/profile/imrankabir02" target="_blank" rel="noopener noreferrer" className="transition-all duration-100 transform hover:text-green-600 hover:scale-110">
                                 <SiHackerrank />
                             </a>
                         </div>
@@ -93,7 +93,7 @@ const Hero = () => {
                         <img
                             src={profilePic}
                             alt="Imran Kabir"
-                            className="object-cover w-48 h-48 transition-all duration-500 transform rounded-3xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-max xl:h-max"
+                            className="object-cover w-48 h-48 transition-all duration-500 transform cursor-not-allowed rounded-3xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-max xl:h-max"
                         />
                     </div>
                 </div>
