@@ -14,7 +14,7 @@ const Hero = () => {
                 <div className="flex flex-col px-6 py-12 mx-auto lg:flex-row lg:items-center lg:justify-between max-w-7xl">
                     {/* Left side - Text content */}
                     <div className="flex flex-col items-center mb-8 lg:items-start lg:w-1/2 lg:mb-0">
-                        <p className="text-xl font-semibold leading-tight tracking-tight text-center lg:text-3xl lg:text-left lg:mt-16 animate-fadeIn">
+                        <p className="text-xl font-semibold leading-tight tracking-tight text-center lg:text-3xl lg:text-left lg:mt-16 text-yellow-800">
                             Hello, I'm...
                         </p>
                         {/* <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-center lg:text-6xl lg:text-left lg:mt-16">
