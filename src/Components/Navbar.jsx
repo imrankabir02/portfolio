@@ -39,7 +39,7 @@ const Navbar = () => {
                         <a 
                             key={item}
                             href={`#${item.toLowerCase().replace(' ', '')}`}
-                            className="relative px-4 py-1 transition-all duration-300 group hover:scale-110 hover:bgcard"
+                            className="relative px-4 py-1 transition-all duration-300 group hover:scale-110 hover:bgcard hover:text-yellow-700"
                         >
                             {/* Retro button effect */}
                             <span className="absolute inset-0 w-full h-full transition-transform transform rounded opacity-50 animate-pulse"></span>

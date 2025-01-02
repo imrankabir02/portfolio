@@ -27,7 +27,7 @@ const Hero = () => {
                         </h1>
 
                         <span className="block mt-6 text-3xl font-medium tracking-tight text-center lg:text-4xl lg:text-left">
-                            <span className="text-3xl ">
+                            <span className="text-3xl hover:text-yellow-700">
                                 {MY_DETAILS.title}
                             </span>
                             <br />
@@ -36,7 +36,7 @@ const Hero = () => {
                             {/* Company */}
                             {/* <span className="block mt-2 text-2xl font-light tracking-tight text-center text-indigo-400 lg:text-3xl lg:text-left"> */}
 
-                            <a href="https://codextric.com/about/" target="_blank" rel="noopener noreferrer" className="text-2xl font-light tracking-tight text-center hover:text-indigo-400 lg:text-4xl lg:text-left">
+                            <a href="https://codextric.com/about/" target="_blank" rel="noopener noreferrer" className="text-2xl font-light tracking-tight text-center hover:text-yellow-700 lg:text-4xl lg:text-left">
                                 {MY_DETAILS.company}
                             </a>
                         </span>
@@ -59,10 +59,10 @@ const Hero = () => {
 
                                 {/* Phone */}
                                 <div className="flex items-center gap-4">
-                                    <MdPhone className="text-2xl hover:text-purple-500" />
+                                    <MdPhone className="text-2xl hover:text-yellow-700" />
                                     <a
                                         href={`tel:${MY_DETAILS.phoneNo}`}
-                                        className="text-lg transition-colors hover:text-purple-400"
+                                        className="text-lg transition-colors hover:text-yellow-700"
                                     >
                                         {MY_DETAILS.phoneNo}
                                     </a>
@@ -71,7 +71,7 @@ const Hero = () => {
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
                                     <FaLocationDot className="text-2xl hover:text-sky-500" />
-                                    <span className="text-lg">{MY_DETAILS.address}</span>
+                                    <span className="text-lg hover:text-yellow-700">{MY_DETAILS.address}</span>
                                 </div>
                             </div>
                         </p>
