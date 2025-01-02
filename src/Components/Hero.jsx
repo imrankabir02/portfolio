@@ -17,9 +17,15 @@ const Hero = () => {
                         <p className="text-xl font-semibold leading-tight tracking-tight text-center lg:text-3xl lg:text-left lg:mt-16 animate-fadeIn">
                             Hello, I'm...
                         </p>
-                        <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-center lg:text-6xl lg:text-left lg:mt-16">
+                        {/* <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-center lg:text-6xl lg:text-left lg:mt-16">
+                            {MY_DETAILS.name}
+                        </h1> */}
+                        <h1
+                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-transform transform lg:text-6xl lg:text-left lg:mt-16 animate-pulse hover:text-yellow-700 hover:animate-spin hover:scale-105"
+                        >
                             {MY_DETAILS.name}
                         </h1>
+
                         <span className="block mt-6 text-3xl font-medium tracking-tight text-center lg:text-4xl lg:text-left">
                             <span className="text-3xl ">
                                 {MY_DETAILS.title}
