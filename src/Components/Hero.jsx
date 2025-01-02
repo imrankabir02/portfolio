@@ -21,7 +21,7 @@ const Hero = () => {
                             {MY_DETAILS.name}
                         </h1> */}
                         <h1
-                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-transform transform lg:text-6xl lg:text-left lg:mt-16 animate-pulse hover:text-yellow-700 hover:animate-spin hover:scale-105"
+                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-transform transform lg:text-6xl lg:text-left lg:mt-16 animate-pulse hover:text-yellow-700 hover:scale-105"
                         >
                             {MY_DETAILS.name}
                         </h1>
