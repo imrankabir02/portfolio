@@ -22,13 +22,13 @@ const Navbar = () => {
     }, [isOpen]);
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 w-full">
+        <nav className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur">
             {/* Retro pattern background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-indigo-800 to-pink-700 opacity-90">
+            <div className="absolute inset-0 opacity-90">
                 {/* Zigzag pattern */}
-                <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#FFD700,#FFD700_1px,transparent_1px,transparent_10px)]"></div>
+                {/* <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,#FFD700,#FFD700_1px,transparent_1px,transparent_10px)]"></div> */}
                 {/* Grid pattern */}
-                <div className="absolute inset-0 opacity-5 bg-[linear-gradient(white_1px,transparent_1px),linear-gradient(to_right,white_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                {/* <div className="absolute inset-0 opacity-5 bg-[linear-gradient(white_1px,transparent_1px),linear-gradient(to_right,white_1px,transparent_1px)] bg-[size:20px_20px]"></div> */}
             </div>
 
             {/* Navbar content */}
@@ -39,19 +39,19 @@ const Navbar = () => {
                         <a 
                             key={item}
                             href={`#${item.toLowerCase().replace(' ', '')}`}
-                            className="relative px-4 py-1 text-white transition-all duration-300 group hover:scale-110"
+                            className="relative px-4 py-1 transition-all duration-300 group hover:scale-110 hover:bgcard"
                         >
                             {/* Retro button effect */}
-                            <span className="absolute inset-0 w-full h-full transition-transform transform rounded opacity-50 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 filter blur group-hover:opacity-100 animate-pulse"></span>
+                            <span className="absolute inset-0 w-full h-full transition-transform transform rounded opacity-50 animate-pulse"></span>
                             <span className="relative">{item}</span>
                         </a>
                     ))}
                     <a 
                         href={cvFile}
                         download="ImranKabirCV.pdf" 
-                        className="relative px-4 py-1 text-white transition-all duration-300 group hover:scale-110"
+                        className="relative px-4 py-1 transition-all duration-300 hover:bgcard hover:text-green-500 group hover:scale-110"
                     >
-                        <span className="absolute inset-0 w-full h-full transition-transform transform rounded opacity-50 bg-gradient-to-r from-pink-500 to-yellow-500 filter blur group-hover:opacity-100 animate-pulse"></span>
+                        <span className="absolute inset-0 w-full h-full transition-transform transform rounded opacity-50 animate-pulse"></span>
                         <span className="relative">My CV</span>
                     </a>
                 </div>
@@ -96,7 +96,7 @@ const Navbar = () => {
             )}
 
             {/* Bottom border effect */}
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></div>
+            {/* <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></div> */}
         </nav>
     );
 }

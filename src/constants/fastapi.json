@@ -1,0 +1,140 @@
+{
+    "id": "fastapi",
+    "title": "FastAPI",
+    "slug": "fastapi",
+    "description": "FastAPI এর চিটশিট",
+    "colorPref": "#009688",
+    "contents": [
+        {
+            "title": "প্রোজেক্ট সেটআপ",
+            "items": [
+                {
+                    "definition": "প্রোজেক্ট ডিরেক্টরী তৈরী করা",
+                    "code": "mkdir <project_name>"
+                },
+                {
+                    "definition": "প্রোজেক্ট ডিরেক্টরীতে নেভিগেইট করা",
+                    "code": "cd <project_name>"
+                },
+                {
+                    "definition": "ভার্চুয়াল এনভায়রনমেন্ট তৈরী করা",
+                    "code": "python -m venv venv"
+                },
+                {
+                    "definition": "ভার্চুয়াল এনভায়রনমেন্ট অ্যাক্টিভেট করা (Windows)",
+                    "code": "venv\\Scripts\\activate"
+                },
+                {
+                    "definition": "ভার্চুয়াল এনভায়রনমেন্ট অ্যাক্টিভেট করা (Linux/Mac)",
+                    "code": "source venv/bin/activate"
+                },
+                {
+                    "definition": "FastAPI ইনস্টল করা",
+                    "code": "pip install fastapi uvicorn"
+                }
+            ]
+        },
+        {
+            "title": "বেসিক এন্ডপয়েন্ট",
+            "items": [
+                {
+                    "definition": "বেসিক FastAPI অ্যাপ তৈরী করা",
+                    "code": "from fastapi import FastAPI\n\napp = FastAPI()"
+                },
+                {
+                    "definition": "GET এন্ডপয়েন্ট তৈরী করা",
+                    "code": "@app.get(\"/\")\ndef read_root():\n    return {\"message\": \"Hello World\"}"
+                },
+                {
+                    "definition": "POST এন্ডপয়েন্ট তৈরী করা",
+                    "code": "@app.post(\"/items/\")\ndef create_item(item: Item):\n    return item"
+                },
+                {
+                    "definition": "PUT এন্ডপয়েন্ট তৈরী করা",
+                    "code": "@app.put(\"/items/{item_id}\")\ndef update_item(item_id: int, item: Item):\n    return {\"item_id\": item_id, **item.dict()}"
+                },
+                {
+                    "definition": "DELETE এন্ডপয়েন্ট তৈরী করা",
+                    "code": "@app.delete(\"/items/{item_id}\")\ndef delete_item(item_id: int):\n    return {\"deleted\": item_id}"
+                }
+            ]
+        },
+        {
+            "title": "Pydantic মডেল",
+            "items": [
+                {
+                    "definition": "বেসিক Pydantic মডেল",
+                    "code": "from pydantic import BaseModel\n\nclass Item(BaseModel):\n    name: str\n    price: float\n    is_offer: bool = None"
+                },
+                {
+                    "definition": "নেস্টেড Pydantic মডেল",
+                    "code": "class User(BaseModel):\n    username: str\n    items: List[Item]"
+                },
+                {
+                    "definition": "ভ্যালিডেশন সহ Pydantic মডেল",
+                    "code": "from pydantic import BaseModel, Field\n\nclass Item(BaseModel):\n    name: str = Field(..., min_length=1, max_length=50)\n    price: float = Field(..., gt=0)"
+                }
+            ]
+        },
+        {
+            "title": "ডাটাবেস এবং SQLAlchemy",
+            "items": [
+                {
+                    "definition": "ডাটাবেস কানেকশন স্ট্রিং",
+                    "code": "SQLALCHEMY_DATABASE_URL = \"postgresql://user:password@localhost/dbname\""
+                },
+                {
+                    "definition": "SQLAlchemy এনজিন তৈরী",
+                    "code": "from sqlalchemy import create_engine\n\nengine = create_engine(SQLALCHEMY_DATABASE_URL)"
+                },
+                {
+                    "definition": "SQLAlchemy মডেল",
+                    "code": "from sqlalchemy import Column, Integer, String\nfrom sqlalchemy.ext.declarative import declarative_base\n\nBase = declarative_base()\n\nclass Item(Base):\n    __tablename__ = \"items\"\n    id = Column(Integer, primary_key=True, index=True)\n    name = Column(String)"
+                }
+            ]
+        },
+        {
+            "title": "সিকিউরিটি এবং অথেনটিকেশন",
+            "items": [
+                {
+                    "definition": "OAuth2 পাসওয়ার্ড বিয়ারার",
+                    "code": "from fastapi.security import OAuth2PasswordBearer\n\noauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"token\")"
+                },
+                {
+                    "definition": "JWT টোকেন জেনারেট",
+                    "code": "from jose import jwt\n\ntoken = jwt.encode({\"sub\": user.username}, SECRET_KEY, algorithm=ALGORITHM)"
+                },
+                {
+                    "definition": "ডিপেন্ডেন্সি সহ প্রটেকটেড রাউট",
+                    "code": "@app.get(\"/users/me\")\nasync def read_users_me(current_user: User = Depends(get_current_user)):\n    return current_user"
+                }
+            ]
+        },
+        {
+            "title": "মিডলওয়্যার এবং CORS",
+            "items": [
+                {
+                    "definition": "CORS মিডলওয়্যার যোগ করা",
+                    "code": "from fastapi.middleware.cors import CORSMiddleware\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)"
+                },
+                {
+                    "definition": "কাস্টম মিডলওয়্যার",
+                    "code": "@app.middleware(\"http\")\nasync def add_custom_header(request, call_next):\n    response = await call_next(request)\n    response.headers[\"Custom-Header\"] = \"value\"\n    return response"
+                }
+            ]
+        },
+        {
+            "title": "এরর হ্যান্ডলিং",
+            "items": [
+                {
+                    "definition": "HTTP এক্সেপশন রেইজ করা",
+                    "code": "from fastapi import HTTPException\n\nraise HTTPException(status_code=404, detail=\"Item not found\")"
+                },
+                {
+                    "definition": "কাস্টম এক্সেপশন হ্যান্ডলার",
+                    "code": "@app.exception_handler(CustomException)\nasync def custom_exception_handler(request, exc):\n    return JSONResponse(status_code=418, content={\"message\": str(exc)})"
+                }
+            ]
+        }
+    ]
+}

@@ -18,7 +18,10 @@ html {
   }
 
   .bgcard {
-    @apply p-6 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg border border-neutral-600;
+    @apply p-6 bg-white shadow-2xl bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg border-neutral-600;
+  }
+  .eldesign {
+    @apply px-4 py-2 text-sm font-black shadow-xl hover:text-white hover:bg-green-600 rounded-full;
   }
 }
 
