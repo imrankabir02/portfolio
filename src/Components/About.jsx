@@ -28,7 +28,7 @@ const About = () => {
             <a
               href={cvFile}
               download="Imran_Kabir_CV.pdf"
-              className="px-8 py-3 text-lg font-semibold transition-transform rounded-full shadow-lg hover:bg-green-600 hover:scale-105"
+              className="px-8 py-3 text-lg font-semibold transition-transform rounded-full shadow-lg hover:text-white hover:bg-green-600 hover:scale-105"
             >
               Download CV
             </a>

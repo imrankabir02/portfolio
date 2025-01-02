@@ -12,7 +12,7 @@ const Projects = () => {
                                 <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="object-cover w-full h-48 transition duration-500 transform hover:scale-150 rounded-t-xl hover:rounded-xl"
+                                    className="object-cover w-full h-48 transition duration-500 transform hover:scale-150 rounded-t-xl hover:rounded-xl grayscale-100 hover:grayscale-0"
                                 />
                             </a>
                             <div className="p-6 bgcard">

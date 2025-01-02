@@ -93,7 +93,7 @@ const Hero = () => {
                         <img
                             src={profilePic}
                             alt="Imran Kabir"
-                            className="object-cover w-48 h-48 transition-all duration-500 transform cursor-not-allowed rounded-3xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-max xl:h-max"
+                            className="object-cover w-48 h-48 transition-all duration-500 transform cursor-not-allowed rounded-3xl hover:scale-105 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-max xl:h-max grayscale-100 hover:grayscale-0"
                         />
                     </div>
                 </div>
