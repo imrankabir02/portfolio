@@ -8,7 +8,7 @@ export default {
     extend: {
       grayscale: {
         0 : '0%',
-        100 : '100%',
+        100 : '40%',
       }
     },
   },
