@@ -1,6 +1,6 @@
 import { DiReact, DiJsBadge, DiPhp, DiMysql, DiCss3, DiHtml5, DiCodeigniter } from "react-icons/di";
 import { FaLaravel, FaJava, FaGitAlt, FaLinux, FaWindows, FaPython } from "react-icons/fa";
-import { SiTailwindcss, SiBootstrap, SiVisualstudiocode, SiC, SiUbuntu, SiDjango } from "react-icons/si";
+import { SiTailwindcss, SiBootstrap, SiVisualstudiocode, SiC, SiUbuntu, SiDjango, SiPostman } from "react-icons/si";
 
 const Skills = () => {
   return (
@@ -13,11 +13,11 @@ const Skills = () => {
           <div className="p-6 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
             <h2 className="mb-4 text-xl font-semibold text-center ">Languages</h2>
             <div className="flex flex-wrap justify-center gap-4">
-              <DiJsBadge className="text-4xl cursor-pointer hover:text-yellow-500" title="JavaScript" />
-              <DiPhp className="text-4xl cursor-pointer hover:text-purple-500" title="PHP" />
-              <FaPython className="text-4xl cursor-pointer hover:text-green-500" title="Python" />
-              <FaJava className="text-4xl cursor-pointer hover:text-orange-500" title="Java" />
-              <SiC className="text-4xl cursor-pointer hover:text-blue-500" title="C" />
+              <DiJsBadge className="skillIcon hover:text-yellow-500" title="JavaScript" />
+              <DiPhp className="skillIcon hover:text-purple-500" title="PHP" />
+              <FaPython className="skillIcon hover:text-green-500" title="Python" />
+              <FaJava className="skillIcon hover:text-orange-500" title="Java" />
+              <SiC className="skillIcon hover:text-blue-500" title="C" />
             </div>
           </div>
 
@@ -25,11 +25,11 @@ const Skills = () => {
           <div className="p-6 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
             <h2 className="mb-4 text-xl font-semibold text-center ">Libraries and Frameworks</h2>
             <div className="flex flex-wrap justify-center gap-4">
-              <FaLaravel className="text-4xl cursor-pointer hover:text-red-500" title="Laravel" />
-              <SiDjango className="text-4xl cursor-pointer hover:text-green-600" title="Django" />
-              <DiReact className="text-4xl cursor-pointer hover:text-blue-400" title="React" />
-              <SiTailwindcss className="text-4xl cursor-pointer hover:text-teal-400" title="Tailwind CSS" />
-              <SiBootstrap className="text-4xl cursor-pointer hover:text-purple-500 " title="Bootstrap" />
+              <FaLaravel className="skillIcon hover:text-red-500" title="Laravel" />
+              <SiDjango className="skillIcon hover:text-green-600" title="Django" />
+              <DiReact className="skillIcon hover:text-blue-400" title="React" />
+              <SiTailwindcss className="skillIcon hover:text-teal-400" title="Tailwind CSS" />
+              <SiBootstrap className="skillIcon hover:text-purple-500 " title="Bootstrap" />
             </div>
           </div>
 
@@ -37,9 +37,9 @@ const Skills = () => {
           <div className="p-6 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
             <h2 className="mb-4 text-xl font-semibold text-center ">Technologies and Databases</h2>
             <div className="flex flex-wrap justify-center gap-4">
-              <DiHtml5 className="text-4xl cursor-pointer hover:text-orange-500" title="HTML5" />
-              <DiCss3 className="text-4xl cursor-pointer hover:text-blue-500" title="CSS3" />
-              <DiMysql className="text-4xl cursor-pointer hover:text-blue-900" title="MySQL" />
+              <DiHtml5 className="skillIcon hover:text-orange-500" title="HTML5" />
+              <DiCss3 className="skillIcon hover:text-blue-500" title="CSS3" />
+              <DiMysql className="skillIcon hover:text-blue-900" title="MySQL" />
             </div>
           </div>
 
@@ -47,8 +47,9 @@ const Skills = () => {
           <div className="p-6 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
             <h2 className="mb-4 text-xl font-semibold text-center ">Development Tools</h2>
             <div className="flex flex-wrap justify-center gap-4">
-              <FaGitAlt className="text-4xl cursor-pointer hover:text-orange-500" title="Git" />
-              <SiVisualstudiocode className="text-4xl cursor-pointer hover:text-blue-500" title="VS Code" />
+              <FaGitAlt className="skillIcon hover:text-orange-500" title="Git" />
+              <SiVisualstudiocode className="skillIcon hover:text-blue-500" title="VS Code" />
+              <SiPostman className="skillIcon hover:text-orange-500" title="Postman" />
             </div>
           </div>
 
@@ -56,9 +57,9 @@ const Skills = () => {
           <div className="p-6 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
             <h2 className="mb-4 text-xl font-semibold text-center ">Operating Systems</h2>
             <div className="flex flex-wrap justify-center gap-4">
-              <FaWindows className="text-4xl cursor-pointer hover:text-blue-500" title="Windows" />
-              <SiUbuntu className="text-4xl cursor-pointer hover:text-orange-500" title="Ubuntu" />
-              <FaLinux className="text-4xl cursor-pointer hover:text-yellow-500" title="Linux" />
+              <FaWindows className="skillIcon hover:text-blue-500" title="Windows" />
+              <SiUbuntu className="skillIcon hover:text-orange-500" title="Ubuntu" />
+              <FaLinux className="skillIcon hover:text-yellow-500" title="Linux" />
             </div>
           </div>
         </div>
