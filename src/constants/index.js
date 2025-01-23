@@ -33,11 +33,11 @@ export const SKILLSETS = [
 
 export const EXPERIENCES = [
   {
-    year: "January, 2024 - Present",
+    year: "January, 2024 - January, 2025",
     role: "Backend Developer",
     company: "Phone Tech BD Ltd",
-    description: `Developing and maintaining server-side applications using PHP, Laravel, and MySQL.
-    Utilizing Livewire occasionally for front-end components. Delivering high-quality code with a focus on continuous improvement`,
+    description: `Developed and maintained server-side applications using PHP, Laravel, and MySQL.
+    Utilized Livewire occasionally for front-end components. Delivered high-quality code with a focus on continuous improvement.`,
     technologies: [
       "Php",
       "Laravel",
@@ -58,7 +58,7 @@ export const EXPERIENCES = [
     year: "July 2022 - October 2022 ",
     role: "Internship",
     company: "ICT Cell, Khulna University",
-    description: `Wroked in Software Management and Data Management`,
+    description: `Wroked in Software Management and Data Management.`,
     technologies: ["Web", "Data", "Network", "Software Infrastructure"],
   },
 ];
