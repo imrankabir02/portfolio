@@ -5,8 +5,8 @@ import project4 from "../assets/projects/project4.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
-  title: "Backend Developer",
-  company: "Phone Tech BD Ltd",
+  title: "Junior Software Engineer",
+  company: "",
   email: "imrankabir325@gmail.com",
   phoneNo: "+880 1614 126 363",
   address: "M.A Bari St, Sonadanga, Khulna",
@@ -14,7 +14,13 @@ export const MY_DETAILS = {
 
 // export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
-export const ABOUT_TEXT = `Hello, I am Mridha Imran Kabir, a Full-stack back-end developer. I worked on 2 complete projects from the scratch and worked on multiple features on 3 different projects at, my current company, Phone Tech BD Ltd. Mainly, I worked on TALL stack (Tailwind CSS, Alpinejs, Laravel, Livewire) and used Nodejs, Django, React and Vue 3 for my personal purpose. I do problem solving in leetcode and hackerrank. I am looking for a position where I can grow my skills and contribute to the greater community. My Skillsets: `;
+export const ABOUT_TEXT = `Hello, I am Mridha Imran Kabir, a Full-stack back-end developer. I recently joined Barikoi Technologies Limited, where I am working on cutting-edge technologies like Laravel Websockets, Redis, and geospatial queries to build robust, scalable solutions.
+
+Previously, I worked at Phone Tech BD Ltd., completing 2 projects from scratch and contributing to multiple features across 3 different projects. My expertise includes the TALL stack (Tailwind CSS, Alpine.js, Laravel, Livewire), and I’ve also worked with Node.js, Django, React, and Vue 3 for personal projects.
+
+I am passionate about problem-solving and actively participate in platforms like LeetCode and HackerRank. I am seeking opportunities to grow my skills further and contribute to impactful projects.
+
+`;
 
 export const SKILLSETS = [
   "PHP (Laravel, Livewire)",
