@@ -6,10 +6,11 @@ import project4 from "../assets/projects/project4.png";
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
   title: "Junior Software Engineer",
-  company: "",
+  company: "Barikoi Maps",
+  companyLink: "https://barikoi.com/",
   email: "imrankabir325@gmail.com",
   phoneNo: "+880 1614 126 363",
-  address: "M.A Bari St, Sonadanga, Khulna",
+  address: "Pallabi, Mirpur, Dhaka, Bangladesh",
 };
 
 // export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
@@ -38,6 +39,19 @@ export const SKILLSETS = [
 ];
 
 export const EXPERIENCES = [
+  {
+    year: "January, 2025 - Present",
+    role: "Junior Software Engineer",
+    company: "Barikoi Maps",
+    description: `Working on server-side applications using Laravel, and MySQL.`,
+    technologies: [
+      "Php",
+      "Laravel",
+      "MySQL",
+      "Nginx",
+      "AWS",
+    ],
+  },
   {
     year: "January, 2024 - January, 2025",
     role: "Backend Developer",

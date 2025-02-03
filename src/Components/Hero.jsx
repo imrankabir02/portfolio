@@ -21,7 +21,7 @@ const Hero = () => {
                             {MY_DETAILS.name}
                         </h1> */}
                         <h1
-                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-transform transform lg:text-6xl lg:text-left lg:mt-16 animate-pulse hover:text-yellow-700 hover:scale-105"
+                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-transform transform lg:text-6xl lg:text-left lg:mt-16 hover:text-yellow-700 hover:scale-105"
                         >
                             {MY_DETAILS.name}
                         </h1>
@@ -36,8 +36,15 @@ const Hero = () => {
                             {/* Company */}
                             {/* <span className="block mt-2 text-2xl font-light tracking-tight text-center text-indigo-400 lg:text-3xl lg:text-left"> */}
 
-                            <a href="https://codextric.com/about/" target="_blank" rel="noopener noreferrer" className="text-2xl font-light tracking-tight text-center hover:text-yellow-700 lg:text-4xl lg:text-left">
-                                {MY_DETAILS.company}
+                            <a href={MY_DETAILS.companyLink} target="_blank" rel="noopener noreferrer" className="text-2xl font-light tracking-tight text-center hover:text-yellow-700 lg:text-4xl lg:text-left">
+                                {MY_DETAILS.company.split("koi").map((part, idx) => (
+                                    <span key={idx}>
+                                        {part}
+                                        {idx !== MY_DETAILS.company.split("koi").length - 1 && (
+                                            <span className="text-green-700">koi</span>
+                                        )}
+                                    </span>
+                                ))}
                             </a>
                         </span>
 
