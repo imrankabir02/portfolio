@@ -33,12 +33,12 @@ const Hero = () => {
                         </h1>
 
                         <span className="block mt-6 text-3xl font-medium tracking-tight text-center lg:text-4xl lg:text-left">
-                            <span className="text-3xl hover:text-yellow-700">
+                            <span className="text-2xl hover:text-yellow-700">
                                 {MY_DETAILS.title}
                             </span>
                             <br />
 
-                            <a href={MY_DETAILS.companyLink} target="_blank" rel="noopener noreferrer" className="text-2xl font-light tracking-tight text-center hover:text-yellow-700 lg:text-4xl lg:text-left">
+                            <a href={MY_DETAILS.companyLink} target="_blank" rel="noopener noreferrer" className="text-3xl font-light tracking-tight text-center hover:text-yellow-700 lg:text-4xl lg:text-left">
                                 {MY_DETAILS.company.split("koi").map((part, idx) => (
                                     <span key={idx}>
                                         {part}
