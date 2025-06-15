@@ -23,32 +23,23 @@ const Hero = () => {
                     
                     {/* Text content - Now comes second on mobile */}
                     <div className="flex flex-col items-center lg:order-1 lg:items-start lg:w-1/2">
-                        <p className="text-xl font-semibold leading-tight tracking-tight text-center text-yellow-800 lg:text-3xl lg:text-left lg:mt-16">
+                        <p className="text-xl font-semibold leading-tight tracking-tight text-center text-yellow-800 lg:text-3xl lg:text-left">
                             Hello, I'm...
                         </p>
                         <h1
-                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-transform transform lg:text-6xl lg:text-left lg:mt-16 hover:text-yellow-700 hover:scale-105"
+                            className="text-4xl font-bold leading-tight tracking-tight text-center transition-colors lg:text-6xl lg:text-left hover:text-yellow-700"
                         >
                             {MY_DETAILS.name}
                         </h1>
 
-                        <span className="block mt-6 text-3xl font-medium tracking-tight text-center lg:text-4xl lg:text-left">
-                            <span className="text-2xl hover:text-yellow-700">
-                                {MY_DETAILS.title}
-                            </span>
-                            <br />
-
-                            <a href={MY_DETAILS.companyLink} target="_blank" rel="noopener noreferrer" className="text-3xl font-light tracking-tight text-center hover:text-yellow-700 lg:text-4xl lg:text-left">
-                                {MY_DETAILS.company.split("koi").map((part, idx) => (
-                                    <span key={idx}>
-                                        {part}
-                                        {idx !== MY_DETAILS.company.split("koi").length - 1 && (
-                                            <span className="text-green-700">koi</span>
-                                        )}
-                                    </span>
-                                ))}
+                        <div className="mt-6 text-center lg:text-left">
+                            <p className="text-2xl font-medium tracking-tight hovar:text-yellow-700 lg:text-4xl">
+                                {MY_DETAILS.title} 
+                            <a href={MY_DETAILS.companyLink} target="_blank" rel="noopener noreferrer" className="text-2xl font-light tracking-tight transition-colors lg:text-3xl hover:text-yellow-600">
+                                @{MY_DETAILS.company}
                             </a>
-                        </span>
+                            </p>
+                        </div>
 
                         {/* MY_DETAILS Information */}
                         <p className="max-w-xl py-6 text-lg leading-relaxed text-center lg:text-left">

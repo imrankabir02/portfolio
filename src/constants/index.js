@@ -5,46 +5,42 @@ import project4 from "../assets/projects/project4.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
-  title: "Junior Software Engineer (Backend Focused)",
-  company: "Barikoi Maps",
-  companyLink: "https://barikoi.com/",
+  title: "IT Engineer",
+  company: "BIFPCL",
+  companyLink: "https://www.bifpcl.com/",
   email: "imrankabir325@gmail.com",
   phoneNo: "+880 1614 126 363",
-  address: "Pallabi, Mirpur, Dhaka, Bangladesh",
+  address: "Rampal, Bagerhat, Bangladesh",
 };
 
 
 // export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
 
-export const ABOUT_TEXT = `Hi, I'm Mridha Imran Kabir — a backend-focused full-stack developer passionate about building powerful and scalable web applications.
-
-Currently, I’m working at Barikoi Technologies Limited, where I’m diving deep into advanced backend technologies including Laravel Websockets, Redis, Nginx, AWS, and geospatial data handling with MySQL/PostgreSQL.
-
-Previously, I made significant contributions at Phone Tech BD Ltd., completing end-to-end feature development across multiple Laravel-based projects using Livewire and MySQL. I’m also skilled in React, Vue 3, and Django REST for building robust personal and collaborative projects.
-
-I love solving problems — whether it's through code or logic — and I actively hone my skills on platforms like LeetCode and HackerRank.
-
-I'm always eager to learn, grow, and take on meaningful challenges that create real-world impact.`;
+export const ABOUT_TEXT = `Hi, I'm Mridha Imran Kabir, a backend-focused full-stack developer with a passion for Python and Django. Currently, I'm an IT Engineer at BIFPCL. I honed my skills at Barikoi and Phone Tech BD, building scalable web applications with technologies like Django, Laravel, and React.`;
 
 
 export const SKILLSETS = [
-  "PHP (Laravel, Livewire, Laravel Websockets)",
-  "Python (Django REST Framework)",
-  "JavaScript (React, Alpine.js, Vue 3)",
-  "MySQL, PostgreSQL",
-  "MongoDB (MERN stack projects)",
-  "API Design & Integration (RESTful APIs)",
-  "HTML5, CSS3 (TailwindCSS)",
-  "Git & GitHub",
-  "Nginx, AWS (EC2, S3)",
-  "Docker (Beginner - Learning Phase)",
+  "Python (Django, Django REST Framework)",
+  "PHP (Laravel, Livewire)",
+  "JavaScript (React, Vue.js)",
+  "Databases (MySQL, PostgreSQL, MongoDB)",
+  "API Design (RESTful APIs)",
+  "Frontend (HTML, CSS, TailwindCSS)",
+  "DevOps (AWS, Nginx, Docker)",
+  "Tools (Git, GitHub)",
   "Problem Solving (LeetCode, HackerRank)",
-  "Basic DevOps & Server Management",
 ];
 
 export const EXPERIENCES = [
   {
-    year: "January, 2025 - Present",
+    year: "June, 2025 - Present",
+    role: "IT Engineer",
+    company: "BIFPCL",
+    description: `Currently contributing to the IT operations and infrastructure at BIFPCL.`,
+    technologies: ["System Administration", "IT Support"],
+  },
+  {
+    year: "January, 2025 - June, 2025",
     role: "Junior Software Engineer",
     company: "Barikoi Maps",
     description: `Building scalable, location-intelligent backend systems using Laravel and MySQL. Working with Laravel Websockets, Redis, and advanced geospatial queries. Collaborating on Docker and AWS-based deployments.`,
@@ -151,4 +147,3 @@ export const PROJECTS = [
     technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
   },
 ];
-
