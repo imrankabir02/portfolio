@@ -2,6 +2,7 @@ import project1 from "../assets/projects/bookStore.png";
 import project2 from "../assets/projects/project2.png";
 import project3 from "../assets/projects/project3.png";
 import project4 from "../assets/projects/project4.png";
+import smoketracker from "../assets/projects/smoketracker.png"
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
@@ -119,6 +120,16 @@ export const PROJECTS = [
       "An efficient workforce scheduling and shift-tracking platform built for businesses. Focused on reliability and performance using Laravel + Livewire.",
     technologies: ["Laravel", "Livewire", "AlpineJS", "TailwindCSS", "MySQL"],
   },
+  {
+    title: "Smoke Tracker – Personal Smoking Habit Tracker",
+    appLink: "https://smoketracker01.pythonanywhere.com/",
+    gitLink: "https://github.com/imrankabir02/smoke-tracker",
+    image: smoketracker, // Replace with your project demo screenshot URL if available
+    description:
+      "A health-focused web application to help users monitor and manage their smoking habits through detailed logging, statistics, and cost analysis. Features include mood and trigger tracking, quick log, admin management, and insightful charts.",
+    technologies: ["Django", "SQLite", "Bootstrap", "PythonAnywhere"],
+  },
+
   {
     title: "Task Manager – Full Stack Productivity Tool",
     appLink: "https://task-manager-live.vercel.app/tasks",
