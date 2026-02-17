@@ -44,7 +44,7 @@ export const EXPERIENCES = [
   },
   {
     year: "January 2025 - June 2025",
-    role: "Junior Software Engineer",
+    role: "Software Engineer",
     company: "Barikoi Maps",
     description: `Developed and optimized location-intelligent backend systems using Laravel and MySQL. Implemented geospatial queries and indexing for efficient spatial filtering. Integrated Redis for caching and queue handling. Worked with Laravel WebSockets for real-time features. Contributed to Docker-based deployments and AWS-hosted production environments. Improved API performance through structured indexing and query optimization.`,
     technologies: [
