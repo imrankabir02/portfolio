@@ -2,159 +2,128 @@ import project1 from "../assets/projects/bookStore.png";
 import project2 from "../assets/projects/project2.png";
 import project3 from "../assets/projects/project3.png";
 import project4 from "../assets/projects/project4.png";
-import smoketracker from "../assets/projects/smoketracker.png"
+import smoketracker from "../assets/projects/smoketracker.png";
 
 export const MY_DETAILS = {
   name: "Mridha Imran Kabir",
-  title: "IT Engineer",
+  title: "Backend Engineer | Laravel & Django | Production Systems",
   company: "BIFPCL",
   companyLink: "https://www.bifpcl.com/",
   email: "imrankabir325@gmail.com",
-  phoneNo: "+880 1614 126 363",
-  address: "Rampal, Bagerhat, Bangladesh",
+  phoneNo: "+8801614126363",
+  address: "Bagerhat, Bangladesh",
 };
 
+export const ABOUT_TEXT = `Backend engineer with 5+ years of experience designing, building, and stabilizing production-grade web applications. Strong expertise in Laravel, Django, MySQL, and REST API architecture.
 
-// export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. With 5 years of hands-on experience, I have honed my skills in front-end technologies like React and Next.js, as well as back-end technologies like Node.js, MySQL, PostgreSQL, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
+Experienced in performance optimization, database indexing, query tuning, caching (Redis), background jobs, and secure authentication mechanisms. Worked with Docker-based environments, Linux servers, Nginx, and AWS-hosted deployments.
 
-export const ABOUT_TEXT = `Hi, I'm Mridha Imran Kabir, a backend-focused full-stack developer with a passion for Python and Django. Currently, I'm an IT Engineer at BIFPCL. I honed my skills at Barikoi and Phone Tech BD, building scalable web applications with technologies like Django, Laravel, and React.`;
-
+Focused on backend reliability, scalability, and clean architecture for high-traffic systems.`;
 
 export const SKILLSETS = [
+  "Laravel (Advanced, REST API Architecture)",
   "Python (Django, Django REST Framework)",
-  "PHP (Laravel, Livewire)",
-  "JavaScript (React, Vue.js)",
-  "Databases (MySQL, PostgreSQL, MongoDB)",
-  "API Design (RESTful APIs)",
-  "Frontend (HTML, CSS, TailwindCSS)",
-  "DevOps (AWS, Nginx, Docker)",
-  "Tools (Git, GitHub)",
-  "Problem Solving (LeetCode, HackerRank)",
+  "MySQL (Indexing, Query Optimization, Performance Tuning)",
+  "Redis (Caching, Queues)",
+  "Background Jobs & Scheduled Tasks",
+  "RESTful API Design & Secure Authentication",
+  "Linux Server Management (Ubuntu)",
+  "Nginx & PHP-FPM Configuration",
+  "Docker (Containerized Deployment)",
+  "AWS (EC2 Deployment)",
+  "Git & Version Control",
 ];
 
 export const EXPERIENCES = [
   {
-    year: "June, 2025 - Present",
+    year: "June 2025 - Present",
     role: "IT Engineer",
     company: "BIFPCL",
-    description: `Currently contributing to the IT operations and infrastructure at BIFPCL.`,
-    technologies: ["System Administration", "IT Support"],
+    description: `Managing IT infrastructure, Linux-based systems, and production stability. Supporting system reliability, monitoring, and secure operations within enterprise-level environments.`,
+    technologies: ["Linux", "System Administration", "Network Services"],
   },
   {
-    year: "January, 2025 - June, 2025",
+    year: "January 2025 - June 2025",
     role: "Junior Software Engineer",
     company: "Barikoi Maps",
-    description: `Building scalable, location-intelligent backend systems using Laravel and MySQL. Working with Laravel Websockets, Redis, and advanced geospatial queries. Collaborating on Docker and AWS-based deployments.`,
-    technologies: ["PHP", "Laravel", "Redis", "MySQL", "Nginx", "AWS", "Geospatial Queries"],
+    description: `Developed and optimized location-intelligent backend systems using Laravel and MySQL. Implemented geospatial queries and indexing for efficient spatial filtering. Integrated Redis for caching and queue handling. Worked with Laravel WebSockets for real-time features. Contributed to Docker-based deployments and AWS-hosted production environments. Improved API performance through structured indexing and query optimization.`,
+    technologies: [
+      "Laravel",
+      "MySQL",
+      "Redis",
+      "WebSockets",
+      "Docker",
+      "AWS",
+      "Geospatial Queries",
+    ],
   },
   {
-    year: "January, 2024 - January, 2025",
+    year: "January 2024 - January 2025",
     role: "Backend Developer",
     company: "Phone Tech BD Ltd",
-    description: `Led backend development for two large-scale applications from scratch. Enhanced application performance using Laravel, Livewire, and MySQL. Delivered secure and efficient APIs with clean, maintainable code.`,
-    technologies: ["PHP", "Laravel", "Livewire", "MySQL", "JavaScript", "GitHub"],
+    description: `Led backend development of two Laravel-based applications from scratch. Designed scalable REST APIs, structured database schemas, and optimized queries for performance. Implemented secure authentication, validation, and modular architecture. Refactored legacy modules to improve maintainability and system stability.`,
+    technologies: [
+      "Laravel",
+      "MySQL",
+      "Livewire",
+      "REST API",
+      "Authentication",
+      "Database Design",
+    ],
   },
   {
-    year: "June 2023 – August 2023",
+    year: "June 2023 - August 2023",
     role: "Backend Intern",
     company: "Unicorn Software and Solutions",
-    description: `Assisted in backend development and performed SQL-based data operations for internal tools. Collaborated closely with the team to learn best practices in Laravel and Git workflows.`,
-    technologies: ["PHP", "Laravel", "MySQL", "JavaScript", "GitHub"],
-  },
-  {
-    year: "July 2022 - October 2022",
-    role: "IT Intern",
-    company: "ICT Cell, Khulna University",
-    description: `Supported software and data management operations. Gained exposure to system infrastructure and network services.`,
-    technologies: ["Data Management", "Software Tools", "Network Basics"],
+    description: `Assisted in backend development and SQL-based data operations. Gained hands-on experience with Laravel architecture, Git workflows, and structured database management.`,
+    technologies: ["Laravel", "MySQL", "Git"],
   },
 ];
 
-
 export const EDUCATIONS = [
   {
-    title: "B.Sc in CSE",
+    title: "B.Sc in Computer Science & Engineering",
     name: "Khulna University",
-    location: "Khulna-9208, Bangladesh",
-    year: "January, 2018 - March 2024",
-  },
-  {
-    title: "HSC",
-    name: "Digraj Degree College",
-    location: "Mongla, Bagerhat",
-    year: "July, 2014 - August, 2016",
-  },
-  {
-    title: "SSC",
-    name: "Sreefaltala Pilot Secondary School",
-    location: "Rampal, Bagerhat",
-    year: "Feruary 2012 - June 2014",
-  },
-  {
-    title: "JSC",
-    name: "Hurka SN High School",
-    location: "Rampal, Bagerhat",
-    year: "January, 2009 - February, 2012",
-  },
-  {
-    title: "PSC",
-    name: "Hurka Govt. Primary School",
-    location: "Rampal, Bagerhat",
-    year: "July, 2007 - December, 2008",
-  },
-  {
-    title: "Primary",
-    name: "Shisu Mongal Govt. Primary School",
-    location: "Cantonment, Dhaka",
-    year: "January, 2004 - July, 2007",
+    location: "Khulna, Bangladesh",
+    year: "January 2018 - March 2024",
   },
 ];
 
 export const PROJECTS = [
   {
-    title: "Shifttrek – Employee Management System",
+    title: "Shifttrek – Workforce Management System",
     appLink: "https://www.shifttrek.com/",
     gitLink: "https://www.shifttrek.com/",
     image: project4,
     description:
-      "An efficient workforce scheduling and shift-tracking platform built for businesses. Focused on reliability and performance using Laravel + Livewire.",
-    technologies: ["Laravel", "Livewire", "AlpineJS", "TailwindCSS", "MySQL"],
+      "Production-grade workforce scheduling platform built with Laravel. Focused on backend stability, database efficiency, and reliable business logic handling for operational workflows.",
+    technologies: ["Laravel", "MySQL", "Livewire", "TailwindCSS"],
   },
   {
-    title: "Smoke Tracker – Personal Smoking Habit Tracker",
+    title: "Smoke Tracker – Structured Logging & Analytics System",
     appLink: "https://smoketracker01.pythonanywhere.com/",
     gitLink: "https://github.com/imrankabir02/smoke-tracker",
-    image: smoketracker, // Replace with your project demo screenshot URL if available
+    image: smoketracker,
     description:
-      "A health-focused web application to help users monitor and manage their smoking habits through detailed logging, statistics, and cost analysis. Features include mood and trigger tracking, quick log, admin management, and insightful charts.",
-    technologies: ["Django", "SQLite", "Bootstrap", "PythonAnywhere"],
+      "Backend-focused Django application designed for structured logging, statistical reporting, and data aggregation. Implemented role-based access, clean API structure, and production deployment configuration.",
+    technologies: ["Django", "SQLite", "REST Architecture"],
   },
-
   {
-    title: "Task Manager – Full Stack Productivity Tool",
+    title: "Task Manager – REST API & Authentication System",
     appLink: "https://task-manager-live.vercel.app/tasks",
     gitLink: "https://github.com/imrankabir02/task-manager.git",
     image: project3,
     description:
-      "A fully responsive task manager with Django REST API and React (TypeScript). Features include authentication, status tracking, and data persistence.",
-    technologies: ["React", "TailwindCSS", "Django", "REST API", "PostgreSQL"],
+      "Full-stack productivity system with Django REST API backend and React frontend. Designed secure authentication, structured API endpoints, and PostgreSQL-based data persistence.",
+    technologies: ["Django", "React", "PostgreSQL", "REST API"],
   },
   {
-    title: "Book Store – MERN Stack E-Commerce (Ongoing)",
+    title: "Experimental MERN Backend Architecture",
     appLink: "https://book-store-mern-psi.vercel.app",
     gitLink: "https://github.com/imrankabir02/book-store-MERN.git",
     image: project1,
     description:
-      "An e-commerce web app under development using the MERN stack. Includes category browsing, cart features, and secure login system.",
-    technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
-  },
-  {
-    title: "Chat App – Real-Time Messaging (Ongoing)",
-    appLink: "https://live-chat-delta-pink.vercel.app",
-    gitLink: "https://github.com/imrankabir02/LiveChat.git",
-    image: project2,
-    description:
-      "A real-time chat application powered by MERN stack. Features include user authentication, message persistence, and live updates.",
-    technologies: ["React", "TailwindCSS", "Node.js", "MongoDB"],
+      "Experimental Node.js-based backend architecture focusing on modular API design and authentication workflows.",
+    technologies: ["Node.js", "MongoDB", "REST API"],
   },
 ];
