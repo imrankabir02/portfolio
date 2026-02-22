@@ -72,8 +72,8 @@ export const EXPERIENCES = [
     ],
   },
   {
-    year: "June 2023 - August 2023",
-    role: "Backend Intern",
+    year: "January 2021 - December 2023",
+    role: "Trainee",
     company: "Unicorn Software and Solutions",
     description: `Assisted in backend development and SQL-based data operations. Gained hands-on experience with Laravel architecture, Git workflows, and structured database management.`,
     technologies: ["Laravel", "MySQL", "Git"],
