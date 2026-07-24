@@ -24,15 +24,7 @@ const Experience = () => {
                 <h2 className="mb-2 text-xl ">
                   {experience.role} -{" "}
                   <span className="font-semibold hover:text-green-700">
-                    {/* only 'koi' will be text-green-700 and other parts will remain same */}
-                    {experience.company.split("koi").map((part, idx) => (
-                      <span key={idx}>
-                        {part}
-                        {idx !== experience.company.split("koi").length - 1 && (
-                          <span className="text-green-700">koi</span>
-                        )}
-                      </span>
-                    ))}
+                    {experience.company}
                   </span>
                 </h2>
                 <p className="mb-4 leading-relaxed ">

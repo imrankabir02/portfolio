@@ -3,41 +3,82 @@ import { PROJECTS } from "../constants";
 const Projects = () => {
     return (
         <div id="projects" className="py-12 lg:py-20">
-            <h1 className="mb-12 text-4xl font-semibold text-center ">Projects</h1>
+            <h1 className="mb-4 text-4xl font-semibold text-center">Projects</h1>
+            <p className="max-w-2xl px-6 mx-auto mb-12 text-center text-neutral-600">
+                Backend systems, with the problem and the tradeoffs rather than the screenshots.
+            </p>
+
             <div className="grid max-w-6xl gap-8 px-6 mx-auto md:grid-cols-2">
-                {PROJECTS.map((project, index) => (
-                    <div key={index} className="p-1 overflow-hidden shadow-lg rounded-xl">
-                        <div className="rounded-xl">
-                            <a href={project.appLink}>
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="object-cover w-full h-48 transition duration-500 transform hover:scale-150 rounded-t-xl hover:rounded-xl grayscale-100 hover:grayscale-0"
-                                />
-                            </a>
-                            <div className="p-6 bgcard">
-                                <a href={project.gitLink}>
-                                    <h2 className="mb-2 text-2xl font-semibold hover:text-green-400">
-                                        {project.title}
-                                    </h2>
-                                </a>
-                                <p className="mb-4 ">{project.description}</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {project.technologies.map((tech, idx) => (
-                                        <span
-                                            key={idx}
-                                            className="eldesign"
-                                        >
-                                            {tech}
-                                        </span>
+                {PROJECTS.map((project) => (
+                    <article
+                        key={project.title}
+                        className="flex flex-col overflow-hidden shadow-lg rounded-xl"
+                    >
+                        <div className="flex flex-col flex-1 p-6 bgcard">
+                            <h2 className="text-2xl font-semibold">{project.title}</h2>
+                            {project.org && (
+                                <p className="mt-1 text-sm font-semibold text-green-800">
+                                    {project.org}
+                                </p>
+                            )}
+                            {project.context && (
+                                <p className="mt-1 mb-3 font-mono text-xs tracking-wide uppercase text-neutral-500">
+                                    {project.context}
+                                </p>
+                            )}
+
+                            <p className="mb-4 leading-relaxed">{project.description}</p>
+
+                            {project.highlights && (
+                                <ul className="mb-5 space-y-2 text-sm list-disc list-outside ps-4 text-neutral-700 marker:text-green-700">
+                                    {project.highlights.map((point) => (
+                                        <li key={point}>{point}</li>
                                     ))}
-                                </div>
+                                </ul>
+                            )}
+
+                            <div className="flex flex-wrap gap-2 mb-5">
+                                {project.technologies.map((tech) => (
+                                    <span key={tech} className="eldesign">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <div className="mt-auto">
+                                {project.appLink || project.gitLink ? (
+                                    <div className="flex flex-wrap gap-4 text-sm font-semibold">
+                                        {project.appLink && (
+                                            <a
+                                                href={project.appLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="transition-colors hover:text-green-700"
+                                            >
+                                                Live site ↗
+                                            </a>
+                                        )}
+                                        {project.gitLink && project.gitLink !== project.appLink && (
+                                            <a
+                                                href={project.gitLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="transition-colors hover:text-green-700"
+                                            >
+                                                Source ↗
+                                            </a>
+                                        )}
+                                    </div>
+                                ) : (
+                                    project.note && (
+                                        <p className="text-sm italic text-neutral-500">
+                                            {project.note}
+                                        </p>
+                                    )
+                                )}
                             </div>
                         </div>
-
-                        {/* Diagonal Divider */}
-                        <div className="absolute top-0 right-0 w-1/2 h-full origin-top-left transform -skew-x-12 opacity-25 bg-gradient-to-r from-green-500 to-indigo-500 -z-10"></div>
-                    </div>
+                    </article>
                 ))}
             </div>
         </div>

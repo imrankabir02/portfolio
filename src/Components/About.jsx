@@ -1,5 +1,5 @@
 import { ABOUT_TEXT } from "../constants";
-import cvFile from "../assets/ImranCV.pdf";
+import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import { SKILLSETS } from "../constants";
 
 const About = () => {
@@ -11,9 +11,13 @@ const About = () => {
         </h1>
 
         <div className="p-8 bg-white shadow-lg bg-opacity-10 rounded-xl backdrop-filter backdrop-blur-lg">
-          <p className="mb-6 text-lg font-light leading-relaxed ">{ABOUT_TEXT}</p>
-          
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <div className="mb-8 space-y-4 text-lg font-light leading-relaxed">
+            {ABOUT_TEXT.split("\n\n").map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             {SKILLSETS.map((skill, index) => (
               <span
                 key={index}
@@ -27,7 +31,7 @@ const About = () => {
           <div className="flex justify-center">
             <a
               href={cvFile}
-              download="Imran_Kabir_CV.pdf"
+              download="Mridha_Imran_Kabir_Backend.pdf"
               className="px-8 py-3 text-lg font-semibold transition-transform rounded-full shadow-lg hover:text-white hover:bg-green-600 hover:scale-105"
             >
               Download CV
