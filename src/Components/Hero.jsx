@@ -5,12 +5,13 @@ import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiLeetcode, SiHackerrank } from "react-icons/si";
 import { FiArrowDown, FiDownload } from "react-icons/fi";
+import Tilt from "./Tilt";
 
 const ROLES = [
   "Backend Engineer",
   "Systems Builder",
   "Reliability-first",
-  "The 2am details",
+  "Sails the Grand Line",
 ];
 
 const SOCIALS = [
@@ -56,73 +57,73 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex items-center min-h-screen px-6 pt-24 pb-16 mx-auto max-w-7xl md:px-8"
+      className="relative flex items-center min-h-screen overflow-hidden stage-3d"
     >
-      {/* retro sun rising behind the portrait (bottom on mobile, right on desktop) */}
-      <div
-        aria-hidden="true"
-        className="absolute pointer-events-none -translate-x-1/2 left-1/2 bottom-8 w-[17rem] h-[17rem] sm:w-[22rem] sm:h-[22rem] lg:w-[28rem] lg:h-[28rem] lg:bottom-auto lg:top-24 lg:left-auto lg:right-20 lg:translate-x-0 retro-sun animate-sun-pulse -z-0 opacity-90"
-      />
+      {/* the persistent SeaWorld (mounted in App) sails behind this section too;
+          this scrim keeps the name legible over the ship */}
+      <div className="absolute inset-0 hero-scrim" style={{ zIndex: 1 }} aria-hidden="true" />
 
-      <div className="relative z-10 grid items-center w-full gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="relative z-10 grid items-center w-full gap-12 px-6 pt-24 pb-16 mx-auto max-w-7xl md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
         {/* ── left: identity ── */}
         <div data-reveal>
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-8 rounded-md glass">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-8 rounded-full sea-panel">
             <span className="dot-online" />
-            <span className="font-mono text-[12px] tracking-widest uppercase text-green-300">
-              Available · open to backend roles
+            <span className="font-mono text-[12px] tracking-widest uppercase text-parch-light/90">
+              Recruiting crew · open to backend roles
             </span>
           </div>
 
-          <p className="mb-3 eyebrow">&gt; Hello — I&apos;m</p>
+          <p className="mb-3 eyebrow">&gt; Ahoy — the name&apos;s</p>
 
-          <h1 className="font-display uppercase text-4xl sm:text-6xl xl:text-7xl font-black leading-[0.95] tracking-tight animate-flicker">
-            <span className="block chrome-text">Mridha Imran</span>
-            <span className="block iris-text">Kabir</span>
+          <h1 className="font-pirate text-5xl sm:text-7xl xl:text-8xl leading-[0.9] tracking-wide">
+            <span className="block text-parch-light drop-shadow-[0_2px_0_rgba(0,0,0,0.4)]">
+              Mridha Imran
+            </span>
+            <span className="block gold-text">Kabir</span>
           </h1>
 
-          <div className="flex items-center h-10 mt-6 font-mono text-lg sm:text-xl text-cyan-200">
-            <span className="mr-2 neon-pink">&#9642;</span>
-            <span className="neon-cyan">{typed}</span>
-            <span className="inline-block w-2.5 h-5 ml-1 bg-iris-cyan animate-blink shadow-[0_0_10px_#05d9e8]" />
+          <div className="flex items-center h-10 mt-6 font-mono text-lg sm:text-xl text-parch-light">
+            <span className="mr-2 text-pirate-red">&#9670;</span>
+            <span className="text-gold-light">{typed}</span>
+            <span className="inline-block w-2.5 h-5 ml-1 bg-gold animate-blink shadow-[0_0_10px_rgba(244,196,48,0.8)]" />
           </div>
 
-          <p className="max-w-xl mt-6 text-lg leading-relaxed text-purple-200/80">
+          <p className="max-w-xl mt-6 text-lg leading-relaxed text-parch-light/80">
             I build backends in Django, Laravel and FastAPI — the unglamorous
-            layer where slow queries get fast, jobs survive bad input, and
-            systems tell you when they break.
+            below-deck engine room where slow queries get fast, jobs survive bad
+            input, and systems tell you when they break.
           </p>
 
           {/* readouts */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-7 font-mono text-[12px] text-purple-300/80">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-7 font-mono text-[12px] text-parch-light/75">
             <span>
-              <span className="neon-pink">ROLE</span> ·{" "}
+              <span className="text-gold">CREW</span> ·{" "}
               {MY_DETAILS.role.replace(" at", "")}{" "}
               <a
                 href={MY_DETAILS.companyLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="neon-cyan hover:underline underline-offset-4"
+                className="text-gold-light hover:underline underline-offset-4"
               >
                 {MY_DETAILS.company}
               </a>
             </span>
             <span>
-              <span className="neon-pink">LOC</span> · {MY_DETAILS.address}
+              <span className="text-gold">PORT</span> · {MY_DETAILS.address}
             </span>
           </div>
 
           {/* actions */}
           <div className="flex flex-wrap items-center gap-4 mt-9">
             <a href="#projects" className="btn-primary">
-              View the work <FiArrowDown />
+              See the bounties <FiArrowDown />
             </a>
             <a
               href={cvFile}
               download="Mridha_Imran_Kabir_Backend.pdf"
               className="btn-ghost"
             >
-              <FiDownload /> Résumé
+              <FiDownload /> Log Book
             </a>
           </div>
 
@@ -135,7 +136,7 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex items-center justify-center transition-all rounded-full w-11 h-11 glass text-neutral-400 hover:text-white hover:border-iris-cyan/50 hover:-translate-y-1"
+                className="flex items-center justify-center transition-all rounded-full w-11 h-11 sea-panel text-parch-light/70 hover:text-gold hover:border-gold/60 hover:-translate-y-1"
               >
                 <Icon size={18} />
               </a>
@@ -143,47 +144,82 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* ── right: orbital portrait ── */}
+        {/* ── right: WANTED poster ── */}
         <div
           className="relative flex justify-center lg:justify-end"
           data-reveal
           style={{ transitionDelay: "120ms" }}
         >
-          <div className="relative w-[19rem] h-[19rem] sm:w-[23rem] sm:h-[23rem] flex items-center justify-center">
-            {/* orbit rings */}
-            <span className="absolute rounded-full inset-0 border border-white/10 animate-spin-slow" />
-            <span className="absolute border rounded-full inset-6 border-iris-cyan/20 animate-spin-slower" />
-            <span className="absolute rounded-full -inset-3 border border-dashed border-white/5 animate-[spinSlow_60s_linear_infinite]" />
-            {/* orbiting node */}
-            <span className="absolute top-0 -translate-x-1/2 left-1/2">
-              <span className="block w-2.5 h-2.5 rounded-full bg-iris-cyan shadow-[0_0_16px_4px_rgba(79,227,208,0.6)] animate-floaty" />
-            </span>
+          {/* nail + hanging poster that sways + tilts in 3D */}
+          <Tilt
+            max={11}
+            className="relative animate-sway origin-top w-[19rem] sm:w-[21rem]"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <span className="absolute z-20 -translate-x-1/2 rounded-full left-1/2 -top-2 w-3 h-3 bg-parch-dark shadow-[0_0_0_3px_rgba(120,84,40,0.6)]" />
 
-            {/* glow */}
-            <span className="absolute rounded-full inset-8 bg-iris-cyan/10 blur-3xl" />
+            <article
+              className="relative px-5 pt-5 pb-4 wanted rounded-sm float-shadow"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* red cleared-for-hire stamp */}
+              <span className="absolute z-20 top-24 -right-3 rotate-[-11deg] stamp text-[11px] animate-stamp">
+                Cleared for hire
+              </span>
 
-            <div className="relative overflow-hidden border shadow-2xl w-56 h-56 sm:w-72 sm:h-72 rounded-[2rem] border-white/10 glass">
-              <img
-                src={profilePic}
-                alt="Portrait of Mridha Imran Kabir"
-                width="500"
-                height="500"
-                fetchPriority="high"
-                className="object-cover w-full h-full transition-all duration-700 grayscale hover:grayscale-0 hover:scale-105"
-              />
-              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-2 font-mono text-[10px] text-cyan-200 bg-gradient-to-t from-black/80 to-transparent">
-                <span className="neon-pink">&#9679; REC</span>
-                <span>PLAYER 1 · MK—1987</span>
+              <p className="text-center wanted-label text-5xl sm:text-6xl tracking-[0.08em] depth-2">
+                Wanted
+              </p>
+              <p className="mt-1 mb-3 font-mono text-center text-[11px] tracking-[0.35em] text-parch-ink/70">
+                DEAD OR ALIVE
+              </p>
+
+              {/* portrait */}
+              <div className="relative mx-auto w-full aspect-square max-w-[15rem] overflow-hidden border-2 border-parch-ink/70 bg-parch-dark depth-1">
+                <img
+                  src={profilePic}
+                  alt="Portrait of Mridha Imran Kabir"
+                  width="500"
+                  height="500"
+                  fetchPriority="high"
+                  className="object-cover w-full h-full sepia-[0.35] contrast-105 transition-all duration-700 hover:sepia-0 hover:scale-105"
+                />
+                {/* corner brackets */}
+                <span className="absolute w-4 h-4 border-t-2 border-l-2 top-1 left-1 border-parch-ink/70" />
+                <span className="absolute w-4 h-4 border-t-2 border-r-2 top-1 right-1 border-parch-ink/70" />
+                <span className="absolute w-4 h-4 border-b-2 border-l-2 bottom-1 left-1 border-parch-ink/70" />
+                <span className="absolute w-4 h-4 border-b-2 border-r-2 bottom-1 right-1 border-parch-ink/70" />
               </div>
-            </div>
-          </div>
+
+              <p className="mt-3 font-pirate text-3xl text-center leading-none text-parch-ink tracking-[0.04em]">
+                &ldquo;Backend&rdquo; Kabir
+              </p>
+
+              <div className="my-2 hairline" />
+
+              {/* bounty */}
+              <div className="flex items-center justify-center gap-2 depth-1">
+                <span className="font-mono text-2xl text-pirate-deep">&#3647;</span>
+                <span className="font-display text-3xl font-black tracking-wider text-parch-ink tabular-nums">
+                  3,000,000,000
+                </span>
+                <span className="self-end mb-1 font-mono text-[10px] text-parch-ink/70">
+                  Beri
+                </span>
+              </div>
+
+              <p className="mt-2 font-mono text-center text-[10px] tracking-[0.3em] text-parch-ink/60">
+                MARINE · GRAND LINE · EAST BLUE
+              </p>
+            </article>
+          </Tilt>
         </div>
       </div>
 
       {/* scroll cue */}
       <a
         href="#about"
-        className="absolute -translate-x-1/2 bottom-6 left-1/2 text-neutral-600 hover:text-iris-cyan"
+        className="absolute -translate-x-1/2 bottom-6 left-1/2 text-gold/70 hover:text-gold"
         aria-label="Scroll down"
       >
         <FiArrowDown className="animate-floaty" />

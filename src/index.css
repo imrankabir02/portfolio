@@ -1,29 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700;800;900&family=Pirata+One&family=Special+Elite&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ============================================================
-   OUTRUN / 1980s SYNTHWAVE — retro-future design system
+   GRAND LINE — a ONE PIECE adventure design system
+   Deep sea · treasure gold · pirate red · aged parchment
    ============================================================ */
 
 :root {
   --mx: 50%;
   --my: 0%;
-  --pink: #ff2e97;
-  --cyan: #05d9e8;
-  --purple: #b967ff;
-  --neon: linear-gradient(92deg, #ff2e97 0%, #ff6ec7 30%, #05d9e8 100%);
-  --chrome: linear-gradient(
-    180deg,
-    #fff 0%,
-    #d8e6ff 22%,
-    #8fb4ff 46%,
-    #ff8fe0 54%,
-    #ffd16b 78%,
-    #fff2a8 100%
-  );
+  --gold: #f4c430;
+  --gold-deep: #d99a1c;
+  --red: #c1272d;
+  --ink: #3a2817;
+  --parch: #f0ddb4;
+  --sea: #071d30;
+  --treasure: linear-gradient(100deg, #a9761a 0%, #f4c430 32%, #ffe9a8 50%, #f4c430 68%, #a9761a 100%);
 }
 
 * {
@@ -47,134 +42,183 @@ html {
   }
 }
 
+/* base colour lives on <html> so the negative-z fixed sea layers stay visible.
+   (An opaque body background paints OVER negative z-index children.) */
+html {
+  background: #04121f;
+}
 body {
-  background: #0d0221;
-  color: #e9d5ff;
-  font-family: "Rajdhani", sans-serif;
+  background: transparent;
+  color: #f3e6cd;
+  font-family: "Cabin", sans-serif;
   overflow-x: hidden;
 }
 
-/* ---- Sunset sky ---- */
+/* ---- Sunset sky (the 3D ocean fills the lower half through the canvas) ---- */
 .scene {
   position: fixed;
   inset: 0;
-  z-index: -3;
+  z-index: -4;
   background:
-    radial-gradient(120% 80% at 50% 68%, rgba(255, 46, 151, 0.55), transparent 55%),
+    radial-gradient(58% 46% at 66% 50%, rgba(255, 150, 80, 0.5), transparent 62%),
     linear-gradient(
       180deg,
-      #05010f 0%,
-      #1a0533 32%,
-      #3b0a5c 52%,
-      #7b1f6b 66%,
-      #ff5e78 78%,
-      #ff9e00 90%,
-      #ffd35c 100%
+      #081f38 0%,
+      #0e2f4e 32%,
+      #1b5580 54%,
+      #2b6f97 66%,
+      #1a6391 100%
     );
 }
+/* fallback deep-sea tint if WebGL never mounts */
+.sea-veil {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 18, 31, 0.1) 0%,
+    rgba(4, 18, 31, 0.4) 52%,
+    rgba(4, 18, 31, 0.56) 100%
+  );
+}
 
-/* faint star field on the upper sky */
+/* faint stars up top */
 .scene::before {
   content: "";
   position: absolute;
-  inset: 0 0 45% 0;
+  inset: 0 0 60% 0;
   background-image:
-    radial-gradient(1px 1px at 12% 22%, #fff, transparent),
-    radial-gradient(1px 1px at 32% 8%, #fff, transparent),
-    radial-gradient(1px 1px at 58% 30%, #fff, transparent),
-    radial-gradient(1px 1px at 78% 14%, #fff, transparent),
-    radial-gradient(1px 1px at 88% 36%, #fff, transparent),
-    radial-gradient(1px 1px at 46% 18%, #fff, transparent),
-    radial-gradient(1px 1px at 68% 6%, #fff, transparent);
-  opacity: 0.7;
+    radial-gradient(1px 1px at 12% 30%, rgba(255, 240, 200, 0.9), transparent),
+    radial-gradient(1px 1px at 32% 12%, rgba(255, 240, 200, 0.8), transparent),
+    radial-gradient(1px 1px at 58% 40%, rgba(255, 240, 200, 0.7), transparent),
+    radial-gradient(1.4px 1.4px at 78% 18%, rgba(255, 240, 200, 0.9), transparent),
+    radial-gradient(1px 1px at 88% 46%, rgba(255, 240, 200, 0.7), transparent),
+    radial-gradient(1px 1px at 46% 22%, rgba(255, 240, 200, 0.6), transparent);
+  opacity: 0.55;
 }
 
-/* ---- Perspective neon grid floor ---- */
-.grid-floor {
+/* ---- Old-map parchment grain + longitude/latitude lines ---- */
+.map-grain {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 46vh;
-  z-index: -2;
-  overflow: hidden;
-  perspective: 260px;
-  perspective-origin: 50% 0%;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%);
-  mask-image: linear-gradient(180deg, transparent, #000 22%);
-}
-.grid-floor::before {
-  content: "";
-  position: absolute;
-  inset: -60% -20% -20% -20%;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: 0.06;
   background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 79px,
-      rgba(5, 217, 232, 0.75) 79px 80px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 39px,
-      rgba(255, 46, 151, 0.7) 39px 40px
-    );
-  transform: rotateX(84deg);
-  transform-origin: 50% 0;
-  animation: gridScroll 1.4s linear infinite;
-}
-/* horizon glow line */
-.grid-floor::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #ff6ec7;
-  box-shadow: 0 0 24px 6px rgba(255, 46, 151, 0.9),
-    0 0 60px 16px rgba(255, 46, 151, 0.5);
+    repeating-linear-gradient(0deg, transparent 0 78px, rgba(240, 221, 180, 0.5) 78px 79px),
+    repeating-linear-gradient(90deg, transparent 0 78px, rgba(240, 221, 180, 0.5) 78px 79px);
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 30%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(120% 100% at 50% 30%, #000 30%, transparent 78%);
 }
 
-/* cursor-reactive magenta glow */
+/* ---- Big faint compass rose watermark ---- */
+.compass-rose {
+  position: fixed;
+  z-index: -3;
+  top: 50%;
+  left: 50%;
+  width: min(84vw, 780px);
+  height: min(84vw, 780px);
+  transform: translate(-50%, -50%);
+  opacity: 0.05;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0 43deg, rgba(244, 196, 48, 0.9) 44deg 46deg, transparent 47deg 90deg,
+      transparent 90deg 133deg, rgba(244, 196, 48, 0.9) 134deg 136deg, transparent 137deg 180deg,
+      transparent 180deg 223deg, rgba(244, 196, 48, 0.9) 224deg 226deg, transparent 227deg 270deg,
+      transparent 270deg 313deg, rgba(244, 196, 48, 0.9) 314deg 316deg, transparent 317deg 360deg
+    );
+  -webkit-mask: radial-gradient(circle, #000 0 49%, transparent 50%);
+  mask: radial-gradient(circle, #000 0 49%, transparent 50%);
+  animation: spinSlow 120s linear infinite;
+}
+
+/* cursor-reactive warm glow */
 .aurora {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   background: radial-gradient(
-    320px 320px at var(--mx) var(--my),
-    rgba(185, 103, 255, 0.16),
-    transparent 68%
+    340px 340px at var(--mx) var(--my),
+    rgba(244, 196, 48, 0.1),
+    transparent 66%
   );
   transition: background 0.18s ease-out;
 }
 
-/* ---- CRT scanlines + vignette overlay ---- */
-.crt {
+/* ---- Ocean waves along the bottom ---- */
+.waves {
   position: fixed;
-  inset: 0;
-  z-index: 40;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30vh;
+  max-height: 260px;
+  z-index: -2;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.16) 0 1px,
-    transparent 1px 3px
-  );
-  mix-blend-mode: multiply;
-  opacity: 0.5;
-  animation: scan 0.5s steps(3) infinite;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 55%);
+  mask-image: linear-gradient(180deg, transparent, #000 55%);
 }
+.waves span {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+}
+/* three parallax wave bands drawn as repeating SVG crests */
+.waves .w1 {
+  height: 60%;
+  opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='40' viewBox='0 0 240 40'%3E%3Cpath d='M0 24 Q 60 4 120 24 T 240 24 V40 H0 Z' fill='%230e3557'/%3E%3C/svg%3E");
+  background-size: 240px 40px;
+  animation: wave 14s linear infinite;
+}
+.waves .w2 {
+  height: 44%;
+  opacity: 0.7;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='34' viewBox='0 0 200 34'%3E%3Cpath d='M0 20 Q 50 2 100 20 T 200 20 V34 H0 Z' fill='%2314507f'/%3E%3C/svg%3E");
+  background-size: 200px 34px;
+  animation: wave 9s linear infinite reverse;
+}
+.waves .w3 {
+  height: 30%;
+  opacity: 0.85;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='28' viewBox='0 0 160 28'%3E%3Cpath d='M0 16 Q 40 2 80 16 T 160 16 V28 H0 Z' fill='%231b6ba3'/%3E%3C/svg%3E");
+  background-size: 160px 28px;
+  animation: wave 6s linear infinite;
+}
+
 .vignette {
   position: fixed;
   inset: 0;
-  z-index: 39;
+  z-index: -1;
   pointer-events: none;
-  box-shadow: inset 0 0 200px 40px rgba(13, 2, 33, 0.9);
+  box-shadow: inset 0 0 220px 60px rgba(4, 18, 31, 0.85);
 }
 
-/* ---- Typography ---- */
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.gold-text {
+  background: var(--treasure);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+/* legacy alias used by a few components */
 .iris-text {
-  background: var(--neon);
+  background: var(--treasure);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -182,72 +226,90 @@ body {
   animation: shimmer 8s linear infinite;
 }
 
-.chrome-text {
-  background: var(--chrome);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.45))
-    drop-shadow(0 0 22px rgba(5, 217, 232, 0.35));
-}
-
-.neon-pink {
-  color: #ff5edb;
-  text-shadow: 0 0 6px rgba(255, 46, 151, 0.9), 0 0 22px rgba(255, 46, 151, 0.6);
-}
-.neon-cyan {
-  color: #7ff3ff;
-  text-shadow: 0 0 6px rgba(5, 217, 232, 0.9), 0 0 22px rgba(5, 217, 232, 0.55);
-}
-
+.ink-title,
 .neon-title {
-  color: #fff;
+  color: #ffe9c2;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.5),
-    0 0 16px rgba(255, 46, 151, 0.85), 0 0 34px rgba(255, 46, 151, 0.55),
-    0 0 60px rgba(185, 103, 255, 0.4);
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 0 22px rgba(244, 196, 48, 0.25);
 }
 
 .eyebrow {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Special Elite", monospace;
   font-size: 0.72rem;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: #7ff3ff;
-  text-shadow: 0 0 10px rgba(5, 217, 232, 0.6);
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(244, 196, 48, 0.3);
 }
 
-/* ---- Neon glass panels ---- */
-.glass {
+.section-index {
+  font-family: "Cinzel", serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(244, 196, 48, 0.4);
+}
+
+/* ============================================================
+   PARCHMENT PANELS  (formerly .glass)
+   ============================================================ */
+.glass,
+.parchment {
   position: relative;
-  background: linear-gradient(
-    160deg,
-    rgba(46, 10, 74, 0.62),
-    rgba(20, 4, 40, 0.72)
-  );
-  border: 1px solid rgba(255, 46, 151, 0.35);
+  color: #2e2013;
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(255, 255, 255, 0.35), transparent 40%),
+    linear-gradient(158deg, #f6ecd2 0%, #eddcb2 55%, #e2cc98 100%);
+  border: 1px solid rgba(120, 84, 40, 0.45);
   border-radius: 14px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 0 1px rgba(5, 217, 232, 0.12) inset,
-    0 0 22px -6px rgba(255, 46, 151, 0.45),
-    0 22px 50px -28px rgba(0, 0, 0, 0.9);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+    inset 0 0 44px rgba(150, 110, 60, 0.28),
+    0 18px 40px -22px rgba(0, 0, 0, 0.85);
+}
+/* subtle stained blotches so parchment doesn't read as flat card */
+.glass::after,
+.parchment::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(40px 30px at 12% 88%, rgba(120, 84, 40, 0.14), transparent 70%),
+    radial-gradient(60px 40px at 90% 12%, rgba(120, 84, 40, 0.12), transparent 70%);
+}
+
+/* Dark "sea log" panel variant — for HUD / nav / anything over parchment feels wrong */
+.sea-panel {
+  position: relative;
+  background: linear-gradient(158deg, rgba(10, 39, 64, 0.82), rgba(7, 29, 48, 0.9));
+  border: 1px solid rgba(244, 196, 48, 0.28);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset, 0 16px 36px -22px rgba(0, 0, 0, 0.9);
+  color: #f3e6cd;
 }
 
 .glass-hover {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s,
-    box-shadow 0.4s;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s,
+    border-color 0.4s;
 }
 .glass-hover:hover {
-  transform: translateY(-6px);
-  border-color: rgba(5, 217, 232, 0.7);
-  box-shadow: 0 0 0 1px rgba(5, 217, 232, 0.3) inset,
-    0 0 30px -2px rgba(5, 217, 232, 0.55),
-    0 30px 60px -24px rgba(255, 46, 151, 0.5);
+  transform: translateY(-6px) rotate(-0.3deg);
+  border-color: rgba(217, 154, 28, 0.9);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+    inset 0 0 44px rgba(150, 110, 60, 0.3),
+    0 26px 54px -24px rgba(0, 0, 0, 0.9),
+    0 0 0 3px rgba(244, 196, 48, 0.14);
 }
 
-/* animated neon border on hover */
+/* golden rope frame that appears on hover */
 .aura-border {
   position: relative;
   isolation: isolate;
@@ -255,10 +317,14 @@ body {
 .aura-border::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: -3px;
   border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(120deg, #ff2e97, #b967ff, #05d9e8);
+  padding: 2px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--gold-deep) 0 6px,
+    var(--gold) 6px 12px
+  );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -267,84 +333,161 @@ body {
   z-index: -1;
 }
 .aura-border:hover::before {
-  opacity: 1;
+  opacity: 0.85;
 }
 
-/* ---- chips ---- */
+/* ============================================================
+   WANTED POSTER
+   ============================================================ */
+.wanted {
+  position: relative;
+  background:
+    radial-gradient(140% 120% at 50% 0%, #f7edd0, #e8d3a2 70%, #d8bd85 100%);
+  border: 2px solid #6b4f34;
+  color: #2b1d0f;
+  box-shadow:
+    inset 0 0 0 6px #e8d3a2,
+    inset 0 0 0 7px #6b4f34,
+    inset 0 0 90px rgba(120, 84, 40, 0.4),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+}
+/* torn / burnt edges */
+.wanted::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 60px rgba(70, 45, 20, 0.55);
+  background-image:
+    radial-gradient(20px 14px at 0% 0%, rgba(70, 45, 20, 0.5), transparent 70%),
+    radial-gradient(24px 16px at 100% 100%, rgba(70, 45, 20, 0.5), transparent 70%);
+}
+.wanted-label {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #2b1d0f;
+  line-height: 0.9;
+}
+
+/* red ink "stamp" */
+.stamp {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  border: 3px double var(--red);
+  border-radius: 8px;
+  padding: 0.25rem 0.8rem;
+  text-transform: uppercase;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+/* ============================================================
+   CHIPS  (tech = "berry tags")
+   ============================================================ */
 .chip {
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Special Elite", monospace;
   font-size: 0.7rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   padding: 0.26rem 0.7rem;
-  border-radius: 6px;
-  border: 1px solid rgba(5, 217, 232, 0.4);
-  color: #9fecff;
-  background: rgba(5, 217, 232, 0.06);
+  border-radius: 4px;
+  border: 1px solid rgba(120, 84, 40, 0.5);
+  color: #5c3d1e;
+  background: rgba(255, 255, 255, 0.32);
   transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s,
     background 0.25s;
   white-space: nowrap;
 }
 .chip:hover {
-  color: #fff;
-  border-color: #ff2e97;
-  background: rgba(255, 46, 151, 0.12);
-  box-shadow: 0 0 14px -2px rgba(255, 46, 151, 0.7);
+  color: #2b1d0f;
+  border-color: var(--gold-deep);
+  background: rgba(244, 196, 48, 0.35);
+  box-shadow: 0 0 14px -3px rgba(217, 154, 28, 0.8);
   transform: translateY(-2px);
 }
+/* dark chip on sea panels */
+.chip-dark {
+  font-family: "Special Elite", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  padding: 0.26rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid rgba(244, 196, 48, 0.4);
+  color: #ffe08a;
+  background: rgba(244, 196, 48, 0.08);
+  white-space: nowrap;
+  transition: all 0.25s;
+}
+.chip-dark:hover {
+  color: #fff;
+  border-color: var(--gold);
+  background: rgba(244, 196, 48, 0.16);
+}
 
-/* ---- buttons ---- */
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn-primary {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: "Orbitron", sans-serif;
+  font-family: "Cinzel", serif;
   font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.8rem 1.6rem;
+  padding: 0.82rem 1.7rem;
   border-radius: 8px;
-  color: #14001a;
-  background: linear-gradient(92deg, #ff2e97, #ff6ec7 60%, #05d9e8);
-  box-shadow: 0 0 22px -2px rgba(255, 46, 151, 0.8),
-    0 0 40px -8px rgba(5, 217, 232, 0.5);
+  color: #fff4dc;
+  background: linear-gradient(180deg, #d6322f 0%, #a51f24 100%);
+  border: 1px solid #7c161a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 0 22px -6px rgba(193, 39, 45, 0.8),
+    0 12px 26px -14px rgba(0, 0, 0, 0.8);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s,
     filter 0.3s;
 }
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
   filter: brightness(1.08);
-  box-shadow: 0 0 30px 2px rgba(255, 46, 151, 0.95),
-    0 0 60px -4px rgba(5, 217, 232, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 30px 0 rgba(244, 196, 48, 0.5),
+    0 18px 34px -16px rgba(0, 0, 0, 0.85);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-family: "Orbitron", sans-serif;
+  font-family: "Cinzel", serif;
   font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.8rem 1.4rem;
+  padding: 0.82rem 1.5rem;
   border-radius: 8px;
-  color: #7ff3ff;
-  border: 1px solid rgba(5, 217, 232, 0.7);
-  background: rgba(5, 217, 232, 0.05);
-  box-shadow: 0 0 16px -4px rgba(5, 217, 232, 0.6),
-    inset 0 0 14px -8px rgba(5, 217, 232, 0.8);
+  color: var(--gold-light, #ffe08a);
+  border: 1.5px solid rgba(244, 196, 48, 0.7);
+  background: rgba(244, 196, 48, 0.06);
+  box-shadow: 0 0 16px -6px rgba(244, 196, 48, 0.6),
+    inset 0 0 14px -8px rgba(244, 196, 48, 0.8);
   transition: color 0.3s, box-shadow 0.3s, transform 0.3s, background 0.3s;
 }
 .btn-ghost:hover {
   color: #fff;
-  background: rgba(5, 217, 232, 0.12);
-  box-shadow: 0 0 24px -2px rgba(5, 217, 232, 0.9);
+  background: rgba(244, 196, 48, 0.16);
+  box-shadow: 0 0 24px -4px rgba(244, 196, 48, 0.85);
   transform: translateY(-3px);
 }
 
-/* ---- scroll reveal ---- */
+/* ============================================================
+   MISC
+   ============================================================ */
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
@@ -356,87 +499,81 @@ body {
   transform: none;
 }
 
-/* ---- section number ---- */
-.section-index {
-  font-family: "Orbitron", sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  color: #ff5edb;
-  text-shadow: 0 0 12px rgba(255, 46, 151, 0.7);
-}
-
-/* ---- scrollbar ---- */
 ::-webkit-scrollbar {
   width: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0221;
+  background: #04121f;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#ff2e97, #05d9e8);
+  background: linear-gradient(#f4c430, #a9761a);
   border-radius: 0;
-  border: 3px solid #0d0221;
+  border: 3px solid #04121f;
 }
 
 ::selection {
-  background: #ff2e97;
-  color: #fff;
+  background: var(--gold);
+  color: #2b1d0f;
 }
 
-/* ---- progress + misc ---- */
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 3px;
   z-index: 60;
-  background: linear-gradient(90deg, #ff2e97, #b967ff, #05d9e8);
-  box-shadow: 0 0 14px rgba(255, 46, 151, 0.9);
+  background: linear-gradient(90deg, #c1272d, #f4c430, #ffe08a);
+  box-shadow: 0 0 14px rgba(244, 196, 48, 0.9);
 }
 
 .dot-online {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #39ff14;
-  box-shadow: 0 0 10px 2px rgba(57, 255, 20, 0.8);
+  background: #3ddc84;
+  box-shadow: 0 0 10px 2px rgba(61, 220, 132, 0.8);
   animation: pulseRing 2.2s ease-out infinite;
 }
 
+/* rope divider (dashes like stitched rope) */
 .hairline {
-  height: 1px;
-  background: linear-gradient(
+  height: 2px;
+  background-image: repeating-linear-gradient(
     90deg,
-    transparent,
-    rgba(255, 46, 151, 0.6),
-    rgba(5, 217, 232, 0.6),
-    transparent
+    rgba(120, 84, 40, 0.55) 0 10px,
+    transparent 10px 18px
+  );
+}
+/* rope divider on dark backgrounds */
+.hairline-gold {
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(244, 196, 48, 0.6) 0 10px,
+    transparent 10px 18px
   );
 }
 
-/* ---- retro sun (hero): solid top + widening slats on the lower half ---- */
-.retro-sun {
+/* red wax seal */
+.wax-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 50%;
-  background: linear-gradient(
-    180deg,
-    #fff36b 0%,
-    #ffd23e 30%,
-    #ff9e00 52%,
-    #ff2e97 78%,
-    #b1176b 100%
-  );
-  --slats: repeating-linear-gradient(
-    180deg,
-    #000 0 7px,
-    transparent 7px 12px
-  );
-  --top: linear-gradient(180deg, #000 0 48%, transparent 48%);
-  -webkit-mask: var(--top), var(--slats);
-  -webkit-mask-composite: source-over;
-  mask: var(--top), var(--slats);
-  mask-composite: add;
-  filter: drop-shadow(0 0 40px rgba(255, 100, 180, 0.55));
+  background: radial-gradient(circle at 35% 30%, #e04a4a, #a51f24 70%, #7c161a);
+  color: #ffdccb;
+  font-family: "Pirata One", cursive;
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.7), inset 0 -4px 8px rgba(0, 0, 0, 0.35);
+  border: 2px solid #7c161a;
+}
+
+/* ---- sun behind the poster ---- */
+.grand-sun {
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #ffe9a8 0%, #ffc24d 34%, #ff8c42 66%, #ff6b4a 100%);
+  filter: drop-shadow(0 0 60px rgba(255, 158, 94, 0.55));
 }
 
 @keyframes bootOut {
@@ -444,4 +581,58 @@ body {
     opacity: 0;
     visibility: hidden;
   }
+}
+
+/* ============================================================
+   3D — perspective stage, mouse tilt, depth layers, parallax
+   ============================================================ */
+.stage-3d {
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+}
+.tilt3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+/* children float toward the viewer inside a tilting card */
+.depth-1 {
+  transform: translateZ(26px);
+  transform-style: preserve-3d;
+}
+.depth-2 {
+  transform: translateZ(48px);
+  transform-style: preserve-3d;
+}
+.depth-3 {
+  transform: translateZ(72px);
+  transform-style: preserve-3d;
+}
+/* a soft contact shadow that deepens the float on hover */
+.float-shadow {
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stage-3d:hover .float-shadow,
+.tilt3d:hover .float-shadow {
+  box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.9),
+    0 0 0 3px rgba(244, 196, 48, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt3d {
+    transform: none !important;
+  }
+}
+
+/* scrim so overlay text stays readable over the live sea */
+.hero-scrim {
+  background: linear-gradient(
+    100deg,
+    rgba(4, 18, 31, 0.94) 0%,
+    rgba(4, 18, 31, 0.82) 30%,
+    rgba(4, 18, 31, 0.4) 50%,
+    rgba(4, 18, 31, 0.12) 66%,
+    transparent 78%
+  );
 }

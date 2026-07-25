@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import { useActiveSection, useClock } from "../hooks";
 import { FiDownload, FiMenu, FiX } from "react-icons/fi";
+import JollyRoger from "./JollyRoger";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home", id: "home" },
-  { label: "About", href: "#about", id: "about" },
-  { label: "Skills", href: "#skills", id: "skills" },
-  { label: "Work", href: "#projects", id: "projects" },
-  { label: "Path", href: "#experience", id: "experience" },
-  { label: "Contact", href: "#contact", id: "contact" },
+  { label: "Deck", href: "#home", id: "home" },
+  { label: "The Pirate", href: "#about", id: "about" },
+  { label: "Powers", href: "#skills", id: "skills" },
+  { label: "Bounties", href: "#projects", id: "projects" },
+  { label: "Voyage", href: "#experience", id: "experience" },
+  { label: "Hail", href: "#contact", id: "contact" },
 ];
 
 const IDS = NAV_LINKS.map((l) => l.id);
@@ -30,53 +31,56 @@ const Navbar = () => {
       <nav className="flex items-center justify-between h-16 px-4 mx-auto max-w-7xl md:px-8">
         {/* wordmark */}
         <a href="#home" className="flex items-center gap-2.5 group">
-          <span className="relative flex items-center justify-center w-9 h-9">
-            <span className="absolute inset-0 border rounded-full border-iris-cyan/40 group-hover:animate-spin-slow" />
-            <span className="font-mono text-sm font-bold iris-text">MK</span>
+          <span className="relative flex items-center justify-center w-10 h-10">
+            <span className="absolute inset-0 border rounded-full border-gold/40 group-hover:animate-spin-slow" />
+            <JollyRoger size={26} className="text-gold" />
           </span>
-          <span className="hidden font-mono text-xs tracking-widest sm:block text-neutral-400">
-            KABIR<span className="text-iris-cyan">/</span>OS
+          <span className="hidden font-pirate text-lg leading-none tracking-wide sm:block text-parch-light">
+            KABIR<span className="text-gold">.</span>
+            <span className="block font-mono text-[9px] tracking-[0.3em] text-gold/70 -mt-0.5">
+              GRAND LINE LOG
+            </span>
           </span>
         </a>
 
         {/* desktop pill */}
-        <div className="items-center hidden gap-1 px-2 py-1 rounded-full lg:flex glass">
+        <div className="items-center hidden gap-1 px-2 py-1 rounded-full lg:flex sea-panel">
           {NAV_LINKS.map(({ label, href, id }) => (
             <a
               key={id}
               href={href}
               className={`relative px-3.5 py-1.5 text-sm rounded-full transition-colors ${
                 active === id
-                  ? "text-white"
-                  : "text-neutral-400 hover:text-neutral-100"
+                  ? "text-sea-950"
+                  : "text-parch-light/70 hover:text-parch-light"
               }`}
             >
               {active === id && (
-                <span className="absolute inset-0 border rounded-full bg-white/10 border-iris-cyan/30" />
+                <span className="absolute inset-0 rounded-full bg-gold shadow-[0_0_16px_rgba(244,196,48,0.6)]" />
               )}
-              <span className="relative">{label}</span>
+              <span className="relative font-medium">{label}</span>
             </a>
           ))}
         </div>
 
         {/* right cluster */}
         <div className="flex items-center gap-3">
-          <span className="hidden font-mono text-[11px] text-neutral-500 xl:block tabular-nums">
+          <span className="hidden font-mono text-[11px] text-gold/70 xl:block tabular-nums">
             {clock}
           </span>
           <a
             href={cvFile}
             download="Mridha_Imran_Kabir_Backend.pdf"
-            className="items-center hidden gap-2 px-4 py-2 font-mono text-xs rounded-full md:inline-flex glass hover:border-iris-cyan/50 text-neutral-200 hover:text-white group transition-colors"
+            className="items-center hidden gap-2 px-4 py-2 font-mono text-xs rounded-full md:inline-flex sea-panel hover:border-gold text-parch-light group transition-colors"
           >
             <FiDownload className="transition-transform group-hover:translate-y-0.5" />
-            CV
+            Log Book
           </a>
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="flex items-center justify-center rounded-full lg:hidden w-10 h-10 glass text-neutral-200"
+            className="flex items-center justify-center rounded-full lg:hidden w-10 h-10 sea-panel text-parch-light"
           >
             {open ? <FiX size={18} /> : <FiMenu size={18} />}
           </button>
@@ -89,7 +93,7 @@ const Navbar = () => {
           open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="mx-4 mt-1 glass rounded-2xl">
+        <div className="mx-4 mt-1 sea-panel rounded-2xl">
           <ul className="flex flex-col p-3">
             {NAV_LINKS.map(({ label, href, id }, i) => (
               <li key={id}>
@@ -98,12 +102,12 @@ const Navbar = () => {
                   onClick={() => setOpen(false)}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl transition-colors ${
                     active === id
-                      ? "text-white bg-white/5"
-                      : "text-neutral-400 hover:text-white"
+                      ? "text-gold bg-gold/10"
+                      : "text-parch-light/70 hover:text-parch-light"
                   }`}
                 >
                   <span>{label}</span>
-                  <span className="font-mono text-[10px] text-iris-cyan/70">
+                  <span className="font-mono text-[10px] text-gold/70">
                     {String(i).padStart(2, "0")}
                   </span>
                 </a>
@@ -115,7 +119,7 @@ const Navbar = () => {
                 download="Mridha_Imran_Kabir_Backend.pdf"
                 className="flex items-center justify-center w-full gap-2 py-3 btn-primary"
               >
-                <FiDownload /> Download CV
+                <FiDownload /> Download Log Book
               </a>
             </li>
           </ul>

@@ -1,4 +1,4 @@
-/* Shared section header: index tag + iris title + optional blurb. */
+/* Shared section header: log-entry index + gilded title + optional blurb. */
 const SectionHead = ({ index, kicker, title, blurb, center }) => (
   <div
     data-reveal
@@ -9,15 +9,16 @@ const SectionHead = ({ index, kicker, title, blurb, center }) => (
         center ? "justify-center" : ""
       }`}
     >
-      <span className="section-index">{index}</span>
-      <span className="w-8 h-px bg-iris-cyan/40" />
+      <span className="section-index">LOG {index}</span>
+      <span className="w-10 h-px bg-gold/50" />
       <span className="eyebrow">{kicker}</span>
+      <span className="text-gold/60">&#9670;</span>
     </div>
-    <h2 className="text-3xl font-extrabold sm:text-4xl font-display neon-title">
+    <h2 className="text-3xl font-extrabold sm:text-5xl font-display ink-title">
       {title}
     </h2>
     {blurb && (
-      <p className="mt-4 text-lg leading-relaxed text-purple-200/70">{blurb}</p>
+      <p className="mt-4 text-lg leading-relaxed text-parch-light/75">{blurb}</p>
     )}
   </div>
 );
