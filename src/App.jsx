@@ -1,31 +1,50 @@
-import Hero from "./Components/Hero"
-import Navbar from "./Components/Navbar"
-import About from "./Components/About"
-import Experience from './Components/Experience'
-import Skills from "./Components/Skills"
-import Educations from "./Components/Educations"
-import Footer from "./Components/Footer"
-import Projects from "./Components/Projects"
+import Navbar from "./Components/Navbar";
+import Hero from "./Components/Hero";
+import About from "./Components/About";
+import Skills from "./Components/Skills";
+import Projects from "./Components/Projects";
+import Experience from "./Components/Experience";
+import Educations from "./Components/Educations";
+import Contact from "./Components/Contact";
+import Boot from "./Components/Boot";
+import { useAmbient, useReveal, useScrollProgress, useBoot } from "./hooks";
 
 const App = () => {
-  return (
-    <div className="overflow-x-hidden antialiased bg-neutral-200 text-neutral-800">
-      <div className="relative min-h-screen">
-        <div className="container relative px-8 mx-auto">
-          <Navbar />
-          <main className="relative space-y-2 md:space-y-2">
-            <Hero className="bg-lime-100"/>
-            <About />
-            <Skills />
-            <Projects />
-            <Experience />
-            <Educations />
-          </main>
-          <Footer />
-        </div>
-      </div>
-    </div>
-  )
-}
+  useAmbient();
+  useReveal();
+  const progress = useScrollProgress();
+  const booting = useBoot();
 
-export default App
+  return (
+    <div className="relative min-h-screen font-sans text-neutral-100 antialiased selection:text-white">
+      {/* retro-future background layers */}
+      <div className="scene" aria-hidden="true" />
+      <div className="grid-floor" aria-hidden="true" />
+      <div className="aurora" aria-hidden="true" />
+      <div className="vignette" aria-hidden="true" />
+      <div className="crt" aria-hidden="true" />
+
+      {booting && <Boot />}
+
+      <div
+        className="progress-bar"
+        style={{ width: `${progress}%` }}
+        aria-hidden="true"
+      />
+
+      <Navbar />
+
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Educations />
+        <Contact />
+      </main>
+    </div>
+  );
+};
+
+export default App;

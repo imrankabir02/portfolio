@@ -1,36 +1,39 @@
 import { EDUCATIONS } from "../constants";
+import SectionHead from "./SectionHead";
+import { FiAward } from "react-icons/fi";
 
 const Educations = () => {
   return (
-    <div id="educations" className="py-12 lg:py-20">
-      <h1 className="mb-12 text-4xl font-bold text-center ">Educations</h1>
+    <section
+      id="educations"
+      className="px-6 pt-4 pb-24 mx-auto scroll-mt-24 max-w-7xl md:px-8"
+    >
+      <SectionHead index="05" kicker="Foundation" title="Education" />
 
-      <div className="max-w-6xl px-6 mx-auto space-y-8">
-        {EDUCATIONS.map((education, index) => (
+      <div className="grid max-w-4xl gap-6 mx-auto">
+        {EDUCATIONS.map((edu, i) => (
           <div
-            key={index}
-            className="relative p-6 overflow-hidden rounded-lg shadow-lg bgcard"
+            key={i}
+            data-reveal
+            className="flex flex-col gap-5 p-7 glass rounded-2xl aura-border glass-hover sm:flex-row sm:items-center"
           >
-            <div className="absolute inset-0"></div>
-            <div className="relative z-10 flex flex-col lg:flex-row">
-              {/* Year Section */}
-              <div className="w-full mb-4 text-center lg:w-1/5 lg:mb-0 lg:text-left">
-                <p className="text-lg font-semibold">{education.year}</p>
-              </div>
-
-              {/* Education Content */}
-              <div className="w-full lg:w-4/5 lg:pl-8">
-                <h2 className="mb-2 text-xl ">
-                  {education.title} -{" "}
-                  <span className="font-semibold hover:text-green-700">{education.name}</span>
-                </h2>
-                <p className="leading-relaxed text-gray-700">{education.location}</p>
-              </div>
+            <span className="flex items-center justify-center border w-14 h-14 shrink-0 rounded-2xl border-iris-cyan/20 bg-iris-cyan/5 text-iris-cyan">
+              <FiAward size={24} />
+            </span>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold font-display">
+                {edu.title}
+              </h3>
+              <p className="text-sm font-medium text-iris-blue">{edu.name}</p>
+              <p className="mt-1 text-sm text-neutral-500">{edu.location}</p>
             </div>
+            <span className="px-3 py-1.5 font-mono text-[11px] rounded-full text-neutral-300 bg-white/5 border border-white/10 whitespace-nowrap">
+              {edu.year}
+            </span>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

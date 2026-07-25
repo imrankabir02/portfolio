@@ -18,59 +18,103 @@ import {
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa";
 import { SKILL_GROUPS } from "../constants";
+import SectionHead from "./SectionHead";
 
-// Keyed by the strings in SKILL_GROUPS; each entry is [icon, brand hover colour].
+// Keyed by the strings in SKILL_GROUPS; each entry is [icon, brand colour].
 const ICONS = {
-  PHP: [SiPhp, "group-hover:text-[#777BB4]"],
-  Python: [SiPython, "group-hover:text-[#3776AB]"],
-  JavaScript: [SiJavascript, "group-hover:text-[#F7DF1E]"],
-  Laravel: [SiLaravel, "group-hover:text-[#FF2D20]"],
-  Django: [SiDjango, "group-hover:text-[#092E20]"],
-  FastAPI: [SiFastapi, "group-hover:text-[#009688]"],
-  React: [SiReact, "group-hover:text-[#61DAFB]"],
-  MySQL: [SiMysql, "group-hover:text-[#4479A1]"],
-  PostgreSQL: [SiPostgresql, "group-hover:text-[#4169E1]"],
-  MSSQL: [SiMicrosoftsqlserver, "group-hover:text-[#CC2927]"],
-  Redis: [SiRedis, "group-hover:text-[#DC382D]"],
-  Celery: [SiCelery, "group-hover:text-[#37814A]"],
-  Docker: [SiDocker, "group-hover:text-[#2496ED]"],
-  Linux: [SiLinux, "group-hover:text-[#FCC624]"],
-  Nginx: [SiNginx, "group-hover:text-[#009639]"],
-  AWS: [FaAws, "group-hover:text-[#FF9900]"],
-  Git: [SiGit, "group-hover:text-[#F05032]"],
+  Python: [SiPython, "#3776AB"],
+  PHP: [SiPhp, "#777BB4"],
+  JavaScript: [SiJavascript, "#F7DF1E"],
+  Laravel: [SiLaravel, "#FF2D20"],
+  Django: [SiDjango, "#44B78B"],
+  FastAPI: [SiFastapi, "#009688"],
+  React: [SiReact, "#61DAFB"],
+  MySQL: [SiMysql, "#4479A1"],
+  PostgreSQL: [SiPostgresql, "#4169E1"],
+  MSSQL: [SiMicrosoftsqlserver, "#CC2927"],
+  Redis: [SiRedis, "#DC382D"],
+  Celery: [SiCelery, "#37814A"],
+  Docker: [SiDocker, "#2496ED"],
+  Linux: [SiLinux, "#FCC624"],
+  Nginx: [SiNginx, "#009639"],
+  AWS: [FaAws, "#FF9900"],
+  Git: [SiGit, "#F05032"],
 };
+
+const ALL = SKILL_GROUPS.flatMap((g) => g.items);
 
 const Skills = () => {
   return (
-    <div id="skills" className="py-12 lg:py-20">
-      <h1 className="mb-12 text-4xl font-bold text-center">Skills</h1>
+    <section
+      id="skills"
+      className="px-6 py-24 mx-auto scroll-mt-24 max-w-7xl md:px-8"
+    >
+      <SectionHead
+        index="02"
+        kicker="Stack"
+        title="Tools I reach for"
+        blurb="The kit behind the systems — languages, frameworks, data stores and the infrastructure they run on."
+      />
 
-      <div className="max-w-5xl px-6 mx-auto">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {SKILL_GROUPS.map((group) => (
-            <div key={group.heading} className="p-6 bgcard">
-              <h2 className="mb-5 text-xs font-semibold tracking-widest text-center uppercase text-neutral-500">
-                {group.heading}
-              </h2>
-              <ul className="space-y-3">
-                {group.items.map((item) => {
-                  const [Icon, hoverColor] = ICONS[item];
-                  return (
-                    <li key={item} className="flex items-center gap-3 group">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {SKILL_GROUPS.map((group, gi) => (
+          <div
+            key={group.heading}
+            data-reveal
+            style={{ transitionDelay: `${gi * 90}ms` }}
+            className="p-6 glass rounded-2xl aura-border glass-hover"
+          >
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="eyebrow">{group.heading}</h3>
+              <span className="font-mono text-[10px] text-neutral-600">
+                {String(group.items.length).padStart(2, "0")}
+              </span>
+            </div>
+            <ul className="space-y-3.5">
+              {group.items.map((item) => {
+                const [Icon, color] = ICONS[item];
+                return (
+                  <li
+                    key={item}
+                    className="flex items-center gap-3 group/i"
+                    style={{ "--bc": color }}
+                  >
+                    <span className="flex items-center justify-center border rounded-lg w-9 h-9 border-white/8 bg-white/5 transition-colors group-hover/i:border-[var(--bc)]">
                       <Icon
                         aria-hidden="true"
-                        className={`text-xl shrink-0 transition-colors ${hoverColor}`}
+                        size={17}
+                        className="transition-colors text-neutral-400 group-hover/i:text-[var(--bc)]"
                       />
-                      <span className="text-sm">{item}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                    </span>
+                    <span className="text-sm text-neutral-300 group-hover/i:text-white">
+                      {item}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* stack ticker */}
+      <div
+        className="relative mt-10 overflow-hidden glass rounded-full py-3 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]"
+        data-reveal
+      >
+        <div className="flex w-max gap-8 animate-marquee">
+          {[...ALL, ...ALL].map((t, i) => (
+            <span
+              key={i}
+              className="font-mono text-xs tracking-widest uppercase text-neutral-500"
+            >
+              {t}
+              <span className="ml-8 text-iris-cyan/50">/</span>
+            </span>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

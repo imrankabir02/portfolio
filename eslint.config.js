@@ -32,6 +32,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      // JS (non-TS) project — prop-types validation is noise here.
+      'react/prop-types': 'off',
     },
   },
 ]

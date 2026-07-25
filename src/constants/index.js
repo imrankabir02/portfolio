@@ -25,11 +25,11 @@ export const SKILLSETS = [
 export const SKILL_GROUPS = [
   {
     heading: "Languages",
-    items: ["PHP", "Python", "JavaScript"],
+    items: ["Python", "PHP", "JavaScript"],
   },
   {
     heading: "Frameworks",
-    items: ["Laravel", "Django", "FastAPI", "React"],
+    items: ["Django", "Laravel", "FastAPI", "React"],
   },
   {
     heading: "Data",
