@@ -385,6 +385,504 @@ body {
 }
 
 /* ============================================================
+   TCG CARDS — the whole portfolio dealt as a One Piece deck.
+   Foil border, full-bleed art, power figure, keyword pills,
+   type banner, name plate, set code and a cost circle. Each card
+   is a real object: card stock has thickness, and it tilts in hand.
+   ============================================================ */
+:root {
+  --rest: rotateX(0deg);
+}
+
+/* perspective host — one per card, so a faded ancestor can't flatten it */
+.slab-stage {
+  perspective: 1100px;
+  perspective-origin: 50% 40%;
+}
+
+/* ---- colour identities, straight off the OP TCG ---- */
+.tcg--red    { --c1: #b52630; --c2: #3d0a10; --ac: #ff7a6b; --band: #8e1b23; }
+.tcg--green  { --c1: #1c7a52; --c2: #062a1c; --ac: #63e2a6; --band: #14603f; }
+.tcg--blue   { --c1: #1a5f9e; --c2: #07203a; --ac: #7cc2f0; --band: #14497a; }
+.tcg--purple { --c1: #5a3a8f; --c2: #1b1030; --ac: #bb92ff; --band: #452b6e; }
+.tcg--yellow { --c1: #c9941a; --c2: #453005; --ac: #ffd766; --band: #9a7010; }
+.tcg--black  { --c1: #2c2c36; --c2: #08080c; --ac: #a8b0c6; --band: #1c1c24; }
+
+/* ---- the card ---- */
+.tcg {
+  --d: 9px; /* card stock thickness */
+  --rest: rotateX(6deg);
+  position: relative;
+  display: block;
+  padding: 9px;
+  border-radius: 20px;
+  transform: var(--rest);
+  transform-style: preserve-3d;
+  /* holographic foil border */
+  background:
+    conic-gradient(
+      from 200deg,
+      #35c6ff 0deg, #55f2a0 50deg, #ffe45e 100deg, #ff8ec4 150deg,
+      #9d7bff 205deg, #35d8ff 265deg, #7dffc4 315deg, #35c6ff 360deg
+    );
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 40px 60px -28px rgba(0, 0, 0, 0.95);
+  transition: box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tcg:hover {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 60px 84px -30px rgba(0, 0, 0, 0.95),
+    0 0 40px -6px rgba(244, 196, 48, 0.4);
+}
+/* foil grain across the border */
+.tcg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.55) 0 2px,
+    transparent 2px 6px
+  );
+}
+/* back of the card */
+.tcg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateZ(calc(var(--d) * -1));
+  background: linear-gradient(160deg, #7a1d22, #2a0a0d);
+}
+
+/* ---- card stock edges: real geometry ---- */
+.wall {
+  position: absolute;
+  pointer-events: none;
+  backface-visibility: hidden;
+  background: linear-gradient(180deg, #fbf6e6, #cdc3aa);
+}
+.wall--t {
+  left: 0; bottom: 100%; width: 100%; height: var(--d);
+  transform-origin: center bottom;
+  transform: rotateX(90deg);
+  border-radius: 6px 6px 0 0;
+}
+.wall--b {
+  left: 0; top: 100%; width: 100%; height: var(--d);
+  transform-origin: center top;
+  transform: rotateX(-90deg);
+  background: linear-gradient(180deg, #cdc3aa, #8d8368);
+  border-radius: 0 0 6px 6px;
+}
+.wall--l {
+  top: 0; right: 100%; width: var(--d); height: 100%;
+  transform-origin: right center;
+  transform: rotateY(-90deg);
+  background: linear-gradient(90deg, #9d937a, #efe7d2);
+  border-radius: 6px 0 0 6px;
+}
+.wall--r {
+  top: 0; left: 100%; width: var(--d); height: 100%;
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, #efe7d2, #9d937a);
+  border-radius: 0 6px 6px 0;
+}
+
+/* ---- inner frame ---- */
+.tcg__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 22rem;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.85);
+  background: #0a0a0e;
+  color: #fff;
+}
+
+/* ---- artwork: gradient sky, impact lines, halftone, big glyph ---- */
+.tcg__art {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90% 55% at 50% 0%, rgba(255, 255, 255, 0.3), transparent 62%),
+    radial-gradient(130% 95% at 50% 26%, var(--c1), var(--c2) 72%);
+}
+/* manga impact lines radiating from the focal point */
+.tcg__art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 34%,
+    rgba(255, 255, 255, 0.16) 0deg 0.55deg,
+    transparent 0.55deg 3.4deg
+  );
+  -webkit-mask-image: radial-gradient(circle at 50% 34%, transparent 20%, #000 68%);
+  mask-image: radial-gradient(circle at 50% 34%, transparent 20%, #000 68%);
+  opacity: 0.55;
+}
+/* screentone dots toward the bottom */
+.tcg__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 1.3px);
+  background-size: 5px 5px;
+  opacity: 0.4;
+  -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 90%);
+  mask-image: linear-gradient(180deg, transparent 28%, #000 90%);
+}
+.tcg__glyph {
+  position: absolute;
+  left: 50%;
+  top: 27%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  opacity: 0.34;
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.75));
+  pointer-events: none;
+}
+
+/* real artwork, when a card has a portrait to show */
+.tcg__photo {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 100%;
+  height: 64%;
+  transform: translateX(-50%);
+  object-fit: cover;
+  object-position: 50% 18%;
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 96%);
+  mask-image: linear-gradient(180deg, #000 58%, transparent 96%);
+}
+/* colour-identity wash so the photo belongs to the card */
+.tcg__photo + .tcg__wash {
+  position: absolute;
+  inset: 0 0 36% 0;
+  background: linear-gradient(180deg, transparent 30%, var(--c2) 96%);
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* holo sheen that rides the pointer */
+.tcg__holo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  mix-blend-mode: color-dodge;
+  background:
+    linear-gradient(115deg, transparent 26%, rgba(255, 255, 255, 0.5) 44%, transparent 58%),
+    conic-gradient(
+      from 180deg at var(--gx, 50%) var(--gy, 50%),
+      #ff8ab6, #ffd88a, #a8ffcf, #8ad4ff, #c9a8ff, #ff8ab6
+    );
+  background-blend-mode: overlay;
+}
+.tcg:hover .tcg__holo { opacity: 0.32; }
+
+/* ---- top row: power + rarity stamp ---- */
+.tcg__head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem 0;
+}
+.tcg__power {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: 2.1rem;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  color: #fff;
+  background: linear-gradient(180deg, #ffffff 30%, #cfd6e6 55%, #8e99b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.85)) drop-shadow(0 0 6px rgba(0, 0, 0, 0.7));
+}
+.tcg__stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: 0.72rem;
+  color: #fff;
+  background: radial-gradient(circle at 35% 30%, #ff7ab8, #b3197a 70%, #7d0f55);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.8);
+}
+/* vertical watermark down the right edge */
+.tcg__edge {
+  position: absolute;
+  right: 0.28rem;
+  top: 4.6rem;
+  writing-mode: vertical-rl;
+  font-family: "Special Elite", monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* art breathing room before the text box */
+.tcg__stage {
+  flex: 1 1 auto;
+  min-height: 7.5rem;
+}
+
+/* ---- effect text box ---- */
+.tcg__box {
+  position: relative;
+  margin: 0 0.55rem;
+  padding: 0.62rem 0.7rem;
+  border-radius: 5px;
+  color: #17100a;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  background: linear-gradient(180deg, rgba(250, 240, 218, 0.94), rgba(232, 212, 168, 0.92));
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* keyword pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.05rem 0.45rem;
+  margin: 0 0.22rem 0.22rem 0;
+  border-radius: 999px;
+  font-family: "Cabin", sans-serif;
+  font-weight: 700;
+  font-size: 0.66rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  border: 1.5px solid;
+}
+.pill--k { background: #12100e; color: #fff; border-color: #12100e; }
+.pill--b { background: #eaf3ff; color: #14508f; border-color: #2f78c4; }
+.pill--r { background: #ffeceb; color: #a81f28; border-color: #d0464c; }
+.pill--g { background: #eafaf1; color: #14603f; border-color: #2f9b6d; }
+
+/* ---- name plate ---- */
+.tcg__plate {
+  position: relative;
+  padding: 0.5rem 0.7rem 0.55rem;
+}
+/* scrim so the name stays legible over any artwork */
+.tcg__plate::before {
+  content: "";
+  position: absolute;
+  inset: -1.6rem 0 0 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.55) 45%, rgba(0, 0, 0, 0.72));
+}
+.tcg__plate > * {
+  position: relative;
+}
+.tcg__type {
+  display: block;
+  margin: 0.45rem auto 0.3rem;
+  padding: 0.09rem 0.9rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: 0.6rem;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: #fff;
+}
+.tcg__name {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow:
+    2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000,
+    0 0 12px rgba(0, 0, 0, 0.9);
+}
+.tcg__sub {
+  margin-top: 0.15rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+/* ---- bottom row: attribute, set code, cost ---- */
+.tcg__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.tcg__attr {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  color: var(--ac);
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+.tcg__code {
+  font-family: "Special Elite", monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+}
+.tcg__cost {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  color: #fff;
+  background: radial-gradient(circle at 35% 28%, #7fc4f2, #17518c 72%, #0c3160);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.9), inset 0 -4px 8px rgba(0, 0, 0, 0.35);
+}
+.tcg__cost b { font-size: 1.05rem; line-height: 1; }
+.tcg__cost span {
+  font-family: "Special Elite", monospace;
+  font-weight: 400;
+  font-size: 0.42rem;
+  letter-spacing: 0.08em;
+  opacity: 0.95;
+}
+
+/* links / actions dropped under the plate */
+.tcg__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.tcg__actions a { color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95); }
+.tcg__actions a:hover { color: var(--ac); }
+
+/* ---- DON!! tile: the little cards you tap for power ---- */
+.don {
+  --d: 7px;
+  --rest: rotateX(6deg);
+  position: relative;
+  padding: 6px;
+  border-radius: 14px;
+  transform: var(--rest);
+  transform-style: preserve-3d;
+  background: conic-gradient(
+    from 200deg,
+    #ffe9a8, #f4c430, #fff6d8, #d99a1c, #ffe9a8
+  );
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 26px 40px -22px rgba(0, 0, 0, 0.9);
+}
+.don::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateZ(calc(var(--d) * -1));
+  background: linear-gradient(160deg, #7a1d22, #2a0a0d);
+}
+.don__inner {
+  position: relative;
+  overflow: hidden;
+  padding: 0.85rem 0.8rem;
+  border-radius: 9px;
+  border: 2px solid rgba(0, 0, 0, 0.85);
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(255, 255, 255, 0.25), transparent 60%),
+    radial-gradient(120% 100% at 50% 20%, #1a5f9e, #07203a 75%);
+  text-align: center;
+  color: #fff;
+}
+.don__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 40%,
+    rgba(255, 255, 255, 0.14) 0deg 0.5deg,
+    transparent 0.5deg 3.2deg
+  );
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, transparent 26%, #000 72%);
+  mask-image: radial-gradient(circle at 50% 40%, transparent 26%, #000 72%);
+}
+.don__n {
+  position: relative;
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+.don__l {
+  position: relative;
+  margin-top: 0.3rem;
+  font-family: "Special Elite", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* mono key/value row */
+.kv {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: "Special Elite", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+}
+.kv > .kv-k { color: rgba(23, 16, 10, 0.55); }
+.kv > .kv-fill {
+  flex: 1;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.4);
+  transform: translateY(-0.18em);
+}
+.kv > .kv-v { color: #17100a; }
+
+
+/* ============================================================
    CHIPS  (tech = "berry tags")
    ============================================================ */
 .chip {
@@ -488,15 +986,16 @@ body {
 /* ============================================================
    MISC
    ============================================================ */
+/* reveal keeps each element's resting 3D pose (--rest) intact */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(24px) var(--rest);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 [data-reveal].in {
   opacity: 1;
-  transform: none;
+  transform: var(--rest);
 }
 
 ::-webkit-scrollbar {

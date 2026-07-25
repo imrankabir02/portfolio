@@ -4,15 +4,20 @@ const reduced = () =>
   typeof window !== "undefined" &&
   window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-/* Mouse-driven 3D tilt wrapper. Children with .depth-* pop forward in Z. */
+/* Mouse-driven 3D tilt wrapper.
+   - children with .depth-* pop forward in Z
+   - the whole slab lifts toward the viewer on hover (`lift`)
+   - --gx/--gy track the pointer so surfaces can catch a highlight */
 export default function Tilt({
   children,
   className = "",
   max = 9,
   scale = 1.0,
+  lift = 16,
+  rest = 0, // resting rotateX, in degrees — the pose the object sits at
   style,
   as: Tag = "div",
-  ...rest
+  ...props
 }) {
   const ref = useRef(null);
   const raf = useRef(0);
@@ -25,17 +30,26 @@ export default function Tilt({
     const py = (e.clientY - r.top) / r.height - 0.5;
     if (raf.current) return;
     raf.current = requestAnimationFrame(() => {
-      if (ref.current)
-        ref.current.style.transform = `rotateX(${(-py * max).toFixed(
+      const el = ref.current;
+      if (el) {
+        el.style.transform = `rotateX(${(rest - py * max).toFixed(
           2
-        )}deg) rotateY(${(px * max).toFixed(2)}deg) scale(${scale})`;
+        )}deg) rotateY(${(px * max).toFixed(
+          2
+        )}deg) translateZ(${lift}px) scale(${scale})`;
+        el.style.setProperty("--gx", `${((px + 0.5) * 100).toFixed(1)}%`);
+        el.style.setProperty("--gy", `${((py + 0.5) * 100).toFixed(1)}%`);
+      }
       raf.current = 0;
     });
   };
 
   const reset = () => {
-    if (ref.current)
-      ref.current.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = `rotateX(${rest}deg) rotateY(0deg) translateZ(0) scale(1)`;
+    el.style.setProperty("--gx", "50%");
+    el.style.setProperty("--gy", "0%");
   };
 
   return (
@@ -45,7 +59,7 @@ export default function Tilt({
       onPointerLeave={reset}
       className={`tilt3d ${className}`}
       style={style}
-      {...rest}
+      {...props}
     >
       {children}
     </Tag>

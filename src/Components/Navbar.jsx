@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Powers", href: "#skills", id: "skills" },
   { label: "Bounties", href: "#projects", id: "projects" },
   { label: "Voyage", href: "#experience", id: "experience" },
+  { label: "Training", href: "#educations", id: "educations" },
   { label: "Hail", href: "#contact", id: "contact" },
 ];
 

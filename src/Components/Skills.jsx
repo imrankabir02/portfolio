@@ -19,7 +19,7 @@ import {
 import { FaAws } from "react-icons/fa";
 import { SKILL_GROUPS } from "../constants";
 import SectionHead from "./SectionHead";
-import Tilt from "./Tilt";
+import TcgCard from "./TcgCard";
 
 // Keyed by the strings in SKILL_GROUPS; each entry is [icon, brand colour].
 const ICONS = {
@@ -50,6 +50,14 @@ const GROUP_TAGS = {
   Infrastructure: "The ship & crew",
 };
 
+// each stack layer gets its own colour identity and card type
+const GROUP_CARD = {
+  Languages: { tone: "yellow", type: "DEVIL FRUIT", edge: "languages.tcg" },
+  Frameworks: { tone: "red", type: "FIGHTING STYLE", edge: "frameworks.tcg" },
+  Data: { tone: "purple", type: "TREASURE", edge: "data.tcg" },
+  Infrastructure: { tone: "blue", type: "SHIP & CREW", edge: "infra.tcg" },
+};
+
 const ALL = SKILL_GROUPS.flatMap((g) => g.items);
 
 const Skills = () => {
@@ -65,51 +73,59 @@ const Skills = () => {
         blurb="Every pirate has their devil fruit and their crew — here's the kit behind the systems: languages, fighting styles, the treasure vault, and the ship it all runs on."
       />
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 stage-3d">
-        {SKILL_GROUPS.map((group, gi) => (
-          <Tilt
-            key={group.heading}
-            max={10}
-            data-reveal
-            style={{ transitionDelay: `${gi * 90}ms` }}
-            className="p-6 glass rounded-2xl aura-border float-shadow"
-          >
-            <div className="flex items-center justify-between mb-1">
-              <h3 className="text-sm font-bold tracking-wide uppercase font-display text-parch-ink">
-                {group.heading}
-              </h3>
-              <span className="font-mono text-[10px] text-parch-soft">
-                {String(group.items.length).padStart(2, "0")}
-              </span>
-            </div>
-            <p className="mb-5 font-mono text-[10px] italic text-pirate-deep/80">
-              {GROUP_TAGS[group.heading]}
-            </p>
-            <ul className="space-y-3.5">
-              {group.items.map((item) => {
-                const [Icon, color] = ICONS[item];
-                return (
-                  <li
-                    key={item}
-                    className="flex items-center gap-3 group/i"
-                    style={{ "--bc": color }}
-                  >
-                    <span className="flex items-center justify-center border rounded-lg w-9 h-9 border-parch-ink/20 bg-white/40 transition-colors group-hover/i:border-[var(--bc)]">
-                      <Icon
-                        aria-hidden="true"
-                        size={17}
-                        className="transition-colors text-parch-soft group-hover/i:text-[var(--bc)]"
-                      />
-                    </span>
-                    <span className="text-sm font-medium text-parch-ink/85 group-hover/i:text-parch-ink">
-                      {item}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-          </Tilt>
-        ))}
+      <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
+        {SKILL_GROUPS.map((group, gi) => {
+          const card = GROUP_CARD[group.heading];
+          const [HeroIcon] = ICONS[group.items[0]];
+          return (
+            <TcgCard
+              key={group.heading}
+              tone={card.tone}
+              max={11}
+              data-reveal
+              style={{ transitionDelay: `${gi * 90}ms` }}
+              power={group.items.length * 1000}
+              stamp="SR"
+              type={card.type}
+              name={group.heading}
+              sub={GROUP_TAGS[group.heading]}
+              glyph={<HeroIcon size={96} aria-hidden="true" />}
+              attr={<span className="text-sm font-black">{gi + 1}</span>}
+              code={`STK13-${String(gi + 1).padStart(3, "0")} SR 1`}
+              cost={group.items.length}
+              costLabel="PKGS"
+              edge={card.edge}
+            >
+              <p className="mb-1.5">
+                <span className="pill pill--k">Passive</span>
+                <span className="pill pill--b">Always Active</span>
+              </p>
+              <ul className="space-y-1.5">
+                {group.items.map((item) => {
+                  const [Icon, color] = ICONS[item];
+                  return (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 group/i"
+                      style={{ "--bc": color }}
+                    >
+                      <span className="flex items-center justify-center w-6 h-6 border rounded border-black/15 bg-white/60 transition-colors group-hover/i:border-[var(--bc)]">
+                        <Icon
+                          aria-hidden="true"
+                          size={13}
+                          className="transition-colors text-black/55 group-hover/i:text-[var(--bc)]"
+                        />
+                      </span>
+                      <span className="text-[0.78rem] font-semibold">
+                        {item}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </TcgCard>
+          );
+        })}
       </div>
 
       {/* stack ticker — a rope of tools */}

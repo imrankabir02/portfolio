@@ -1,7 +1,9 @@
 import { EDUCATIONS } from "../constants";
 import SectionHead from "./SectionHead";
-import Tilt from "./Tilt";
+import TcgCard from "./TcgCard";
 import { FiAward } from "react-icons/fi";
+
+const TONES = ["purple", "yellow", "green", "blue"];
 
 const Educations = () => {
   return (
@@ -11,28 +13,42 @@ const Educations = () => {
     >
       <SectionHead index="05" kicker="Training" title="Where the sword was forged" />
 
-      <div className="grid max-w-4xl gap-6 mx-auto stage-3d">
+      <div className="grid max-w-3xl gap-8 mx-auto sm:grid-cols-2 justify-items-center">
         {EDUCATIONS.map((edu, i) => (
-          <Tilt
+          <TcgCard
             key={i}
-            max={7}
+            tone={TONES[i % TONES.length]}
             data-reveal
-            className="flex flex-col gap-5 p-7 glass rounded-2xl aura-border float-shadow sm:flex-row sm:items-center"
+            wrapperClassName="w-full max-w-[20rem]"
+            style={{ transitionDelay: `${i * 90}ms` }}
+            max={9}
+            power={(i === 0 ? 5 : 4) * 1000}
+            stamp="UC"
+            type="TRAINING"
+            name={edu.title}
+            sub={edu.name}
+            glyph={<FiAward size={104} aria-hidden="true" />}
+            attr={<FiAward size={15} />}
+            code={`EDU13-${String(i + 1).padStart(3, "0")} UC 1`}
+            cost={edu.year.replace(/\D/g, "").slice(-2)}
+            costLabel="YEAR"
+            edge="log-book.tcg"
           >
-            <span className="flex items-center justify-center border w-14 h-14 shrink-0 rounded-2xl border-gold-deep/40 bg-gold/20 text-pirate-deep depth-1">
-              <FiAward size={24} />
-            </span>
-            <div className="flex-1">
-              <h3 className="text-lg font-bold font-display text-parch-ink">
-                {edu.title}
-              </h3>
-              <p className="text-sm font-semibold text-pirate-red">{edu.name}</p>
-              <p className="mt-1 text-sm text-parch-soft">{edu.location}</p>
+            <p className="mb-1.5">
+              <span className="pill pill--k">{edu.year}</span>
+              <span className="pill pill--g">Signature valid</span>
+            </p>
+            <div className="kv">
+              <span className="kv-k">issuer</span>
+              <span className="kv-fill" />
+              <span className="kv-v">{edu.name}</span>
             </div>
-            <span className="px-3 py-1.5 font-mono text-[11px] rounded-full text-parch-ink bg-white/40 border border-parch-ink/20 whitespace-nowrap">
-              {edu.year}
-            </span>
-          </Tilt>
+            <div className="mt-1 kv">
+              <span className="kv-k">port</span>
+              <span className="kv-fill" />
+              <span className="kv-v">{edu.location}</span>
+            </div>
+          </TcgCard>
         ))}
       </div>
     </section>
