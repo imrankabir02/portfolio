@@ -1,5 +1,6 @@
 import { EXPERIENCES } from "../constants";
 import SectionHead from "./SectionHead";
+import Tilt from "./Tilt";
 
 const Experience = () => {
   return (
@@ -9,14 +10,14 @@ const Experience = () => {
     >
       <SectionHead
         index="04"
-        kicker="Trajectory"
-        title="The path so far"
-        blurb="Four backend roles, each one a step deeper into ownership — from first APIs to architecting a multi-tenant platform."
+        kicker="Voyage"
+        title="Islands on the log pose"
+        blurb="Four ports along the Grand Line, each one a step deeper into ownership — from first APIs to architecting a multi-tenant platform."
       />
 
       <div className="relative max-w-4xl mx-auto">
-        {/* spine */}
-        <div className="absolute top-0 bottom-0 w-px left-3 md:left-1/2 md:-translate-x-1/2 bg-gradient-to-b from-transparent via-iris-cyan/30 to-transparent" />
+        {/* the charted route */}
+        <div className="absolute top-0 bottom-0 left-3 md:left-1/2 md:-translate-x-1/2 w-0.5 border-l-2 border-dashed border-gold/40" />
 
         <div className="space-y-8">
           {EXPERIENCES.map((exp, i) => {
@@ -25,28 +26,28 @@ const Experience = () => {
               <div
                 key={i}
                 data-reveal
-                className={`relative pl-12 md:pl-0 md:w-1/2 ${
+                className={`relative pl-12 md:pl-0 md:w-1/2 stage-3d ${
                   left ? "md:pr-10 md:mr-auto md:text-right" : "md:pl-10 md:ml-auto"
                 }`}
               >
-                {/* node */}
+                {/* island marker */}
                 <span
                   className={`absolute top-6 left-3 -translate-x-1/2 md:left-auto ${
-                    left ? "md:-right-[5px] md:translate-x-0" : "md:-left-[5px]"
-                  } w-2.5 h-2.5 rounded-full bg-iris-cyan shadow-[0_0_14px_3px_rgba(79,227,208,0.6)]`}
+                    left ? "md:-right-[7px] md:translate-x-0" : "md:-left-[7px]"
+                  } w-3.5 h-3.5 rotate-45 bg-gold border-2 border-sea-900 shadow-[0_0_14px_3px_rgba(244,196,48,0.6)]`}
                 />
 
-                <div className="p-6 glass rounded-2xl aura-border glass-hover">
-                  <span className="inline-block px-2.5 py-1 mb-3 font-mono text-[10px] tracking-wide rounded-full text-iris-cyan bg-iris-cyan/10 border border-iris-cyan/20">
+                <Tilt max={9} className="p-6 glass rounded-2xl aura-border float-shadow">
+                  <span className="inline-block px-2.5 py-1 mb-3 font-mono text-[10px] tracking-wide rounded-full text-pirate-deep bg-gold/25 border border-gold-deep/40 depth-1">
                     {exp.year}
                   </span>
-                  <h3 className="text-lg font-semibold font-display">
+                  <h3 className="text-lg font-bold font-display text-parch-ink">
                     {exp.role}
                   </h3>
-                  <p className="mb-3 text-sm font-medium text-iris-blue">
+                  <p className="mb-3 text-sm font-semibold text-pirate-red">
                     {exp.company}
                   </p>
-                  <p className="mb-4 text-sm leading-relaxed text-neutral-400">
+                  <p className="mb-4 text-sm leading-relaxed text-parch-ink/85">
                     {exp.description}
                   </p>
                   <div
@@ -60,7 +61,7 @@ const Experience = () => {
                       </span>
                     ))}
                   </div>
-                </div>
+                </Tilt>
               </div>
             );
           })}
