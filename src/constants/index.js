@@ -110,6 +110,12 @@ export const EDUCATIONS = [
     location: "Khulna, Bangladesh",
     year: "January 2018 - March 2024",
   },
+  {
+    title: "HSC in Science",
+    name: "Digraj Degree College",
+    location: "Mongla, Bagerhat, Bangladesh",
+    year: " 2014 - 2016",
+  },
 ];
 
 // Ordered strongest first. Backend systems don't photograph well, so each card is

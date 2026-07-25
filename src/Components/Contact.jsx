@@ -21,59 +21,73 @@ const Contact = () => {
       id="contact"
       className="px-6 pt-8 pb-10 mx-auto scroll-mt-24 max-w-7xl md:px-8"
     >
-      {/* CTA panel */}
-      <div data-reveal className="stage-3d">
-      <Tilt
-        max={5}
-        className="relative p-10 overflow-hidden text-center glass rounded-3xl md:p-16 aura-border float-shadow"
-      >
-        <div className="absolute rounded-full -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-gold/25 blur-3xl" />
-        <div className="relative">
-          <div className="flex justify-center mb-5">
-            <JollyRoger size={54} className="text-pirate-red animate-bob" />
-          </div>
+      {/* CTA — dealt as a wide EVENT card */}
+      <div data-reveal className="slab-stage">
+        <Tilt max={4} rest={3} className="tcg tcg--red">
+          <span className="wall wall--t" aria-hidden="true" />
+          <span className="wall wall--b" aria-hidden="true" />
+          <span className="wall wall--l" aria-hidden="true" />
+          <span className="wall wall--r" aria-hidden="true" />
 
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-6 rounded-full bg-white/40 border border-parch-ink/20">
-            <span className="dot-online" />
-            <span className="font-mono text-[11px] tracking-wide text-parch-ink">
-              RECRUITING CREW · let&apos;s build something that stays afloat
-            </span>
-          </div>
+          <div className="tcg__inner items-center px-6 py-12 text-center md:px-16 md:py-16">
+            <div className="tcg__art" aria-hidden="true" />
+            <span className="tcg__edge">den-den-mushi.tcg</span>
 
-          <h2 className="text-4xl font-black sm:text-6xl font-display text-parch-ink">
-            Ready to <span className="text-pirate-red">set sail?</span>
-          </h2>
-          <p className="max-w-xl mx-auto mt-5 leading-relaxed text-parch-ink/80">
-            Have a system that needs to stay correct under load — or one that
-            already ran aground and you&apos;d rather it didn&apos;t again? Send a
-            Den Den Mushi. I&apos;d like to hear about it.
-          </p>
+            <div className="relative w-full">
+              <div className="flex justify-center mb-5">
+                <JollyRoger size={64} className="text-white animate-bob" />
+              </div>
 
-          <div className="flex flex-col items-center justify-center gap-4 mt-9 sm:flex-row">
-            <a href={`mailto:${MY_DETAILS.email}`} className="btn-primary">
-              <FiMail /> {MY_DETAILS.email}
-            </a>
-            <span className="inline-flex items-center gap-2 font-mono text-xs text-parch-soft">
-              <FiMapPin /> {MY_DETAILS.address}
-            </span>
-          </div>
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-6 border rounded-full bg-black/40 border-white/25">
+                <span className="dot-online" />
+                <span className="font-mono text-[11px] tracking-wide text-white">
+                  RECRUITING CREW · let&apos;s build something that stays afloat
+                </span>
+              </div>
 
-          <div className="flex items-center justify-center gap-3 mt-10">
-            {SOCIALS.map(({ Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex items-center justify-center transition-all border rounded-full w-11 h-11 bg-white/40 border-parch-ink/20 text-parch-soft hover:text-pirate-red hover:border-pirate-red/50 hover:-translate-y-1"
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+              <span className="tcg__type">DEN DEN MUSHI</span>
+              <h2 className="mt-2 tcg__name !text-4xl sm:!text-6xl">
+                Ready to set sail?
+              </h2>
+
+              <p className="max-w-xl mx-auto mt-5 leading-relaxed text-white/85">
+                Have a system that needs to stay correct under load — or one
+                that already ran aground and you&apos;d rather it didn&apos;t
+                again? Send a Den Den Mushi. I&apos;d like to hear about it.
+              </p>
+
+              <div className="flex flex-col items-center justify-center gap-4 mt-9 sm:flex-row">
+                <a href={`mailto:${MY_DETAILS.email}`} className="btn-primary">
+                  <FiMail /> {MY_DETAILS.email}
+                </a>
+                <span className="inline-flex items-center gap-2 font-mono text-xs text-white/75">
+                  <FiMapPin /> {MY_DETAILS.address}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-center gap-3 mt-10">
+                {SOCIALS.map(({ Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex items-center justify-center transition-all border rounded-full w-11 h-11 bg-black/35 border-white/25 text-white/80 hover:text-white hover:border-white hover:-translate-y-1"
+                  >
+                    <Icon size={18} />
+                  </a>
+                ))}
+              </div>
+
+              <p className="mt-10 tcg__code">
+                CTA13-001 L 1 · MARINE · GRAND LINE · EAST BLUE
+              </p>
+            </div>
+
+            <span className="tcg__holo" aria-hidden="true" />
           </div>
-        </div>
-      </Tilt>
+        </Tilt>
       </div>
 
       {/* bottom bar */}

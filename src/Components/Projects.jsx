@@ -1,41 +1,44 @@
 import { PROJECTS } from "../constants";
 import SectionHead from "./SectionHead";
-import Tilt from "./Tilt";
-import { FiArrowUpRight, FiLock } from "react-icons/fi";
+import TcgCard from "./TcgCard";
+import JollyRoger from "./JollyRoger";
+import { FiArrowUpRight, FiLock, FiAnchor } from "react-icons/fi";
 
 const isLive = (p) => Boolean(p.appLink || p.gitLink);
 
-const StatusTag = ({ project }) =>
-  isLive(project) ? (
-    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-green-700">
-      <span className="dot-online" /> SAILING
-    </span>
-  ) : (
-    <span className="inline-flex items-center gap-1 font-mono text-[10px] text-parch-soft">
-      <FiLock size={11} /> SEALED
-    </span>
-  );
+// colour identity rotates through the OP deck colours
+const TONES = ["red", "green", "blue", "purple", "yellow", "black"];
 
-const Meta = ({ project }) => (
-  <div className="flex items-center justify-between gap-3">
-    {project.context && (
-      <p className="font-mono text-[11px] tracking-wide uppercase text-pirate-deep">
-        {project.context}
-      </p>
+// power reads like a card's: scaled off how much stack the bounty carries
+const powerOf = (p) => (p.technologies.length + (p.highlights?.length || 0)) * 1000;
+
+const Pills = ({ project }) => (
+  <p className="mb-1.5">
+    <span className="pill pill--k">Activate:Main</span>
+    {isLive(project) ? (
+      <span className="pill pill--b">Deployed</span>
+    ) : (
+      <span className="pill pill--r">
+        <FiLock size={9} /> Under NDA
+      </span>
     )}
-    <StatusTag project={project} />
-  </div>
+    {project.technologies.slice(0, 2).map((t) => (
+      <span key={t} className="pill pill--g">
+        {t}
+      </span>
+    ))}
+  </p>
 );
 
 const Links = ({ project }) =>
   isLive(project) ? (
-    <div className="flex flex-wrap gap-4 mt-auto text-sm font-semibold">
+    <>
       {project.appLink && (
         <a
           href={project.appLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-pirate-red hover:text-pirate-deep group/l"
+          className="inline-flex items-center gap-1 group/l"
         >
           Set sail
           <FiArrowUpRight className="transition-transform group-hover/l:translate-x-0.5 group-hover/l:-translate-y-0.5" />
@@ -46,28 +49,34 @@ const Links = ({ project }) =>
           href={project.gitLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-parch-soft hover:text-parch-ink"
+          className="inline-flex items-center gap-1"
         >
           Source <FiArrowUpRight />
         </a>
       )}
-    </div>
-  ) : (
-    project.note && (
-      <p className="mt-auto font-mono text-[11px] italic text-parch-soft">
-        {project.note}
-      </p>
-    )
-  );
+    </>
+  ) : null;
 
-const Tech = ({ items }) => (
-  <div className="flex flex-wrap gap-2 mb-6">
-    {items.map((t) => (
-      <span key={t} className="chip">
-        {t}
-      </span>
-    ))}
-  </div>
+const Effect = ({ project, compact, hideHighlights }) => (
+  <>
+    <Pills project={project} />
+    <p className={compact ? "text-[0.78rem] leading-snug" : ""}>
+      {project.description}
+    </p>
+    {project.highlights && !hideHighlights && (
+      <ul className="mt-2 space-y-1 text-[0.72rem] leading-snug">
+        {project.highlights.map((h) => (
+          <li key={h} className="flex gap-2">
+            <span className="mt-1.5 h-1 w-1 shrink-0 rotate-45 bg-black/60" />
+            {h}
+          </li>
+        ))}
+      </ul>
+    )}
+    {!isLive(project) && project.note && (
+      <p className="mt-2 text-[0.7rem] italic opacity-70">{project.note}</p>
+    )}
+  </>
 );
 
 const Projects = () => {
@@ -82,99 +91,89 @@ const Projects = () => {
         index="03"
         kicker="Bounties"
         title="Treasures hauled in"
-        blurb="Backend work doesn't photograph well — so each bounty is the problem, the decision, and the tradeoff. Ordered by the size of the haul."
+        blurb="Backend work doesn't photograph well — so each bounty is dealt as a card: the problem, the decision, and the tradeoff. Ordered by the size of the haul."
       />
 
-      {/* featured — highest bounty */}
-      <Tilt
-        as="article"
-        max={5}
-        data-reveal
-        className="relative flex flex-col gap-6 p-8 mb-6 lg:flex-row lg:p-10 glass rounded-3xl aura-border float-shadow stage-3d"
-      >
-        <span className="absolute font-mono text-[11px] tracking-widest top-6 right-8 text-pirate-red">
-          &#9733; HIGHEST BOUNTY
-        </span>
-        <div className="lg:w-2/5">
-          <Meta project={featured} />
-          <h3 className="mt-3 text-3xl font-black font-display text-parch-ink">
+      {/* the leader card — highest bounty */}
+      <div className="grid gap-8 mb-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-center">
+        <TcgCard
+          tone="red"
+          data-reveal
+          max={9}
+          power={powerOf(featured)}
+          stamp="L"
+          type="LEADER"
+          name={featured.title}
+          sub={featured.org || featured.context}
+          glyph={<JollyRoger size={132} />}
+          attr={<FiAnchor size={16} />}
+          code={`PRJ13-001 L 1`}
+          cost={featured.technologies.length}
+          costLabel="DEPS"
+          edge="highest-bounty.tcg"
+          actions={<Links project={featured} />}
+        >
+          <Effect project={featured} compact hideHighlights />
+        </TcgCard>
+
+        <div data-reveal style={{ transitionDelay: "120ms" }}>
+          <p className="eyebrow mb-3">&#9733; Highest bounty</p>
+          <h3 className="text-3xl font-black font-display text-parch-light sm:text-4xl">
             {featured.title}
           </h3>
           {featured.org && (
-            <p className="mt-2 text-sm font-medium text-parch-soft">
+            <p className="mt-2 font-mono text-sm text-gold-light">
               {featured.org}
             </p>
           )}
-        </div>
-        <div className="flex flex-col lg:w-3/5">
-          <p className="mb-5 leading-relaxed text-parch-ink/90">
+          <p className="max-w-xl mt-5 leading-relaxed text-parch-light/80">
             {featured.description}
           </p>
           {featured.highlights && (
-            <ul className="mb-6 space-y-2.5 text-sm text-parch-soft">
+            <ul className="mt-5 space-y-2.5 text-sm text-parch-light/70">
               {featured.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-deep" />
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" />
                   {h}
                 </li>
               ))}
             </ul>
           )}
-          <Tech items={featured.technologies} />
-          <Links project={featured} />
+          <div className="flex flex-wrap gap-2 mt-6">
+            {featured.technologies.map((t) => (
+              <span key={t} className="chip-dark">
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
-      </Tilt>
+      </div>
 
-      {/* grid */}
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 stage-3d">
+      {/* the rest of the hand */}
+      <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-3">
         {rest.map((project, i) => (
-          <Tilt
-            as="article"
-            max={8}
+          <TcgCard
             key={project.title}
+            tone={TONES[(i + 1) % TONES.length]}
             data-reveal
             style={{ transitionDelay: `${(i % 3) * 90}ms` }}
-            className="flex flex-col p-6 glass rounded-2xl aura-border float-shadow"
+            power={powerOf(project)}
+            stamp={isLive(project) ? "R" : "C"}
+            type="CHARACTER"
+            name={project.title}
+            sub={project.org || project.context}
+            glyph={<JollyRoger size={104} />}
+            attr={<FiAnchor size={15} />}
+            code={`PRJ13-${String(i + 2).padStart(3, "0")} ${
+              isLive(project) ? "R" : "C"
+            } 1`}
+            cost={project.technologies.length}
+            costLabel="DEPS"
+            edge={`bounty-${String(i + 2).padStart(2, "0")}.tcg`}
+            actions={<Links project={project} />}
           >
-            <div className="flex items-baseline justify-between mb-4">
-              <span className="font-mono text-xs text-parch-soft">
-                {String(i + 2).padStart(2, "0")}
-              </span>
-              <StatusTag project={project} />
-            </div>
-
-            <h3 className="text-xl font-bold font-display text-parch-ink">
-              {project.title}
-            </h3>
-            {project.org && (
-              <p className="mt-1 text-xs font-medium text-parch-soft">
-                {project.org}
-              </p>
-            )}
-            {project.context && (
-              <p className="mt-1 mb-4 font-mono text-[10px] tracking-wide uppercase text-pirate-deep">
-                {project.context}
-              </p>
-            )}
-
-            <p className="mb-4 text-sm leading-relaxed text-parch-ink/85">
-              {project.description}
-            </p>
-
-            {project.highlights && (
-              <ul className="mb-5 space-y-2 text-xs text-parch-soft">
-                {project.highlights.map((h) => (
-                  <li key={h} className="flex gap-2.5">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rotate-45 bg-gold-deep/80" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <Tech items={project.technologies} />
-            <Links project={project} />
-          </Tilt>
+            <Effect project={project} compact />
+          </TcgCard>
         ))}
       </div>
     </section>

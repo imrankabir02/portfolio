@@ -162,16 +162,26 @@ const Hero = () => {
               className="relative px-5 pt-5 pb-4 wanted rounded-sm float-shadow"
               style={{ transformStyle: "preserve-3d" }}
             >
-              {/* red cleared-for-hire stamp */}
-              <span className="absolute z-20 top-24 -right-3 rotate-[-11deg] stamp text-[11px] animate-stamp">
-                Cleared for hire
+              {/* red hire stamp. The wrapper carries the Z-lift: stampIn is a
+                  `forwards` animation, so its transform would overwrite one set
+                  on the stamp itself and drop it behind the portrait. */}
+              <span
+                className="absolute z-20 top-24 -right-3"
+                style={{
+                  transform: "translateZ(60px)",
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                <span className="inline-block stamp text-[11px] animate-stamp">
+                  available = true
+                </span>
               </span>
 
-              <p className="text-center wanted-label text-5xl sm:text-6xl tracking-[0.08em] depth-2">
-                Wanted
+              <p className="text-center wanted-label text-[2.6rem] sm:text-5xl tracking-[0.03em] whitespace-nowrap depth-2">
+                For Hire
               </p>
-              <p className="mt-1 mb-3 font-mono text-center text-[11px] tracking-[0.35em] text-parch-ink/70">
-                DEAD OR ALIVE
+              <p className="mt-1 mb-3 font-mono text-center text-[11px] tracking-[0.3em] text-parch-ink/70">
+                AVAILABLE IMMEDIATELY
               </p>
 
               {/* portrait */}
@@ -189,27 +199,59 @@ const Hero = () => {
                 <span className="absolute w-4 h-4 border-t-2 border-r-2 top-1 right-1 border-parch-ink/70" />
                 <span className="absolute w-4 h-4 border-b-2 border-l-2 bottom-1 left-1 border-parch-ink/70" />
                 <span className="absolute w-4 h-4 border-b-2 border-r-2 bottom-1 right-1 border-parch-ink/70" />
+
+                {/* health-check badge */}
+                <span className="absolute bottom-1.5 left-1.5 flex items-center gap-1.5 px-2 py-0.5 font-mono text-[9px] tracking-widest bg-parch-ink/85 text-parch-light">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-blink" />
+                  200 OK
+                </span>
               </div>
 
               <p className="mt-3 font-pirate text-3xl text-center leading-none text-parch-ink tracking-[0.04em]">
                 &ldquo;Backend&rdquo; Kabir
               </p>
+              <p className="mt-1.5 font-mono text-center text-[10px] tracking-[0.18em] text-parch-ink/65">
+                @imrankabir02 · role=backend.engineer
+              </p>
 
-              <div className="my-2 hairline" />
+              <div className="my-2.5 hairline" />
 
-              {/* bounty */}
+              {/* service datasheet */}
+              <dl className="font-mono text-[10.5px] leading-none text-parch-ink/80">
+                {[
+                  ["UPTIME", "99.9 %"],
+                  ["LATENCY", "p99 · 120 ms"],
+                  ["RUNTIME", "py · php · sql"],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="flex items-baseline gap-2 py-[3px] border-b border-dotted border-parch-ink/25 last:border-0"
+                  >
+                    <dt className="tracking-[0.16em] text-parch-ink/55">{k}</dt>
+                    <span className="flex-1" />
+                    <dd className="tracking-wide text-parch-ink">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="my-2.5 hairline" />
+
+              {/* bounty, denominated in traffic */}
+              <p className="mb-1 font-mono text-center text-[9px] tracking-[0.32em] text-parch-ink/55">
+                BOUNTY
+              </p>
               <div className="flex items-center justify-center gap-2 depth-1">
-                <span className="font-mono text-2xl text-pirate-deep">&#3647;</span>
+                <span className="font-mono text-2xl text-pirate-deep">&#931;</span>
                 <span className="font-display text-3xl font-black tracking-wider text-parch-ink tabular-nums">
                   3,000,000,000
                 </span>
                 <span className="self-end mb-1 font-mono text-[10px] text-parch-ink/70">
-                  Beri
+                  req
                 </span>
               </div>
 
-              <p className="mt-2 font-mono text-center text-[10px] tracking-[0.3em] text-parch-ink/60">
-                MARINE · GRAND LINE · EAST BLUE
+              <p className="mt-2 font-mono text-center text-[10px] tracking-[0.24em] text-parch-ink/60">
+                HTTP/1.1 · DHAKA · TLS &#10003;
               </p>
             </article>
           </Tilt>
