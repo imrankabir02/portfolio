@@ -7,7 +7,11 @@ import Experience from "./Components/Experience";
 import Educations from "./Components/Educations";
 import Contact from "./Components/Contact";
 import Boot from "./Components/Boot";
+import { lazy, Suspense } from "react";
 import { useAmbient, useReveal, useScrollProgress, useBoot } from "./hooks";
+
+// heavy three.js world — its own chunk, loaded after first paint
+const SeaWorld = lazy(() => import("./Components/three/SeaWorld"));
 
 const App = () => {
   useAmbient();
@@ -19,14 +23,14 @@ const App = () => {
     <div className="relative min-h-screen font-sans text-parch-light antialiased selection:text-sea-900">
       {/* Grand Line background layers */}
       <div className="scene" aria-hidden="true" />
-      <div className="map-grain" aria-hidden="true" />
+      {/* persistent full-page WebGL sea (behind everything) */}
+      <Suspense fallback={null}>
+        <SeaWorld />
+      </Suspense>
+      {/* readability veil over the sea so parchment + text stay crisp */}
+      <div className="sea-veil" aria-hidden="true" />
       <div className="compass-rose" aria-hidden="true" />
       <div className="aurora" aria-hidden="true" />
-      <div className="waves" aria-hidden="true">
-        <span className="w1" />
-        <span className="w2" />
-        <span className="w3" />
-      </div>
       <div className="vignette" aria-hidden="true" />
 
       {booting && <Boot />}

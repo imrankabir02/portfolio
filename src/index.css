@@ -42,28 +42,46 @@ html {
   }
 }
 
-body {
+/* base colour lives on <html> so the negative-z fixed sea layers stay visible.
+   (An opaque body background paints OVER negative z-index children.) */
+html {
   background: #04121f;
+}
+body {
+  background: transparent;
   color: #f3e6cd;
   font-family: "Cabin", sans-serif;
   overflow-x: hidden;
 }
 
-/* ---- Deep sea + sunset sky ---- */
+/* ---- Sunset sky (the 3D ocean fills the lower half through the canvas) ---- */
 .scene {
   position: fixed;
   inset: 0;
   z-index: -4;
   background:
-    radial-gradient(120% 70% at 50% 6%, rgba(255, 158, 94, 0.28), transparent 46%),
-    radial-gradient(140% 90% at 50% 120%, rgba(20, 80, 127, 0.55), transparent 60%),
+    radial-gradient(58% 46% at 66% 50%, rgba(255, 150, 80, 0.5), transparent 62%),
     linear-gradient(
       180deg,
-      #0a2a45 0%,
-      #071d30 34%,
-      #061a2b 58%,
-      #04121f 100%
+      #081f38 0%,
+      #0e2f4e 32%,
+      #1b5580 54%,
+      #2b6f97 66%,
+      #1a6391 100%
     );
+}
+/* fallback deep-sea tint if WebGL never mounts */
+.sea-veil {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 18, 31, 0.1) 0%,
+    rgba(4, 18, 31, 0.4) 52%,
+    rgba(4, 18, 31, 0.56) 100%
+  );
 }
 
 /* faint stars up top */

@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { MY_DETAILS } from "../constants";
 import profilePic from "../assets/Kabir.png";
 import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
@@ -6,9 +6,6 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiLeetcode, SiHackerrank } from "react-icons/si";
 import { FiArrowDown, FiDownload } from "react-icons/fi";
 import Tilt from "./Tilt";
-
-// three.js is heavy — load the sea scene as its own chunk after first paint
-const SeaScene = lazy(() => import("./three/SeaScene"));
 
 const ROLES = [
   "Backend Engineer",
@@ -62,11 +59,8 @@ const Hero = () => {
       id="home"
       className="relative flex items-center min-h-screen overflow-hidden stage-3d"
     >
-      {/* live WebGL sea — the Going Merry sailing behind everything */}
-      <Suspense fallback={null}>
-        <SeaScene />
-      </Suspense>
-      {/* readability scrim over the sea */}
+      {/* the persistent SeaWorld (mounted in App) sails behind this section too;
+          this scrim keeps the name legible over the ship */}
       <div className="absolute inset-0 hero-scrim" style={{ zIndex: 1 }} aria-hidden="true" />
 
       <div className="relative z-10 grid items-center w-full gap-12 px-6 pt-24 pb-16 mx-auto max-w-7xl md:px-8 lg:grid-cols-[1.1fr_0.9fr]">

@@ -25,7 +25,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <style>
-    html, body { background: #04121f; margin: 0; }
+    /* colour on <html> only — body stays transparent so the negative-z
+       fixed WebGL sea + gradient are not painted over. */
+    html { background: #04121f; }
+    html, body { margin: 0; }
   </style>
 </head>
 
