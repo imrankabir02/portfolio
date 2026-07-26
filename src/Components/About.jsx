@@ -1,5 +1,11 @@
 import { useRef, useState, useEffect } from "react";
-import { ABOUT_TEXT, SKILLSETS, EXPERIENCES, PROJECTS } from "../constants";
+import {
+  ABOUT_TEXT,
+  SKILLSETS,
+  SKILL_GROUPS,
+  EXPERIENCES,
+  PROJECTS,
+} from "../constants";
 import profilePic from "../assets/image.png";
 import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import SectionHead from "./SectionHead";
@@ -12,11 +18,20 @@ import { FiDownload, FiAnchor } from "react-icons/fi";
 
 const SAGA = sagaById("about");
 
+// systems a stranger could actually hit today, versus ones still in a repo
+const RUNNING = PROJECTS.filter(
+  (p) => p.status === "In production" || p.status === "Live"
+).length;
+
+const FRAMEWORKS =
+  SKILL_GROUPS.find((g) => g.heading === "Frameworks")?.items.length ?? 0;
+
+// every figure here counts something on this page — nothing decorative
 const STATS = [
-  { value: EXPERIENCES.length, suffix: "", label: "PORTS OF CALL" },
-  { value: PROJECTS.length, suffix: "", label: "BOUNTIES CLAIMED" },
-  { value: 3, suffix: "", label: "DEVIL FRUITS" },
-  { value: 24, suffix: "/7", label: "ON-WATCH" },
+  { value: EXPERIENCES.length, suffix: "", label: "ROLES HELD" },
+  { value: PROJECTS.length, suffix: "", label: "SYSTEMS BUILT" },
+  { value: RUNNING, suffix: "", label: "IN PRODUCTION" },
+  { value: FRAMEWORKS, suffix: "", label: "FRAMEWORKS" },
 ];
 
 /* DON!! tiles — the little cards you tap for power */
@@ -65,26 +80,29 @@ const About = () => {
           tone="red"
           data-reveal
           max={9}
-          power={5000}
-          stamp="L"
-          type="LEADER"
+          metric={RUNNING}
+          metricLabel="IN PRODUCTION"
+          outcome="Available now for backend roles — Django, Laravel, FastAPI."
+          stamp="BACKEND"
+          type="BACKEND ENGINEER"
           name={`"Backend" Kabir`}
-          sub="Grand Line · Backend Engineer"
+          sub="Bagerhat, Bangladesh · open to relocate or remote"
           image={profilePic}
           imageAlt="Mridha Imran Kabir"
           attr={<FiAnchor size={16} />}
-          code="LDR13-001 L 1"
+          code={`${EXPERIENCES.length} ROLES · ${PROJECTS.length} SYSTEMS`}
           cost={SKILLSETS.length}
-          costLabel="HAKI"
-          edge="straw-hat.tcg"
+          costLabel="AREAS"
+          edge="open to backend roles"
         >
           <p className="mb-1.5">
-            <span className="pill pill--k">Activate:Main</span>
-            <span className="pill pill--b">Once Per Sprint</span>
+            <span className="pill pill--k">Owns systems end to end</span>
+            <span className="pill pill--b">Correct under load</span>
           </p>
           <p className="text-[0.78rem] leading-snug">
-            Look at 5 slow endpoints from the top of your backlog and add up to 1
-            to production, face-up. Then, put the rest in a queue in any order.
+            Schema through migration, deployment, and the Linux boxes it runs on
+            — multi-tenant SaaS, workflow engines, and data pipelines that keep
+            their promises when the input is bad and the traffic is concurrent.
           </p>
           <p className="mt-1.5">
             {SKILLSETS.slice(0, 4).map((s) => (

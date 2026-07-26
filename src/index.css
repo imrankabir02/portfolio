@@ -603,7 +603,17 @@ body {
   gap: 0.5rem;
   padding: 0.5rem 0.6rem 0;
 }
-.tcg__power {
+/* The headline figure. It is a real measurement or it is not rendered at all —
+   the label underneath says what was counted, so the number can be checked. */
+.tcg__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 0.9;
+  margin-right: auto;
+  padding-left: 0.15rem;
+}
+.tcg__metric b {
   font-family: "Cinzel", serif;
   font-weight: 900;
   font-size: 2.1rem;
@@ -616,20 +626,49 @@ body {
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.85)) drop-shadow(0 0 6px rgba(0, 0, 0, 0.7));
 }
+.tcg__metric > span {
+  margin-top: 0.22rem;
+  font-family: "Special Elite", monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+/* the stamp carries ownership — LEAD, SOLE, BACKEND — so it sizes to its word */
 .tcg__stamp {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  border-radius: 50%;
+  min-width: 2.1rem;
+  height: 1.55rem;
+  padding: 0 0.55rem;
+  border-radius: 999px;
   font-family: "Cinzel", serif;
   font-weight: 900;
-  font-size: 0.72rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
   color: #fff;
   background: radial-gradient(circle at 35% 30%, #ff7ab8, #b3197a 70%, #7d0f55);
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.8);
+}
+
+/* the result, set apart from the description above it */
+.tcg__outcome {
+  margin-top: 0.5rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.35);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #14472f;
+}
+.tcg__outcome::before {
+  content: "→ ";
+  color: #2f9b6d;
+  font-weight: 900;
 }
 /* vertical watermark down the right edge */
 .tcg__edge {
@@ -1292,6 +1331,7 @@ body {
 }
 .saga-map__head {
   position: absolute;
+  z-index: 50;
   top: 0;
   left: 0;
   right: 0;
@@ -1307,6 +1347,7 @@ body {
 }
 .saga-map__hint {
   position: absolute;
+  z-index: 20;
   left: 50%;
   bottom: 1rem;
   transform: translateX(-50%);
@@ -1324,6 +1365,7 @@ body {
 /* saga list down the left of the chart */
 .saga-map__list {
   position: absolute;
+  z-index: 30;
   left: 1.25rem;
   top: 5.5rem;
   bottom: 3.5rem;
@@ -1463,4 +1505,247 @@ body {
   .saga-mini:hover,
   .saga-row:hover,
   .map-label:hover { transform: none; }
+}
+
+/* ---- arc markers moored around a focused saga ---- */
+.arc-pin {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.5rem 0.22rem 0.22rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  border: 1px solid rgba(244, 196, 48, 0.3);
+  background: rgba(4, 18, 31, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+.arc-pin:hover {
+  border-color: rgba(244, 196, 48, 0.85);
+  transform: scale(1.06);
+}
+.arc-pin--on {
+  border-color: var(--gold);
+  background: rgba(24, 18, 4, 0.92);
+  box-shadow: 0 0 20px -4px rgba(244, 196, 48, 0.75);
+}
+.arc-pin__no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: none;
+  border-radius: 999px;
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: 0.6rem;
+  color: #08131f;
+  background: linear-gradient(180deg, #ffe08a, #d99a1c);
+}
+.arc-pin--on .arc-pin__no {
+  box-shadow: 0 0 0 2px rgba(244, 196, 48, 0.45);
+}
+.arc-pin__name {
+  font-family: "Special Elite", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(243, 230, 205, 0.82);
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.arc-pin--on .arc-pin__name {
+  color: #ffe08a;
+}
+
+/* ---- the arc detail panel ---- */
+.arc-panel {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  width: min(22rem, calc(100vw - 2.5rem));
+  max-height: min(34rem, calc(100vh - 7rem));
+  padding: 1rem 1.1rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(244, 196, 48, 0.4);
+  background: linear-gradient(158deg, rgba(10, 39, 64, 0.95), rgba(6, 24, 40, 0.97));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.95);
+  animation: arcPanelIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes arcPanelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.arc-panel__kicker {
+  font-family: "Cinzel", serif;
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+.arc-panel__name {
+  margin-top: 0.3rem;
+  font-family: "Pirata One", "Cinzel", serif;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: #f8eed4;
+}
+.arc-panel__note {
+  margin-top: 0.2rem;
+  font-family: "Special Elite", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: rgba(243, 230, 205, 0.6);
+}
+.arc-panel__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+}
+.arc-panel__badge,
+.arc-panel__when {
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-family: "Special Elite", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(244, 196, 48, 0.35);
+  color: rgba(244, 196, 48, 0.92);
+  background: rgba(244, 196, 48, 0.08);
+}
+.arc-panel__when {
+  border-color: rgba(243, 230, 205, 0.22);
+  color: rgba(243, 230, 205, 0.62);
+  background: transparent;
+}
+.arc-panel__scroll {
+  margin-top: 0.8rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 196, 48, 0.45) transparent;
+}
+.arc-panel__scroll::-webkit-scrollbar { width: 5px; }
+.arc-panel__scroll::-webkit-scrollbar-track { background: transparent; }
+.arc-panel__scroll::-webkit-scrollbar-thumb {
+  background: rgba(244, 196, 48, 0.45);
+  border-radius: 999px;
+}
+.arc-panel__body {
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: rgba(243, 230, 205, 0.82);
+}
+.arc-panel__bullets {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: rgba(243, 230, 205, 0.68);
+}
+.arc-panel__bullets li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+.arc-panel__bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 0.3rem;
+  height: 0.3rem;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+.arc-panel__outcome {
+  margin-top: 0.7rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed rgba(244, 196, 48, 0.28);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #9fe3bd;
+}
+.arc-panel__outcome::before {
+  content: "→ ";
+  color: #2f9b6d;
+  font-weight: 900;
+}
+.arc-panel__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.7rem;
+}
+.arc-panel__tags span {
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+  font-family: "Special Elite", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(243, 230, 205, 0.18);
+  color: rgba(243, 230, 205, 0.62);
+}
+.arc-panel__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(244, 196, 48, 0.18);
+}
+.arc-panel__read,
+.arc-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-family: "Special Elite", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: filter 0.25s, border-color 0.25s;
+}
+.arc-panel__read {
+  color: #08131f;
+  background: var(--treasure);
+  background-size: 200% 100%;
+  font-weight: 700;
+}
+.arc-panel__read:hover { filter: brightness(1.08); }
+.arc-panel__link {
+  border: 1px solid rgba(244, 196, 48, 0.4);
+  color: rgba(244, 196, 48, 0.9);
+}
+.arc-panel__link:hover { border-color: var(--gold); }
+
+/* on narrow screens the panel takes the bottom of the screen and the saga
+   list is already hidden, so nothing competes with it */
+@media (max-width: 640px) {
+  .arc-panel {
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    width: auto;
+    max-height: 58vh;
+  }
+  .saga-map__hint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-panel { animation: none; }
+  .arc-pin:hover { transform: none; }
 }

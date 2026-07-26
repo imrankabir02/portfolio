@@ -26,21 +26,20 @@ const Educations = () => {
             wrapperClassName="w-full max-w-[20rem]"
             style={{ transitionDelay: `${i * 90}ms` }}
             max={9}
-            power={(i === 0 ? 5 : 4) * 1000}
-            stamp="UC"
+            metric={edu.year.trim().slice(-4)}
+            metricLabel="COMPLETED"
+            stamp={i === 0 ? "B.SC" : "HSC"}
             type="TRAINING"
             name={edu.title}
             sub={edu.name}
             glyph={<FiAward size={104} aria-hidden="true" />}
             attr={<FiAward size={15} />}
-            code={`EDU13-${String(i + 1).padStart(3, "0")} UC 1`}
-            cost={edu.year.replace(/\D/g, "").slice(-2)}
-            costLabel="YEAR"
-            edge="log-book.tcg"
+            code={edu.location.toUpperCase()}
+            edge={edu.name}
           >
             <p className="mb-1.5">
-              <span className="pill pill--k">{edu.year}</span>
-              <span className="pill pill--g">Signature valid</span>
+              <span className="pill pill--k">{edu.year.trim()}</span>
+              <span className="pill pill--g">Awarded</span>
             </p>
             <div className="kv">
               <span className="kv-k">issuer</span>

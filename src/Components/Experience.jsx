@@ -7,6 +7,13 @@ import { FiCompass } from "react-icons/fi";
 const TONES = ["blue", "green", "purple", "red"];
 const SAGA = sagaById("experience");
 
+const OWNERSHIP = {
+  LEAD: "Lead author",
+  SOLE: "Sole author",
+  BACKEND: "Backend",
+  SOLO: "Built solo",
+};
+
 const Experience = () => {
   return (
     <section
@@ -45,26 +52,28 @@ const Experience = () => {
                     left ? "md:ml-auto" : ""
                   }`}
                   max={9}
-                  power={(i + 2) * 1000}
-                  stamp={i === 0 ? "L" : "SR"}
-                  type="EVENT"
+                  metric={exp.metric}
+                  metricLabel={exp.metricLabel}
+                  outcome={exp.outcome}
+                  stamp={exp.ownership}
+                  type="PORT OF CALL"
                   name={exp.role}
                   sub={exp.company}
                   glyph={<FiCompass size={104} aria-hidden="true" />}
                   attr={<FiCompass size={15} />}
-                  code={`VOY13-${String(i + 1).padStart(3, "0")} ${
-                    i === 0 ? "L" : "SR"
-                  } 1`}
+                  code={exp.year.toUpperCase()}
                   cost={exp.technologies.length}
-                  costLabel="TOOLS"
-                  edge={`${exp.year.replace(/\s/g, "")}.tcg`}
+                  costLabel="STACK"
+                  edge={exp.company}
                 >
                   <p className="mb-1.5">
-                    <span className="pill pill--k">{exp.year}</span>
-                    {i === 0 ? (
+                    <span className="pill pill--k">
+                      {OWNERSHIP[exp.ownership]}
+                    </span>
+                    {exp.year.includes("Present") ? (
                       <span className="pill pill--g">Currently aboard</span>
                     ) : (
-                      <span className="pill pill--b">Log closed</span>
+                      <span className="pill pill--b">Completed</span>
                     )}
                   </p>
                   <p className="text-[0.78rem] leading-snug">
