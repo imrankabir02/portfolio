@@ -2,6 +2,8 @@
 import { Suspense, useRef, useEffect, useState, Component } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import Merry from "./Merry";
+import { SAGAS } from "../../constants/sagas";
+import { route } from "../../route";
 
 /* ---- low-poly rolling ocean (fills the lower viewport everywhere) ---- */
 function Ocean() {
@@ -121,24 +123,30 @@ function Island({ position, scale = 1, tint = "#c9a24a" }) {
   );
 }
 
-// islands strung along the route; scroll advances them past the camera
-const ISLANDS = [
-  [-13, -1.6, -34, 1.5, "#cb9a4a"],
-  [15, -1.7, -52, 2.1, "#c9a24a"],
-  [-9, -1.6, -70, 1.7, "#d0ad5a"],
-  [12, -1.6, -92, 2.0, "#c19a44"],
-  [-15, -1.7, -112, 1.9, "#caa350"],
-];
+/* One island per saga, strung along the route in reading order. The group
+   slides on `route.t`, so saga i's island is abeam exactly while you are
+   reading saga i — the background sea and the chart never disagree. */
+const SPACING = 24;
 
-function Islands({ scroll }) {
+const ISLANDS = SAGAS.map((s, i) => ({
+  x: (i % 2 === 0 ? -1 : 1) * (11 + (i % 3) * 3),
+  z: -20 - i * SPACING,
+  scale: 1.5 + (i % 3) * 0.25,
+  tint: s.isle.tint,
+}));
+
+function Islands() {
   const g = useRef();
+  const eased = useRef(0);
   useFrame(() => {
-    if (g.current) g.current.position.z = scroll.current * 96;
+    if (!g.current) return;
+    eased.current += (route.t - eased.current) * 0.06;
+    g.current.position.z = eased.current * SPACING;
   });
   return (
     <group ref={g}>
       {ISLANDS.map((s, i) => (
-        <Island key={i} position={[s[0], s[1], s[2]]} scale={s[3]} tint={s[4]} />
+        <Island key={i} position={[s.x, -1.65, s.z]} scale={s.scale} tint={s.tint} />
       ))}
     </group>
   );
@@ -287,7 +295,7 @@ export default function SeaWorld() {
               <Sun scroll={scroll} />
               <Clouds scroll={scroll} />
               <Gulls />
-              <Islands scroll={scroll} />
+              <Islands />
               <Ocean />
               <SailingMerry scroll={scroll} />
             </Rig>

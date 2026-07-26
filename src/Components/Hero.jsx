@@ -4,8 +4,12 @@ import profilePic from "../assets/Kabir.png";
 import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { SiLeetcode, SiHackerrank } from "react-icons/si";
-import { FiArrowDown, FiDownload } from "react-icons/fi";
+import { FiArrowDown, FiDownload, FiMap } from "react-icons/fi";
 import Tilt from "./Tilt";
+import ArcTag from "./ArcTag";
+import { SAGAS, sagaById, TOTAL_ARCS } from "../constants/sagas";
+
+const SAGA = sagaById("home");
 
 const ROLES = [
   "Backend Engineer",
@@ -73,6 +77,19 @@ const Hero = () => {
             </span>
           </div>
 
+          <div className="flex flex-wrap items-center gap-3 mb-3">
+            <span className="section-index">SAGA {SAGA.no}</span>
+            <span className="w-10 h-px bg-gold/50" />
+            <span className="font-pirate text-lg tracking-wide text-gold-light">
+              {SAGA.name}
+            </span>
+            <span className="saga-arc-count">
+              {SAGAS.length} SAGAS · {TOTAL_ARCS} ARCS
+            </span>
+          </div>
+
+          <ArcTag saga={SAGA} i={0} className="max-w-xs" />
+
           <p className="mb-3 eyebrow">&gt; Ahoy — the name&apos;s</p>
 
           <h1 className="font-pirate text-5xl sm:text-7xl xl:text-8xl leading-[0.9] tracking-wide">
@@ -125,6 +142,15 @@ const Hero = () => {
             >
               <FiDownload /> Log Book
             </a>
+            <button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("open-saga-map"))
+              }
+              className="btn-ghost"
+            >
+              <FiMap /> Chart the voyage
+            </button>
           </div>
 
           {/* socials */}
@@ -144,12 +170,14 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* ── right: WANTED poster ── */}
+        {/* ── right: Arc 02 — WANTED poster ── */}
         <div
-          className="relative flex justify-center lg:justify-end"
+          className="relative flex flex-col items-center lg:items-end"
           data-reveal
           style={{ transitionDelay: "120ms" }}
         >
+          <ArcTag saga={SAGA} i={1} className="w-[19rem] sm:w-[21rem]" />
+
           {/* nail + hanging poster that sways + tilts in 3D */}
           <Tilt
             max={11}

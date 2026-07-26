@@ -1,16 +1,21 @@
 import Tilt from "./Tilt";
+import ArcTag from "./ArcTag";
 
 /**
  * A One Piece TCG card.
  *
- * Anatomy, top to bottom: foil border → power figure + rarity stamp →
- * full-bleed artwork with impact lines → effect box (keyword pills + text) →
- * type banner, name, affiliation → attribute icon, set code, cost circle.
+ * Anatomy, top to bottom: arc marker → foil border → power figure + rarity
+ * stamp → full-bleed artwork with impact lines → effect box (keyword pills +
+ * text) → type banner, name, affiliation → attribute icon, set code, cost.
  *
  * The wrapper owns the perspective and the reveal fade — `opacity < 1`
- * flattens 3D, so it must never land on the card itself.
+ * flattens 3D, so it must never land on the card itself. The arc marker is a
+ * sibling of the card, not a child, for the same reason: perspective only
+ * reaches direct children, so nothing may come between the two.
  */
 export default function TcgCard({
+  saga,
+  arc,
   tone = "red",
   power,
   stamp = "SR",
@@ -34,17 +39,22 @@ export default function TcgCard({
   ...props
 }) {
   const { "data-reveal": dataReveal, ...rel } = props;
+  const marked = saga != null && arc != null;
 
   return (
     <div
-      className={`slab-stage h-full ${wrapperClassName}`}
+      className={`slab-stage h-full ${
+        marked ? "flex flex-col" : ""
+      } ${wrapperClassName}`}
       style={style}
       {...(dataReveal !== undefined ? { "data-reveal": dataReveal } : {})}
     >
+      {marked && <ArcTag saga={saga} i={arc} />}
+
       <Tilt
         max={max}
         rest={6}
-        className={`tcg tcg--${tone} h-full ${className}`}
+        className={`tcg tcg--${tone} ${marked ? "flex-1" : "h-full"} ${className}`}
         {...rel}
       >
         {/* card stock has thickness */}

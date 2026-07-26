@@ -1,9 +1,11 @@
 import { EXPERIENCES } from "../constants";
+import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
 import TcgCard from "./TcgCard";
 import { FiCompass } from "react-icons/fi";
 
 const TONES = ["blue", "green", "purple", "red"];
+const SAGA = sagaById("experience");
 
 const Experience = () => {
   return (
@@ -11,12 +13,7 @@ const Experience = () => {
       id="experience"
       className="px-6 py-24 mx-auto scroll-mt-24 max-w-7xl md:px-8"
     >
-      <SectionHead
-        index="04"
-        kicker="Voyage"
-        title="Islands on the log pose"
-        blurb="Four ports along the Grand Line, each one a step deeper into ownership — from first APIs to architecting a multi-tenant platform."
-      />
+      <SectionHead saga={SAGA} />
 
       <div className="relative max-w-5xl mx-auto">
         {/* the charted route */}
@@ -40,6 +37,8 @@ const Experience = () => {
                 />
 
                 <TcgCard
+                  saga={SAGA}
+                  arc={i}
                   tone={TONES[i % TONES.length]}
                   data-reveal
                   wrapperClassName={`w-full max-w-[21rem] ${
