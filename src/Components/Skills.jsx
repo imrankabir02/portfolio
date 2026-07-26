@@ -53,12 +53,37 @@ const GROUP_TAGS = {
   Infrastructure: "The ship & crew",
 };
 
-// each stack layer gets its own colour identity and card type
+// each stack layer gets its own colour identity, card type, and an honest note
+// on how it is actually used day to day
 const GROUP_CARD = {
-  Languages: { tone: "yellow", type: "DEVIL FRUIT", edge: "languages.tcg" },
-  Frameworks: { tone: "red", type: "FIGHTING STYLE", edge: "frameworks.tcg" },
-  Data: { tone: "purple", type: "TREASURE", edge: "data.tcg" },
-  Infrastructure: { tone: "blue", type: "SHIP & CREW", edge: "infra.tcg" },
+  Languages: {
+    tone: "yellow",
+    type: "DEVIL FRUIT",
+    edge: "written daily",
+    stamp: "DAILY",
+    use: "Production code",
+  },
+  Frameworks: {
+    tone: "red",
+    type: "FIGHTING STYLE",
+    edge: "shipped in production",
+    stamp: "SHIPPED",
+    use: "Systems built end to end",
+  },
+  Data: {
+    tone: "purple",
+    type: "TREASURE",
+    edge: "schema · indexes · migrations",
+    stamp: "OWNED",
+    use: "Schema, indexing, migrations",
+  },
+  Infrastructure: {
+    tone: "blue",
+    type: "SHIP & CREW",
+    edge: "deployed and operated",
+    stamp: "OPS",
+    use: "Deployed and operated",
+  },
 };
 
 const ALL = SKILL_GROUPS.flatMap((g) => g.items);
@@ -84,21 +109,20 @@ const Skills = () => {
               max={11}
               data-reveal
               style={{ transitionDelay: `${gi * 90}ms` }}
-              power={group.items.length * 1000}
-              stamp="SR"
+              metric={group.items.length}
+              metricLabel={group.items.length === 1 ? "TOOL" : "TOOLS"}
+              stamp={card.stamp}
               type={card.type}
               name={group.heading}
               sub={GROUP_TAGS[group.heading]}
               glyph={<HeroIcon size={96} aria-hidden="true" />}
               attr={<span className="text-sm font-black">{gi + 1}</span>}
-              code={`STK13-${String(gi + 1).padStart(3, "0")} SR 1`}
-              cost={group.items.length}
-              costLabel="PKGS"
+              code={group.items.join(" · ").toUpperCase()}
               edge={card.edge}
             >
               <p className="mb-1.5">
-                <span className="pill pill--k">Passive</span>
-                <span className="pill pill--b">Always Active</span>
+                <span className="pill pill--k">{card.use}</span>
+                <span className="pill pill--b">{group.items[0]} primary</span>
               </p>
               <ul className="space-y-1.5">
                 {group.items.map((item) => {

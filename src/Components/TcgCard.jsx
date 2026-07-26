@@ -17,7 +17,9 @@ export default function TcgCard({
   saga,
   arc,
   tone = "red",
-  power,
+  metric,
+  metricLabel,
+  outcome,
   stamp = "SR",
   edge = "grand-line.tcg",
   image,
@@ -77,15 +79,27 @@ export default function TcgCard({
             </span>
           )}
 
+          {/* the figure top-left is a real one or it is absent — nothing here
+              is invented for the sake of filling the slot */}
           <div className="tcg__head">
-            {power != null && <span className="tcg__power">{power}</span>}
+            {metric != null && (
+              <span className="tcg__metric">
+                <b>{metric}</b>
+                {metricLabel && <span>{metricLabel}</span>}
+              </span>
+            )}
             {stamp && <span className="tcg__stamp">{stamp}</span>}
           </div>
           {edge && <span className="tcg__edge">{edge}</span>}
 
           <div className="tcg__stage" />
 
-          {children && <div className="tcg__box">{children}</div>}
+          {(children || outcome) && (
+            <div className="tcg__box">
+              {children}
+              {outcome && <p className="tcg__outcome">{outcome}</p>}
+            </div>
+          )}
 
           <div className="tcg__plate">
             {type && <span className="tcg__type">{type}</span>}

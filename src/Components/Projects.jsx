@@ -12,17 +12,27 @@ const isLive = (p) => Boolean(p.appLink || p.gitLink);
 // colour identity rotates through the OP deck colours
 const TONES = ["red", "green", "blue", "purple", "yellow", "black"];
 
-// power reads like a card's: scaled off how much stack the bounty carries
-const powerOf = (p) => (p.technologies.length + (p.highlights?.length || 0)) * 1000;
+// how the work was owned, spelled out rather than abbreviated
+const OWNERSHIP = {
+  LEAD: "Lead author",
+  SOLE: "Sole author",
+  BACKEND: "Backend",
+  SOLO: "Built solo",
+};
 
+/* The keyword row is the two things a hiring manager scans for first: how much
+   of it was mine, and whether it actually runs. Stack follows. */
 const Pills = ({ project }) => (
   <p className="mb-1.5">
-    <span className="pill pill--k">Activate:Main</span>
-    {isLive(project) ? (
-      <span className="pill pill--b">Deployed</span>
+    <span className="pill pill--k">{OWNERSHIP[project.ownership]}</span>
+    {project.status === "Prototype" ? (
+      <span className="pill pill--r">Prototype</span>
     ) : (
+      <span className="pill pill--b">{project.status}</span>
+    )}
+    {!isLive(project) && (
       <span className="pill pill--r">
-        <FiLock size={9} /> Under NDA
+        <FiLock size={9} /> Private
       </span>
     )}
     {project.technologies.slice(0, 2).map((t) => (
@@ -100,17 +110,19 @@ const Projects = () => {
           tone="red"
           data-reveal
           max={9}
-          power={powerOf(featured)}
-          stamp="L"
-          type="LEADER"
+          metric={featured.metric}
+          metricLabel={featured.metricLabel}
+          outcome={featured.outcome}
+          stamp={featured.ownership}
+          type="FLAGSHIP"
           name={featured.title}
           sub={featured.org || featured.context}
           glyph={<JollyRoger size={132} />}
           attr={<FiAnchor size={16} />}
-          code={`PRJ13-001 L 1`}
+          code={featured.status.toUpperCase()}
           cost={featured.technologies.length}
-          costLabel="DEPS"
-          edge="highest-bounty.tcg"
+          costLabel="STACK"
+          edge={featured.context}
           actions={<Links project={featured} />}
         >
           <Effect project={featured} compact hideHighlights />
@@ -160,19 +172,19 @@ const Projects = () => {
             tone={TONES[(i + 1) % TONES.length]}
             data-reveal
             style={{ transitionDelay: `${(i % 3) * 90}ms` }}
-            power={powerOf(project)}
-            stamp={isLive(project) ? "R" : "C"}
-            type="CHARACTER"
+            metric={project.metric}
+            metricLabel={project.metricLabel}
+            outcome={project.outcome}
+            stamp={project.ownership}
+            type="SYSTEM"
             name={project.title}
             sub={project.org || project.context}
             glyph={<JollyRoger size={104} />}
             attr={<FiAnchor size={15} />}
-            code={`PRJ13-${String(i + 2).padStart(3, "0")} ${
-              isLive(project) ? "R" : "C"
-            } 1`}
+            code={project.status.toUpperCase()}
             cost={project.technologies.length}
-            costLabel="DEPS"
-            edge={`bounty-${String(i + 2).padStart(2, "0")}.tcg`}
+            costLabel="STACK"
+            edge={project.context}
             actions={<Links project={project} />}
           >
             <Effect project={project} compact />

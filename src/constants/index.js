@@ -46,6 +46,9 @@ export const EXPERIENCES = [
     year: "July 2026 - Present",
     role: "Backend Engineer (Contract)",
     company: "CloudHub",
+    ownership: "LEAD",
+    outcome:
+      "I own the backend architecture and the design docs that justify it.",
     description: `Lead backend author on a multi-tenant B2B SaaS platform. Tenant isolation is enforced in the database with PostgreSQL Row-Level Security, so a missing WHERE clause fails closed instead of leaking another tenant's data. Also built a transactional outbox for reliable notifications, TimescaleDB time-series ingestion, and concurrency-safe scheduling. I own the backend architecture and its design docs.`,
     technologies: [
       "FastAPI",
@@ -62,6 +65,11 @@ export const EXPERIENCES = [
     year: "June 2025 - Present",
     role: "IT Engineer",
     company: "BIFPCL",
+    ownership: "SOLE",
+    metric: "80+",
+    metricLabel: "MODELS",
+    outcome:
+      "Migrated SQLite → MSSQL in place, then kept shipping on top of it.",
     description: `Titled IT Engineer, but the work is mostly backend. Primary author of a large internal Django platform — a multi-module monolith I've built and maintained single-handed since late 2025. Migrated it from SQLite to MSSQL in place, moved slow file handling onto background workers, and extracted a heavily-used module into its own service. Plus Linux operations, containerised deployment, and monitoring.`,
     technologies: [
       "Django",
@@ -77,6 +85,9 @@ export const EXPERIENCES = [
     year: "January 2025 - June 2025",
     role: "Software Engineer",
     company: "Barikoi Maps",
+    ownership: "BACKEND",
+    outcome:
+      "Geofence and nearby-point queries stayed fast as the dataset grew.",
     description: `Location-intelligence backends in Laravel and MySQL: spatial filtering — geofence containment, nearby-point lookups — and the indexing to keep it fast as data grew. Redis for caching and queues, Laravel WebSockets for real-time, Docker on AWS.`,
     technologies: [
       "Laravel",
@@ -92,6 +103,11 @@ export const EXPERIENCES = [
     year: "January 2024 - January 2025",
     role: "Backend Developer",
     company: "Phone Tech BD Ltd",
+    ownership: "BACKEND",
+    metric: "2",
+    metricLabel: "APPS",
+    outcome:
+      "Both shipped; Shifttrek is still in production.",
     description: `First professional backend role. Built two Laravel applications from scratch — including Shifttrek, a workforce-scheduling product now in production — covering schema design, REST APIs, and authentication, and refactored legacy modules that had grown hard to change safely.`,
     technologies: [
       "Laravel",
@@ -126,6 +142,10 @@ export const EDUCATIONS = [
 export const PROJECTS = [
   {
     title: "CloudHR",
+    ownership: "LEAD",
+    status: "In production",
+    outcome:
+      "Tenant isolation the database itself enforces — a missed WHERE clause fails closed, not open.",
     org: "Lead Backend Engineer · CloudHub",
     context: "FastAPI · PostgreSQL · TimescaleDB",
     note: "Client product · code is private — walkthrough on request.",
@@ -147,6 +167,12 @@ export const PROJECTS = [
   },
   {
     title: "BIFPCL Operations Platform",
+    ownership: "SOLE",
+    status: "In production",
+    metric: "80+",
+    metricLabel: "MODELS",
+    outcome:
+      "One author, one migration path, and still deployable as requirements keep arriving.",
     org: "Sole backend author · BIFPCL",
     context: "Django · MSSQL · Docker · CI/CD",
     note: "Internal system · code is private — walkthrough on request.",
@@ -161,6 +187,10 @@ export const PROJECTS = [
   },
   {
     title: "Gatepass — Approval Workflow",
+    ownership: "BACKEND",
+    status: "In production",
+    outcome:
+      "No approval can land half-applied — every transition is atomic and recoverable.",
     org: "Backend · BIFPCL",
     context: "Django · DRF · Celery · Redis",
     note: "Internal system · code is private — walkthrough on request.",
@@ -175,6 +205,12 @@ export const PROJECTS = [
   },
   {
     title: "Vendor Procurement Portal",
+    ownership: "BACKEND",
+    status: "In production",
+    metric: "2",
+    metricLabel: "PORTALS",
+    outcome:
+      "Two audiences, one domain model, and business rules that live in exactly one place.",
     org: "Backend · BIFPCL",
     context: "Django · Services Layer · UBAC",
     note: "Internal system · code is private — walkthrough on request.",
@@ -189,6 +225,12 @@ export const PROJECTS = [
   },
   {
     title: "Reliable Background Import System",
+    ownership: "SOLO",
+    status: "Private repo",
+    metric: "54",
+    metricLabel: "TESTS",
+    outcome:
+      "One bad row can no longer abort the run — failures stay queryable and re-exportable.",
     context: "Laravel · MySQL · Redis queues",
     note: "Private repository — happy to walk through the code on request.",
     description:
@@ -202,6 +244,12 @@ export const PROJECTS = [
   },
   {
     title: "Legal Document Intelligence Pipeline",
+    ownership: "SOLO",
+    status: "Private repo",
+    metric: "57",
+    metricLabel: "TESTS",
+    outcome:
+      "Every generated claim traces back to the source passage it came from.",
     context: "FastAPI · Python · Chroma · Docker",
     note: "Private repository — happy to walk through the code on request.",
     description:
@@ -215,6 +263,10 @@ export const PROJECTS = [
   },
   {
     title: "Shifttrek — Workforce Management Platform",
+    ownership: "BACKEND",
+    status: "Live",
+    outcome:
+      "In production and serving live scheduling workflows today.",
     org: "Backend · Phone Tech BD",
     context: "Production system · Laravel · MySQL",
     appLink: "https://www.shifttrek.com/",
@@ -224,6 +276,12 @@ export const PROJECTS = [
   },
   {
     title: "CV Studio",
+    ownership: "SOLO",
+    status: "Live",
+    metric: "0",
+    metricLabel: "SIGN-UP",
+    outcome:
+      "Fully usable with no account — cloud sync is opt-in, and off by default.",
     context: "React 19 · Vite · Supabase",
     appLink: "https://cv-studio-v1.vercel.app/",
     description:
@@ -237,6 +295,12 @@ export const PROJECTS = [
   },
   {
     title: "BanglaHealth — Health Records Prototype",
+    ownership: "SOLO",
+    status: "Prototype",
+    metric: "~20",
+    metricLabel: "MODELS",
+    outcome:
+      "Honest status: the hard domain modelling is done, the test suite is not.",
     context: "Django · DRF · Celery · Docker",
     note: "Work-in-progress prototype — private repository, walkthrough on request.",
     description:
