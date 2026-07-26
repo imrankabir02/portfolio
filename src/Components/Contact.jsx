@@ -4,7 +4,6 @@ import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { FiArrowUp, FiMail, FiMapPin } from "react-icons/fi";
 import JollyRoger from "./JollyRoger";
-import Tilt from "./Tilt";
 import ArcTag from "./ArcTag";
 
 const SAGA = sagaById("contact");
@@ -44,76 +43,65 @@ const Contact = () => {
 
       {/* Arc 01 — the hail, dealt as a wide EVENT card */}
       <ArcTag saga={SAGA} i={0} className="max-w-md mx-auto" />
-      <div data-reveal className="slab-stage">
-        <Tilt max={4} rest={3} className="tcg tcg--red">
-          <span className="wall wall--t" aria-hidden="true" />
-          <span className="wall wall--b" aria-hidden="true" />
-          <span className="wall wall--l" aria-hidden="true" />
-          <span className="wall wall--r" aria-hidden="true" />
-
-          <div className="tcg__inner items-center px-6 py-12 text-center md:px-16 md:py-16">
-            <div className="tcg__art" aria-hidden="true" />
-            <span className="tcg__edge">den-den-mushi.tcg</span>
-
-            <div className="relative w-full">
-              <div className="flex justify-center mb-5">
-                <JollyRoger size={64} className="text-white animate-bob" />
-              </div>
-
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-6 border rounded-full bg-black/40 border-white/25">
-                <span className="dot-online" />
-                <span className="font-mono text-[11px] tracking-wide text-white">
-                  RECRUITING CREW · let&apos;s build something that stays afloat
-                </span>
-              </div>
-
-              <span className="tcg__type">DEN DEN MUSHI</span>
-              <h2 className="mt-2 tcg__name !text-4xl sm:!text-6xl">
-                Ready to set sail?
-              </h2>
-
-              <p className="max-w-xl mx-auto mt-5 leading-relaxed text-white/85">
-                Have a system that needs to stay correct under load — or one
-                that already ran aground and you&apos;d rather it didn&apos;t
-                again? Send a Den Den Mushi. I&apos;d like to hear about it.
-              </p>
-
-              <div className="flex flex-col items-center justify-center gap-4 mt-9 sm:flex-row">
-                <a href={`mailto:${MY_DETAILS.email}`} className="btn-primary">
-                  <FiMail /> {MY_DETAILS.email}
-                </a>
-                <span className="inline-flex items-center gap-2 font-mono text-xs text-white/75">
-                  <FiMapPin /> {MY_DETAILS.address}
-                </span>
-              </div>
-
-              {/* Arc 02 — the crew roster */}
-              <p className="mt-10 font-mono text-[10px] tracking-[0.28em] text-white/60">
-                ARC 02 — {SAGA.arcs[1].name}
-              </p>
-              <div className="flex items-center justify-center gap-3 mt-4">
-                {SOCIALS.map(({ Icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex items-center justify-center transition-all border rounded-full w-11 h-11 bg-black/35 border-white/25 text-white/80 hover:text-white hover:border-white hover:-translate-y-1"
-                  >
-                    <Icon size={18} />
-                  </a>
-                ))}
-              </div>
-
-              <p className="mt-10 tcg__code">
-                CTA13-001 L 1 · MARINE · GRAND LINE · EAST BLUE
-              </p>
+      {/* the finale: the same episode card, run wide with no still */}
+      <div data-reveal className="ep-slot">
+        <article className="ep ep--red ep--wide">
+          <div className="ep__body">
+            <div className="mb-5">
+              <JollyRoger size={64} className="text-white animate-bob" />
             </div>
 
-            <span className="tcg__holo" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-6 border rounded-full bg-black/30 border-white/20">
+              <span className="dot-online" />
+              <span className="font-mono text-[11px] tracking-wide text-white">
+                RECRUITING CREW · let&apos;s build something that stays afloat
+              </span>
+            </div>
+
+            <p className="ep__kicker">DEN DEN MUSHI</p>
+            <h2 className="ep__name !text-4xl sm:!text-6xl">
+              Ready to set sail?
+            </h2>
+
+            <p className="max-w-xl mx-auto mt-5 leading-relaxed text-parch-light/90">
+              Have a system that needs to stay correct under load — or one that
+              already ran aground and you&apos;d rather it didn&apos;t again?
+              Send a Den Den Mushi. I&apos;d like to hear about it.
+            </p>
+
+            <div className="flex flex-col items-center justify-center gap-4 mt-9 sm:flex-row">
+              <a href={`mailto:${MY_DETAILS.email}`} className="btn-primary">
+                <FiMail /> {MY_DETAILS.email}
+              </a>
+              <span className="inline-flex items-center gap-2 font-mono text-xs text-parch-light/85">
+                <FiMapPin /> {MY_DETAILS.address}
+              </span>
+            </div>
+
+            {/* Arc 02 — the crew roster */}
+            <p className="mt-10 font-mono text-[10px] tracking-[0.28em] text-parch-light/75">
+              ARC 02 — {SAGA.arcs[1].name}
+            </p>
+            <div className="flex items-center justify-center gap-3 mt-4">
+              {SOCIALS.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex items-center justify-center transition-all border rounded-full w-11 h-11 bg-black/25 border-parch-light/20 text-parch-light/90 hover:text-white hover:border-gold hover:-translate-y-1"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+
+            <p className="mt-10 font-mono text-[0.58rem] tracking-[0.1em] text-parch-light/60">
+              CTA13-001 L 1 · MARINE · GRAND LINE · EAST BLUE
+            </p>
           </div>
-        </Tilt>
+        </article>
       </div>
 
       {/* bottom bar */}

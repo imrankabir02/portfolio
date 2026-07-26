@@ -1,7 +1,7 @@
 import { EDUCATIONS } from "../constants";
 import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
-import TcgCard from "./TcgCard";
+import EpCard from "./EpCard";
 import { FiAward } from "react-icons/fi";
 
 const TONES = ["purple", "yellow", "green", "blue"];
@@ -17,7 +17,7 @@ const Educations = () => {
 
       <div className="grid max-w-3xl gap-8 mx-auto sm:grid-cols-2 justify-items-center">
         {EDUCATIONS.map((edu, i) => (
-          <TcgCard
+          <EpCard
             key={i}
             saga={SAGA}
             arc={i}
@@ -25,15 +25,14 @@ const Educations = () => {
             data-reveal
             wrapperClassName="w-full max-w-[20rem]"
             style={{ transitionDelay: `${i * 90}ms` }}
-            max={9}
             metric={edu.year.trim().slice(-4)}
             metricLabel="COMPLETED"
             stamp={i === 0 ? "B.SC" : "HSC"}
             type="TRAINING"
             name={edu.title}
             sub={edu.name}
-            glyph={<FiAward size={104} aria-hidden="true" />}
-            attr={<FiAward size={15} />}
+            glyph={<FiAward size={88} aria-hidden="true" />}
+            attr={<FiAward size={14} />}
             code={edu.location.toUpperCase()}
             edge={edu.name}
           >
@@ -51,7 +50,7 @@ const Educations = () => {
               <span className="kv-fill" />
               <span className="kv-v">{edu.location}</span>
             </div>
-          </TcgCard>
+          </EpCard>
         ))}
       </div>
     </section>

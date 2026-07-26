@@ -20,7 +20,7 @@ import { FaAws } from "react-icons/fa";
 import { SKILL_GROUPS } from "../constants";
 import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
-import TcgCard from "./TcgCard";
+import EpCard from "./EpCard";
 
 const SAGA = sagaById("skills");
 
@@ -101,12 +101,11 @@ const Skills = () => {
           const card = GROUP_CARD[group.heading];
           const [HeroIcon] = ICONS[group.items[0]];
           return (
-            <TcgCard
+            <EpCard
               key={group.heading}
               saga={SAGA}
               arc={gi}
               tone={card.tone}
-              max={11}
               data-reveal
               style={{ transitionDelay: `${gi * 90}ms` }}
               metric={group.items.length}
@@ -115,10 +114,10 @@ const Skills = () => {
               type={card.type}
               name={group.heading}
               sub={GROUP_TAGS[group.heading]}
-              glyph={<HeroIcon size={96} aria-hidden="true" />}
-              attr={<span className="text-sm font-black">{gi + 1}</span>}
-              code={group.items.join(" · ").toUpperCase()}
-              edge={card.edge}
+              glyph={<HeroIcon size={84} aria-hidden="true" />}
+              attr={<span className="text-xs font-black">{gi + 1}</span>}
+              code={card.edge.toUpperCase()}
+              edge={group.items.join(" · ")}
             >
               <p className="mb-1.5">
                 <span className="pill pill--k">{card.use}</span>
@@ -133,11 +132,11 @@ const Skills = () => {
                       className="flex items-center gap-2 group/i"
                       style={{ "--bc": color }}
                     >
-                      <span className="flex items-center justify-center w-6 h-6 border rounded border-black/15 bg-white/60 transition-colors group-hover/i:border-[var(--bc)]">
+                      <span className="flex items-center justify-center w-6 h-6 border rounded border-parch-light/15 bg-parch-light/[0.06] transition-colors group-hover/i:border-[var(--bc)]">
                         <Icon
                           aria-hidden="true"
                           size={13}
-                          className="transition-colors text-black/55 group-hover/i:text-[var(--bc)]"
+                          className="transition-colors text-parch-light/60 group-hover/i:text-[var(--bc)]"
                         />
                       </span>
                       <span className="text-[0.78rem] font-semibold">
@@ -147,7 +146,7 @@ const Skills = () => {
                   );
                 })}
               </ul>
-            </TcgCard>
+            </EpCard>
           );
         })}
       </div>
