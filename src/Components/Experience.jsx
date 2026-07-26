@@ -1,7 +1,7 @@
 import { EXPERIENCES } from "../constants";
 import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
-import TcgCard from "./TcgCard";
+import EpCard from "./EpCard";
 import { FiCompass } from "react-icons/fi";
 
 const TONES = ["blue", "green", "purple", "red"];
@@ -43,7 +43,7 @@ const Experience = () => {
                   } w-3.5 h-3.5 rotate-45 bg-gold border-2 border-sea-900 shadow-[0_0_14px_3px_rgba(244,196,48,0.6)]`}
                 />
 
-                <TcgCard
+                <EpCard
                   saga={SAGA}
                   arc={i}
                   tone={TONES[i % TONES.length]}
@@ -51,7 +51,6 @@ const Experience = () => {
                   wrapperClassName={`w-full max-w-[21rem] ${
                     left ? "md:ml-auto" : ""
                   }`}
-                  max={9}
                   metric={exp.metric}
                   metricLabel={exp.metricLabel}
                   outcome={exp.outcome}
@@ -59,8 +58,8 @@ const Experience = () => {
                   type="PORT OF CALL"
                   name={exp.role}
                   sub={exp.company}
-                  glyph={<FiCompass size={104} aria-hidden="true" />}
-                  attr={<FiCompass size={15} />}
+                  glyph={<FiCompass size={88} aria-hidden="true" />}
+                  attr={<FiCompass size={14} />}
                   code={exp.year.toUpperCase()}
                   cost={exp.technologies.length}
                   costLabel="STACK"
@@ -83,13 +82,13 @@ const Experience = () => {
                     {exp.technologies.map((t) => (
                       <span
                         key={t}
-                        className="px-1.5 py-0.5 text-[0.62rem] font-semibold border rounded border-black/25 bg-white/50"
+                        className="px-1.5 py-0.5 text-[0.62rem] font-semibold border rounded border-gold/25 bg-gold/[0.07] text-parch-light/75"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
-                </TcgCard>
+                </EpCard>
               </div>
             );
           })}

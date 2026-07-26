@@ -9,8 +9,7 @@ import {
 import profilePic from "../assets/image.png";
 import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import SectionHead from "./SectionHead";
-import TcgCard from "./TcgCard";
-import Tilt from "./Tilt";
+import EpCard from "./EpCard";
 import ArcTag from "./ArcTag";
 import { sagaById } from "../constants/sagas";
 import { useCountUp } from "../hooks";
@@ -38,16 +37,12 @@ const STATS = [
 const Don = ({ value, suffix, label, run }) => {
   const n = useCountUp(value, run);
   return (
-    <div className="slab-stage">
-      <Tilt max={14} rest={6} className="don">
-        <div className="don__inner">
-          <div className="don__n">
-            {n}
-            {suffix}
-          </div>
-          <div className="don__l">{label}</div>
-        </div>
-      </Tilt>
+    <div className="don">
+      <div className="don__n">
+        {n}
+        {suffix}
+      </div>
+      <div className="don__l">{label}</div>
     </div>
   );
 };
@@ -74,12 +69,11 @@ const About = () => {
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr]">
         {/* Arc 01 — the leader card */}
-        <TcgCard
+        <EpCard
           saga={SAGA}
           arc={0}
           tone="red"
           data-reveal
-          max={9}
           metric={RUNNING}
           metricLabel="IN PRODUCTION"
           outcome="Available now for backend roles — Django, Laravel, FastAPI."
@@ -89,7 +83,7 @@ const About = () => {
           sub="Bagerhat, Bangladesh · open to relocate or remote"
           image={profilePic}
           imageAlt="Mridha Imran Kabir"
-          attr={<FiAnchor size={16} />}
+          attr={<FiAnchor size={15} />}
           code={`${EXPERIENCES.length} ROLES · ${PROJECTS.length} SYSTEMS`}
           cost={SKILLSETS.length}
           costLabel="AREAS"
@@ -111,7 +105,7 @@ const About = () => {
               </span>
             ))}
           </p>
-        </TcgCard>
+        </EpCard>
 
         {/* Arc 02 — the log entry beside it */}
         <div data-reveal style={{ transitionDelay: "120ms" }}>

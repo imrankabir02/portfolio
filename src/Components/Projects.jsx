@@ -1,7 +1,7 @@
 import { PROJECTS } from "../constants";
 import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
-import TcgCard from "./TcgCard";
+import EpCard from "./EpCard";
 import JollyRoger from "./JollyRoger";
 import { FiArrowUpRight, FiLock, FiAnchor } from "react-icons/fi";
 
@@ -80,7 +80,7 @@ const Effect = ({ project, compact, hideHighlights }) => (
       <ul className="mt-2 space-y-1 text-[0.72rem] leading-snug">
         {project.highlights.map((h) => (
           <li key={h} className="flex gap-2">
-            <span className="mt-1.5 h-1 w-1 shrink-0 rotate-45 bg-black/60" />
+            <span className="mt-1.5 h-1 w-1 shrink-0 rotate-45 bg-gold/70" />
             {h}
           </li>
         ))}
@@ -104,12 +104,11 @@ const Projects = () => {
 
       {/* Arc 01 — the leader card, highest bounty */}
       <div className="grid gap-8 mb-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-center">
-        <TcgCard
+        <EpCard
           saga={SAGA}
           arc={0}
           tone="red"
           data-reveal
-          max={9}
           metric={featured.metric}
           metricLabel={featured.metricLabel}
           outcome={featured.outcome}
@@ -117,8 +116,8 @@ const Projects = () => {
           type="FLAGSHIP"
           name={featured.title}
           sub={featured.org || featured.context}
-          glyph={<JollyRoger size={132} />}
-          attr={<FiAnchor size={16} />}
+          glyph={<JollyRoger size={104} />}
+          attr={<FiAnchor size={15} />}
           code={featured.status.toUpperCase()}
           cost={featured.technologies.length}
           costLabel="STACK"
@@ -126,7 +125,7 @@ const Projects = () => {
           actions={<Links project={featured} />}
         >
           <Effect project={featured} compact hideHighlights />
-        </TcgCard>
+        </EpCard>
 
         {/* the arc marker for this one already sits on its card */}
         <div data-reveal style={{ transitionDelay: "120ms" }}>
@@ -165,7 +164,7 @@ const Projects = () => {
       {/* the rest of the hand */}
       <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-3">
         {rest.map((project, i) => (
-          <TcgCard
+          <EpCard
             key={project.title}
             saga={SAGA}
             arc={i + 1}
@@ -179,8 +178,8 @@ const Projects = () => {
             type="SYSTEM"
             name={project.title}
             sub={project.org || project.context}
-            glyph={<JollyRoger size={104} />}
-            attr={<FiAnchor size={15} />}
+            glyph={<JollyRoger size={88} />}
+            attr={<FiAnchor size={14} />}
             code={project.status.toUpperCase()}
             cost={project.technologies.length}
             costLabel="STACK"
@@ -188,7 +187,7 @@ const Projects = () => {
             actions={<Links project={project} />}
           >
             <Effect project={project} compact />
-          </TcgCard>
+          </EpCard>
         ))}
       </div>
     </section>

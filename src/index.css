@@ -385,522 +385,427 @@ body {
 }
 
 /* ============================================================
-   TCG CARDS — the whole portfolio dealt as a One Piece deck.
-   Foil border, full-bleed art, power figure, keyword pills,
-   type banner, name plate, set code and a cost circle. Each card
-   is a real object: card stock has thickness, and it tilts in hand.
+   EPISODE CARDS — every arc of the voyage dealt as an episode
+   in a streaming guide: a 16:9 still carrying the arc number and
+   the badges, then the title block beneath it.
+
+   The shell is the corner mini-chart's, scaled up: the same navy
+   gradient panel, the same gold hairline, the same inset framed
+   canvas for the still, gold Cinzel kicker over a Pirata One name,
+   and a dashed-rule mono footer. One thing of the mini-chart's is
+   deliberately left out — `backdrop-filter: blur()`, which one
+   fixed corner panel can afford and twenty scrolling cards over a
+   live WebGL sea cannot.
+
+   Cheap by construction otherwise: one composited element per card
+   — no `preserve-3d`, no rotated wall elements, no conic foil, no
+   `mask-image`, no blend modes and no pointer-driven JS. The depth
+   is a single perspective transform.
    ============================================================ */
 :root {
   --rest: rotateX(0deg);
 }
 
-/* perspective host — one per card, so a faded ancestor can't flatten it */
-.slab-stage {
-  perspective: 1100px;
-  perspective-origin: 50% 40%;
+/* ---- colour identities, still straight off the OP TCG ---- */
+.ep--red    { --c1: #a8222c; --c2: #2a070b; --ac: #ff9086; }
+.ep--green  { --c1: #16704a; --c2: #052018; --ac: #63e2a6; }
+.ep--blue   { --c1: #185a95; --c2: #051a2f; --ac: #7cc2f0; }
+.ep--purple { --c1: #533687; --c2: #150d26; --ac: #bb92ff; }
+.ep--yellow { --c1: #b3831a; --c2: #2f2005; --ac: #ffd766; }
+.ep--black  { --c1: #2a2a34; --c2: #07070b; --ac: #a8b0c6; }
+
+/* the wrapper only carries width + the reveal — never a transform
+   that would fight the card's own */
+.ep-slot {
+  height: 100%;
 }
 
-/* ---- colour identities, straight off the OP TCG ---- */
-.tcg--red    { --c1: #b52630; --c2: #3d0a10; --ac: #ff7a6b; --band: #8e1b23; }
-.tcg--green  { --c1: #1c7a52; --c2: #062a1c; --ac: #63e2a6; --band: #14603f; }
-.tcg--blue   { --c1: #1a5f9e; --c2: #07203a; --ac: #7cc2f0; --band: #14497a; }
-.tcg--purple { --c1: #5a3a8f; --c2: #1b1030; --ac: #bb92ff; --band: #452b6e; }
-.tcg--yellow { --c1: #c9941a; --c2: #453005; --ac: #ffd766; --band: #9a7010; }
-.tcg--black  { --c1: #2c2c36; --c2: #08080c; --ac: #a8b0c6; --band: #1c1c24; }
-
-/* ---- the card ---- */
-.tcg {
-  --d: 9px; /* card stock thickness */
-  --rest: rotateX(6deg);
-  position: relative;
-  display: block;
-  padding: 9px;
-  border-radius: 20px;
-  transform: var(--rest);
-  transform-style: preserve-3d;
-  /* holographic foil border */
-  background:
-    conic-gradient(
-      from 200deg,
-      #35c6ff 0deg, #55f2a0 50deg, #ffe45e 100deg, #ff8ec4 150deg,
-      #9d7bff 205deg, #35d8ff 265deg, #7dffc4 315deg, #35c6ff 360deg
-    );
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.55),
-    0 40px 60px -28px rgba(0, 0, 0, 0.95);
-  transition: box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.tcg:hover {
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.55),
-    0 60px 84px -30px rgba(0, 0, 0, 0.95),
-    0 0 40px -6px rgba(244, 196, 48, 0.4);
-}
-/* foil grain across the border */
-.tcg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0.5;
-  background: repeating-linear-gradient(
-    115deg,
-    rgba(255, 255, 255, 0.55) 0 2px,
-    transparent 2px 6px
-  );
-}
-/* back of the card */
-.tcg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  transform: translateZ(calc(var(--d) * -1));
-  background: linear-gradient(160deg, #7a1d22, #2a0a0d);
-}
-
-/* ---- card stock edges: real geometry ---- */
-.wall {
-  position: absolute;
-  pointer-events: none;
-  backface-visibility: hidden;
-  background: linear-gradient(180deg, #fbf6e6, #cdc3aa);
-}
-.wall--t {
-  left: 0; bottom: 100%; width: 100%; height: var(--d);
-  transform-origin: center bottom;
-  transform: rotateX(90deg);
-  border-radius: 6px 6px 0 0;
-}
-.wall--b {
-  left: 0; top: 100%; width: 100%; height: var(--d);
-  transform-origin: center top;
-  transform: rotateX(-90deg);
-  background: linear-gradient(180deg, #cdc3aa, #8d8368);
-  border-radius: 0 0 6px 6px;
-}
-.wall--l {
-  top: 0; right: 100%; width: var(--d); height: 100%;
-  transform-origin: right center;
-  transform: rotateY(-90deg);
-  background: linear-gradient(90deg, #9d937a, #efe7d2);
-  border-radius: 6px 0 0 6px;
-}
-.wall--r {
-  top: 0; left: 100%; width: var(--d); height: 100%;
-  transform-origin: left center;
-  transform: rotateY(90deg);
-  background: linear-gradient(90deg, #efe7d2, #9d937a);
-  border-radius: 0 6px 6px 0;
-}
-
-/* ---- inner frame ---- */
-.tcg__inner {
+/* ---- the card: the mini-chart's panel, grown to card size ---- */
+.ep {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 22rem;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  background: #0a0a0e;
-  color: #fff;
+  padding: 0.55rem;
+  border-radius: 14px;
+  color: #f3e6cd;
+  background: linear-gradient(158deg, rgba(9, 34, 56, 0.95), rgba(5, 22, 38, 0.97));
+  border: 1px solid rgba(244, 196, 48, 0.3);
+  /* the hard offset is what little thickness the panel has; the soft one
+     is the shadow it casts */
+  box-shadow:
+    0 2px 0 rgba(244, 196, 48, 0.16),
+    0 18px 40px -22px rgba(0, 0, 0, 0.95);
+  transform: perspective(1000px) rotateX(3deg);
+  transform-origin: 50% 100%;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s,
+    box-shadow 0.35s;
+  contain: paint;
 }
-
-/* ---- artwork: gradient sky, impact lines, halftone, big glyph ---- */
-.tcg__art {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(90% 55% at 50% 0%, rgba(255, 255, 255, 0.3), transparent 62%),
-    radial-gradient(130% 95% at 50% 26%, var(--c1), var(--c2) 72%);
+.ep:hover {
+  transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+  border-color: rgba(244, 196, 48, 0.7);
+  box-shadow:
+    0 3px 0 rgba(244, 196, 48, 0.22),
+    0 28px 46px -24px rgba(0, 0, 0, 1);
 }
-/* manga impact lines radiating from the focal point */
-.tcg__art::before {
+/* one diagonal sheen, faded in by opacity alone — compositor work only */
+.ep::after {
   content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-conic-gradient(
-    from 0deg at 50% 34%,
-    rgba(255, 255, 255, 0.16) 0deg 0.55deg,
-    transparent 0.55deg 3.4deg
-  );
-  -webkit-mask-image: radial-gradient(circle at 50% 34%, transparent 20%, #000 68%);
-  mask-image: radial-gradient(circle at 50% 34%, transparent 20%, #000 68%);
-  opacity: 0.55;
-}
-/* screentone dots toward the bottom */
-.tcg__art::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 1.3px);
-  background-size: 5px 5px;
-  opacity: 0.4;
-  -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 90%);
-  mask-image: linear-gradient(180deg, transparent 28%, #000 90%);
-}
-.tcg__glyph {
-  position: absolute;
-  left: 50%;
-  top: 27%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  opacity: 0.34;
-  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.75));
-  pointer-events: none;
-}
-
-/* real artwork, when a card has a portrait to show */
-.tcg__photo {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 100%;
-  height: 64%;
-  transform: translateX(-50%);
-  object-fit: cover;
-  object-position: 50% 18%;
-  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 96%);
-  mask-image: linear-gradient(180deg, #000 58%, transparent 96%);
-}
-/* colour-identity wash so the photo belongs to the card */
-.tcg__photo + .tcg__wash {
-  position: absolute;
-  inset: 0 0 36% 0;
-  background: linear-gradient(180deg, transparent 30%, var(--c2) 96%);
-  mix-blend-mode: multiply;
-  opacity: 0.75;
-  pointer-events: none;
-}
-
-/* holo sheen that rides the pointer */
-.tcg__holo {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s;
-  mix-blend-mode: color-dodge;
-  background:
-    linear-gradient(115deg, transparent 26%, rgba(255, 255, 255, 0.5) 44%, transparent 58%),
-    conic-gradient(
-      from 180deg at var(--gx, 50%) var(--gy, 50%),
-      #ff8ab6, #ffd88a, #a8ffcf, #8ad4ff, #c9a8ff, #ff8ab6
-    );
-  background-blend-mode: overlay;
+  transition: opacity 0.35s;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 62%
+  );
 }
-.tcg:hover .tcg__holo { opacity: 0.32; }
+.ep:hover::after {
+  opacity: 1;
+}
 
-/* ---- top row: power + rarity stamp ---- */
-.tcg__head {
+/* ---- the still, framed the way the mini-chart frames its canvas ---- */
+.ep__thumb {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  padding: 0.5rem 0.6rem 0;
+  flex: none;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 9px;
+  border: 1px solid rgba(244, 196, 48, 0.14);
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.045) 0 2px,
+      transparent 2px 10px
+    ),
+    radial-gradient(120% 120% at 50% 0%, var(--c1), #04121f 82%);
 }
-/* The headline figure. It is a real measurement or it is not rendered at all —
-   the label underneath says what was counted, so the number can be checked. */
-.tcg__metric {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  line-height: 0.9;
-  margin-right: auto;
-  padding-left: 0.15rem;
+.ep__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 14%;
 }
-.tcg__metric b {
-  font-family: "Cinzel", serif;
-  font-weight: 900;
-  font-size: 2.1rem;
-  line-height: 0.9;
-  letter-spacing: 0.01em;
+/* the watermark icon standing in for a still, when there is no photograph */
+.ep__glyph {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-46%);
   color: #fff;
-  background: linear-gradient(180deg, #ffffff 30%, #cfd6e6 55%, #8e99b2 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.85)) drop-shadow(0 0 6px rgba(0, 0, 0, 0.7));
+  opacity: 0.16;
+  pointer-events: none;
 }
-.tcg__metric > span {
-  margin-top: 0.22rem;
-  font-family: "Special Elite", monospace;
-  font-size: 0.5rem;
-  letter-spacing: 0.16em;
-  white-space: nowrap;
-  color: rgba(255, 255, 255, 0.82);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-}
-/* the stamp carries ownership — LEAD, SOLE, BACKEND — so it sizes to its word */
-.tcg__stamp {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.1rem;
-  height: 1.55rem;
-  padding: 0 0.55rem;
-  border-radius: 999px;
-  font-family: "Cinzel", serif;
-  font-weight: 900;
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  color: #fff;
-  background: radial-gradient(circle at 35% 30%, #ff7ab8, #b3197a 70%, #7d0f55);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.8);
+/* one gradient keeps every badge legible over art or gradient alike */
+.ep__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 14, 24, 0.5) 0%,
+    rgba(4, 14, 24, 0.06) 34%,
+    rgba(4, 14, 24, 0.82) 78%,
+    rgba(4, 14, 24, 0.94) 100%
+  );
 }
 
-/* the result, set apart from the description above it */
-.tcg__outcome {
-  margin-top: 0.5rem;
-  padding-top: 0.45rem;
-  border-top: 1px dashed rgba(0, 0, 0, 0.35);
-  font-size: 0.72rem;
-  line-height: 1.4;
-  font-weight: 700;
-  color: #14472f;
-}
-.tcg__outcome::before {
-  content: "→ ";
-  color: #2f9b6d;
-  font-weight: 900;
-}
-/* vertical watermark down the right edge */
-.tcg__edge {
+/* the headline figure. It is a real measurement or it is not rendered at
+   all — the label says what was counted, so the number can be checked. */
+.ep__metric {
   position: absolute;
-  right: 0.28rem;
-  top: 4.6rem;
-  writing-mode: vertical-rl;
+  top: 0.55rem;
+  left: 0.65rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+.ep__metric b {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+.ep__metric > span {
   font-family: "Special Elite", monospace;
   font-size: 0.5rem;
   letter-spacing: 0.14em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+/* the stamp carries ownership — LEAD, SOLE, BACKEND — so it sizes to its word */
+.ep__stamp {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.6rem;
+  padding: 0.16rem 0.5rem;
+  border-radius: 999px;
+  font-family: "Cinzel", serif;
+  font-weight: 800;
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(6, 18, 30, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
-/* art breathing room before the text box */
-.tcg__stage {
+/* the episode slug: arc number, then the arc's own name */
+.ep__slug {
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  font-family: "Special Elite", monospace;
+  font-size: 0.58rem;
+  line-height: 1;
+}
+.ep__no {
+  flex: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.16em;
+  color: #0d1b26;
+  background: var(--gold);
+}
+.ep__title {
   flex: 1 1 auto;
-  min-height: 7.5rem;
+  min-width: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* runtime, in the corner a runtime would sit — here, stack depth */
+.ep__run {
+  flex: none;
+  margin-left: auto;
+  font-family: "Special Elite", monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.92);
+}
+.ep__run b {
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  color: #fff;
 }
 
-/* ---- effect text box ---- */
-.tcg__box {
-  position: relative;
-  margin: 0 0.55rem;
-  padding: 0.62rem 0.7rem;
-  border-radius: 5px;
-  color: #17100a;
+/* ---- the title block: the mini-chart's HUD, verbatim ---- */
+.ep__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 0.5rem 0.2rem 0.1rem;
+}
+.ep__kicker {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  /* the type keeps its line and the code gives way — a two-word type must
+     never break across lines the way "FIGHTING STYLE" wants to */
+  white-space: nowrap;
+  font-family: "Cinzel", serif;
+  font-weight: 800;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.ep__kicker span {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Special Elite", monospace;
+  font-weight: 400;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: rgba(243, 230, 205, 0.68);
+}
+.ep__kicker span::before {
+  content: "· ";
+}
+.ep__name {
+  margin-top: 0.15rem;
+  font-family: "Pirata One", "Cinzel", serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: #fbf3e2;
+}
+.ep__sub {
+  margin-top: 0.25rem;
+  font-family: "Special Elite", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  color: rgba(243, 230, 205, 0.75);
+}
+.ep__text {
+  margin-top: 0.55rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(244, 196, 48, 0.22);
   font-size: 0.8rem;
+  line-height: 1.55;
+  color: rgba(243, 230, 205, 0.94);
+}
+/* the result, set apart from the description above it */
+.ep__outcome {
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(244, 196, 48, 0.22);
+  font-size: 0.74rem;
   line-height: 1.45;
-  background: linear-gradient(180deg, rgba(250, 240, 218, 0.94), rgba(232, 212, 168, 0.92));
-  border: 1px solid rgba(0, 0, 0, 0.45);
-  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+  color: #8ff0bf;
+}
+.ep__outcome::before {
+  content: "→ ";
+  opacity: 0.7;
 }
 
-/* keyword pills */
+/* ---- footer: the mini-chart's dashed rule and mono row ---- */
+.ep__foot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* the effect text absorbs the slack, so this only bites on a card with
+     no effect text at all — the footer still lands on the bottom edge */
+  margin-top: auto;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(244, 196, 48, 0.22);
+  font-family: "Special Elite", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: rgba(243, 230, 205, 0.72);
+}
+.ep__attr {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--ac);
+  background: rgba(255, 255, 255, 0.06);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+.ep__edge {
+  min-width: 0;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ep__actions {
+  display: inline-flex;
+  flex: none;
+  gap: 0.8rem;
+  margin-left: auto;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ep__actions a {
+  color: rgba(255, 216, 110, 0.95);
+  transition: color 0.25s;
+}
+.ep__actions a:hover {
+  color: var(--gold);
+}
+
+/* ---- the wide finale card: no still, just the hail ---- */
+.ep--wide .ep__body {
+  align-items: center;
+  padding: 3rem 1.5rem;
+  border-radius: 9px;
+  border: 1px solid rgba(244, 196, 48, 0.14);
+  background: radial-gradient(120% 120% at 50% 0%, var(--c1), #04121f 78%);
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .ep--wide .ep__body {
+    padding: 4rem;
+  }
+}
+/* the finale's own kicker sits centred, so it can't use the flex row's rules */
+.ep--wide .ep__kicker {
+  justify-content: center;
+}
+
+/* keyword pills, sitting on the dark title block */
 .pill {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.05rem 0.45rem;
-  margin: 0 0.22rem 0.22rem 0;
+  padding: 0.08rem 0.5rem;
+  margin: 0 0.25rem 0.3rem 0;
   border-radius: 999px;
   font-family: "Cabin", sans-serif;
   font-weight: 700;
-  font-size: 0.66rem;
-  line-height: 1.5;
+  font-size: 0.68rem;
+  line-height: 1.6;
   white-space: nowrap;
-  border: 1.5px solid;
+  border: 1px solid;
 }
-.pill--k { background: #12100e; color: #fff; border-color: #12100e; }
-.pill--b { background: #eaf3ff; color: #14508f; border-color: #2f78c4; }
-.pill--r { background: #ffeceb; color: #a81f28; border-color: #d0464c; }
-.pill--g { background: #eafaf1; color: #14603f; border-color: #2f9b6d; }
-
-/* ---- name plate ---- */
-.tcg__plate {
-  position: relative;
-  padding: 0.5rem 0.7rem 0.55rem;
-}
-/* scrim so the name stays legible over any artwork */
-.tcg__plate::before {
-  content: "";
-  position: absolute;
-  inset: -1.6rem 0 0 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.55) 45%, rgba(0, 0, 0, 0.72));
-}
-.tcg__plate > * {
-  position: relative;
-}
-.tcg__type {
-  display: block;
-  margin: 0.45rem auto 0.3rem;
-  padding: 0.09rem 0.9rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  font-family: "Cinzel", serif;
-  font-weight: 700;
-  font-size: 0.6rem;
-  letter-spacing: 0.42em;
-  text-indent: 0.42em;
-  color: #fff;
-}
-.tcg__name {
-  text-align: center;
-  font-family: "Cinzel", serif;
-  font-weight: 900;
-  font-size: 1.35rem;
-  line-height: 1.1;
-  color: #fff;
-  text-shadow:
-    2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000,
-    0 0 12px rgba(0, 0, 0, 0.9);
-}
-.tcg__sub {
-  margin-top: 0.15rem;
-  text-align: center;
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
-}
-
-/* ---- bottom row: attribute, set code, cost ---- */
-.tcg__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-.tcg__attr {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  flex-shrink: 0;
-  color: var(--ac);
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-}
-.tcg__code {
-  font-family: "Special Elite", monospace;
-  font-size: 0.56rem;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-  white-space: nowrap;
-}
-.tcg__cost {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  flex-shrink: 0;
-  border-radius: 50%;
-  font-family: "Cinzel", serif;
-  font-weight: 900;
-  color: #fff;
-  background: radial-gradient(circle at 35% 28%, #7fc4f2, #17518c 72%, #0c3160);
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.9), inset 0 -4px 8px rgba(0, 0, 0, 0.35);
-}
-.tcg__cost b { font-size: 1.05rem; line-height: 1; }
-.tcg__cost span {
-  font-family: "Special Elite", monospace;
-  font-weight: 400;
-  font-size: 0.42rem;
-  letter-spacing: 0.08em;
-  opacity: 0.95;
-}
-
-/* links / actions dropped under the plate */
-.tcg__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-top: 0.6rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-.tcg__actions a { color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95); }
-.tcg__actions a:hover { color: var(--ac); }
+.pill--k { color: #fbf3e2; border-color: rgba(243, 230, 205, 0.45); background: rgba(243, 230, 205, 0.14); }
+.pill--b { color: #a9dcff; border-color: rgba(143, 208, 255, 0.55); background: rgba(143, 208, 255, 0.16); }
+.pill--r { color: #ffb0a8; border-color: rgba(255, 154, 146, 0.55); background: rgba(255, 154, 146, 0.16); }
+.pill--g { color: #92ecc0; border-color: rgba(126, 226, 176, 0.55); background: rgba(126, 226, 176, 0.16); }
 
 /* ---- DON!! tile: the little cards you tap for power ---- */
 .don {
-  --d: 7px;
-  --rest: rotateX(6deg);
-  position: relative;
-  padding: 6px;
-  border-radius: 14px;
-  transform: var(--rest);
-  transform-style: preserve-3d;
-  background: conic-gradient(
-    from 200deg,
-    #ffe9a8, #f4c430, #fff6d8, #d99a1c, #ffe9a8
-  );
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 26px 40px -22px rgba(0, 0, 0, 0.9);
-}
-.don::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  transform: translateZ(calc(var(--d) * -1));
-  background: linear-gradient(160deg, #7a1d22, #2a0a0d);
-}
-.don__inner {
   position: relative;
   overflow: hidden;
-  padding: 0.85rem 0.8rem;
-  border-radius: 9px;
-  border: 2px solid rgba(0, 0, 0, 0.85);
-  background:
-    radial-gradient(80% 60% at 50% 0%, rgba(255, 255, 255, 0.25), transparent 60%),
-    radial-gradient(120% 100% at 50% 20%, #1a5f9e, #07203a 75%);
+  padding: 0.8rem 0.7rem 0.65rem;
+  border-radius: 12px;
   text-align: center;
-  color: #fff;
+  color: #f3e6cd;
+  border: 1px solid rgba(244, 196, 48, 0.3);
+  background: linear-gradient(158deg, rgba(10, 39, 64, 0.86), rgba(7, 29, 48, 0.93));
+  box-shadow:
+    0 2px 0 rgba(244, 196, 48, 0.16),
+    0 14px 30px -20px rgba(0, 0, 0, 0.95);
+  transform: perspective(700px) rotateX(4deg);
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s;
 }
-.don__inner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-conic-gradient(
-    from 0deg at 50% 40%,
-    rgba(255, 255, 255, 0.14) 0deg 0.5deg,
-    transparent 0.5deg 3.2deg
-  );
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, transparent 26%, #000 72%);
-  mask-image: radial-gradient(circle at 50% 40%, transparent 26%, #000 72%);
+.don:hover {
+  transform: perspective(700px) rotateX(0deg) translateY(-4px);
+  border-color: rgba(244, 196, 48, 0.7);
 }
 .don__n {
-  position: relative;
   font-family: "Cinzel", serif;
   font-weight: 900;
-  font-size: 2rem;
+  font-size: 1.9rem;
   line-height: 1;
-  color: #fff;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+  color: #f3e6cd;
 }
 .don__l {
-  position: relative;
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed rgba(244, 196, 48, 0.22);
   font-family: "Special Elite", monospace;
   font-size: 0.6rem;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.16em;
+  color: rgba(243, 230, 205, 0.72);
 }
 
 /* mono key/value row */
@@ -909,16 +814,27 @@ body {
   align-items: baseline;
   gap: 0.5rem;
   font-family: "Special Elite", monospace;
-  font-size: 0.66rem;
+  font-size: 0.7rem;
   letter-spacing: 0.05em;
 }
-.kv > .kv-k { color: rgba(23, 16, 10, 0.55); }
+.kv > .kv-k { color: rgba(243, 230, 205, 0.68); }
 .kv > .kv-fill {
   flex: 1;
-  border-bottom: 1px dotted rgba(0, 0, 0, 0.4);
+  border-bottom: 1px dotted rgba(243, 230, 205, 0.28);
   transform: translateY(-0.18em);
 }
-.kv > .kv-v { color: #17100a; }
+.kv > .kv-v { color: rgba(243, 230, 205, 0.96); }
+
+/* the tilt and the lift are decoration — nobody who asked for less
+   motion needs either */
+@media (prefers-reduced-motion: reduce) {
+  .ep,
+  .ep:hover,
+  .don,
+  .don:hover {
+    transform: none;
+  }
+}
 
 
 /* ============================================================
