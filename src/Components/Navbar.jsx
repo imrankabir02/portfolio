@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import { useActiveSection, useClock } from "../hooks";
-import { FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { FiDownload, FiMenu, FiX, FiMap } from "react-icons/fi";
 import JollyRoger from "./JollyRoger";
+import { SAGAS, SAGA_IDS } from "../constants/sagas";
 
-const NAV_LINKS = [
-  { label: "Deck", href: "#home", id: "home" },
-  { label: "The Pirate", href: "#about", id: "about" },
-  { label: "Powers", href: "#skills", id: "skills" },
-  { label: "Bounties", href: "#projects", id: "projects" },
-  { label: "Voyage", href: "#experience", id: "experience" },
-  { label: "Training", href: "#educations", id: "educations" },
-  { label: "Hail", href: "#contact", id: "contact" },
-];
+// the nav is the route: one entry per saga, straight off the same source the
+// page headers and the 3D chart read from
+const NAV_LINKS = SAGAS.map((s) => ({
+  label: s.nav,
+  href: `#${s.id}`,
+  id: s.id,
+  no: s.no,
+  name: s.name,
+  arcs: s.arcs.length,
+}));
 
-const IDS = NAV_LINKS.map((l) => l.id);
+const IDS = SAGA_IDS;
+
+const openMap = () => window.dispatchEvent(new CustomEvent("open-saga-map"));
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -46,10 +50,13 @@ const Navbar = () => {
 
         {/* desktop pill */}
         <div className="items-center hidden gap-1 px-2 py-1 rounded-full lg:flex sea-panel">
-          {NAV_LINKS.map(({ label, href, id }) => (
+          {NAV_LINKS.map(({ label, href, id, no, name, arcs }) => (
             <a
               key={id}
               href={href}
+              title={`Saga ${no} — ${name} · ${arcs} arc${
+                arcs === 1 ? "" : "s"
+              }`}
               className={`relative px-3.5 py-1.5 text-sm rounded-full transition-colors ${
                 active === id
                   ? "text-sea-950"
@@ -69,6 +76,15 @@ const Navbar = () => {
           <span className="hidden font-mono text-[11px] text-gold/70 xl:block tabular-nums">
             {clock}
           </span>
+          <button
+            type="button"
+            onClick={openMap}
+            aria-label="Open the Grand Line saga map"
+            className="inline-flex items-center gap-2 px-4 py-2 font-mono text-xs rounded-full sea-panel hover:border-gold text-parch-light transition-colors"
+          >
+            <FiMap />
+            <span className="hidden sm:inline">Chart</span>
+          </button>
           <a
             href={cvFile}
             download="Mridha_Imran_Kabir_Backend.pdf"
@@ -96,20 +112,28 @@ const Navbar = () => {
       >
         <div className="mx-4 mt-1 sea-panel rounded-2xl">
           <ul className="flex flex-col p-3">
-            {NAV_LINKS.map(({ label, href, id }, i) => (
+            {NAV_LINKS.map(({ label, href, id, no, name, arcs }) => (
               <li key={id}>
                 <a
                   href={href}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl transition-colors ${
+                  className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-colors ${
                     active === id
                       ? "text-gold bg-gold/10"
                       : "text-parch-light/70 hover:text-parch-light"
                   }`}
                 >
-                  <span>{label}</span>
-                  <span className="font-mono text-[10px] text-gold/70">
-                    {String(i).padStart(2, "0")}
+                  <span className="flex flex-col">
+                    <span>{label}</span>
+                    <span className="font-mono text-[9px] tracking-[0.2em] text-parch-light/40">
+                      {name.toUpperCase()}
+                    </span>
+                  </span>
+                  <span className="font-mono text-[10px] text-gold/70 text-right shrink-0">
+                    SAGA {no}
+                    <span className="block text-parch-light/40">
+                      {arcs} ARC{arcs === 1 ? "" : "S"}
+                    </span>
                   </span>
                 </a>
               </li>

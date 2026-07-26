@@ -9,13 +9,17 @@ import Contact from "./Components/Contact";
 import Boot from "./Components/Boot";
 import { lazy, Suspense } from "react";
 import { useAmbient, useReveal, useScrollProgress, useBoot } from "./hooks";
+import { useRouteTracker } from "./route";
 
 // heavy three.js world — its own chunk, loaded after first paint
 const SeaWorld = lazy(() => import("./Components/three/SeaWorld"));
+// the saga chart — mini-map in the corner, full 3D map on demand
+const SagaMap = lazy(() => import("./Components/SagaMap"));
 
 const App = () => {
   useAmbient();
   useReveal();
+  useRouteTracker();
   const progress = useScrollProgress();
   const booting = useBoot();
 
@@ -52,6 +56,10 @@ const App = () => {
         <Educations />
         <Contact />
       </main>
+
+      <Suspense fallback={null}>
+        <SagaMap />
+      </Suspense>
     </div>
   );
 };

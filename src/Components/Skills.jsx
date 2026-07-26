@@ -18,8 +18,11 @@ import {
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa";
 import { SKILL_GROUPS } from "../constants";
+import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
 import TcgCard from "./TcgCard";
+
+const SAGA = sagaById("skills");
 
 // Keyed by the strings in SKILL_GROUPS; each entry is [icon, brand colour].
 const ICONS = {
@@ -66,12 +69,7 @@ const Skills = () => {
       id="skills"
       className="px-6 py-24 mx-auto scroll-mt-24 max-w-7xl md:px-8"
     >
-      <SectionHead
-        index="02"
-        kicker="Powers"
-        title="The arsenal aboard"
-        blurb="Every pirate has their devil fruit and their crew — here's the kit behind the systems: languages, fighting styles, the treasure vault, and the ship it all runs on."
-      />
+      <SectionHead saga={SAGA} />
 
       <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
         {SKILL_GROUPS.map((group, gi) => {
@@ -80,6 +78,8 @@ const Skills = () => {
           return (
             <TcgCard
               key={group.heading}
+              saga={SAGA}
+              arc={gi}
               tone={card.tone}
               max={11}
               data-reveal

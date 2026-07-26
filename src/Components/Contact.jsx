@@ -1,9 +1,13 @@
 import { MY_DETAILS } from "../constants";
+import { sagaById, SAGAS, TOTAL_ARCS } from "../constants/sagas";
 import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { FiArrowUp, FiMail, FiMapPin } from "react-icons/fi";
 import JollyRoger from "./JollyRoger";
 import Tilt from "./Tilt";
+import ArcTag from "./ArcTag";
+
+const SAGA = sagaById("contact");
 
 const SOCIALS = [
   { Icon: FaLinkedin, href: "https://www.linkedin.com/in/imrankabir02", label: "LinkedIn" },
@@ -21,7 +25,25 @@ const Contact = () => {
       id="contact"
       className="px-6 pt-8 pb-10 mx-auto scroll-mt-24 max-w-7xl md:px-8"
     >
-      {/* CTA — dealt as a wide EVENT card */}
+      {/* the final saga's own title card */}
+      <div data-reveal className="max-w-2xl mx-auto mb-8 text-center">
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
+          <span className="section-index">SAGA {SAGA.no}</span>
+          <span className="w-10 h-px bg-gold/50" />
+          <span className="eyebrow">{SAGA.kicker}</span>
+          <span className="text-gold/60">&#9670;</span>
+          <span className="saga-arc-count">{SAGA.arcs.length} ARCS</span>
+        </div>
+        <p className="font-pirate text-xl tracking-wide text-gold-light">
+          {SAGA.name}
+        </p>
+        <p className="mt-3 font-mono text-[10px] tracking-[0.28em] text-parch-light/45">
+          FINAL LEG · {SAGAS.length} SAGAS · {TOTAL_ARCS} ARCS SAILED
+        </p>
+      </div>
+
+      {/* Arc 01 — the hail, dealt as a wide EVENT card */}
+      <ArcTag saga={SAGA} i={0} className="max-w-md mx-auto" />
       <div data-reveal className="slab-stage">
         <Tilt max={4} rest={3} className="tcg tcg--red">
           <span className="wall wall--t" aria-hidden="true" />
@@ -65,7 +87,11 @@ const Contact = () => {
                 </span>
               </div>
 
-              <div className="flex items-center justify-center gap-3 mt-10">
+              {/* Arc 02 — the crew roster */}
+              <p className="mt-10 font-mono text-[10px] tracking-[0.28em] text-white/60">
+                ARC 02 — {SAGA.arcs[1].name}
+              </p>
+              <div className="flex items-center justify-center gap-3 mt-4">
                 {SOCIALS.map(({ Icon, href, label }) => (
                   <a
                     key={label}

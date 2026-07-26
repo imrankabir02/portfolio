@@ -1,8 +1,11 @@
 import { PROJECTS } from "../constants";
+import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
 import TcgCard from "./TcgCard";
 import JollyRoger from "./JollyRoger";
 import { FiArrowUpRight, FiLock, FiAnchor } from "react-icons/fi";
+
+const SAGA = sagaById("projects");
 
 const isLive = (p) => Boolean(p.appLink || p.gitLink);
 
@@ -87,16 +90,13 @@ const Projects = () => {
       id="projects"
       className="px-6 py-24 mx-auto scroll-mt-24 max-w-7xl md:px-8"
     >
-      <SectionHead
-        index="03"
-        kicker="Bounties"
-        title="Treasures hauled in"
-        blurb="Backend work doesn't photograph well — so each bounty is dealt as a card: the problem, the decision, and the tradeoff. Ordered by the size of the haul."
-      />
+      <SectionHead saga={SAGA} />
 
-      {/* the leader card — highest bounty */}
+      {/* Arc 01 — the leader card, highest bounty */}
       <div className="grid gap-8 mb-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-center">
         <TcgCard
+          saga={SAGA}
+          arc={0}
           tone="red"
           data-reveal
           max={9}
@@ -116,6 +116,7 @@ const Projects = () => {
           <Effect project={featured} compact hideHighlights />
         </TcgCard>
 
+        {/* the arc marker for this one already sits on its card */}
         <div data-reveal style={{ transitionDelay: "120ms" }}>
           <p className="eyebrow mb-3">&#9733; Highest bounty</p>
           <h3 className="text-3xl font-black font-display text-parch-light sm:text-4xl">
@@ -154,6 +155,8 @@ const Projects = () => {
         {rest.map((project, i) => (
           <TcgCard
             key={project.title}
+            saga={SAGA}
+            arc={i + 1}
             tone={TONES[(i + 1) % TONES.length]}
             data-reveal
             style={{ transitionDelay: `${(i % 3) * 90}ms` }}

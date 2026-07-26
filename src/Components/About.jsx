@@ -5,8 +5,12 @@ import cvFile from "../assets/Mridha_Imran_Kabir_Backend.pdf";
 import SectionHead from "./SectionHead";
 import TcgCard from "./TcgCard";
 import Tilt from "./Tilt";
+import ArcTag from "./ArcTag";
+import { sagaById } from "../constants/sagas";
 import { useCountUp } from "../hooks";
 import { FiDownload, FiAnchor } from "react-icons/fi";
+
+const SAGA = sagaById("about");
 
 const STATS = [
   { value: EXPERIENCES.length, suffix: "", label: "PORTS OF CALL" },
@@ -51,15 +55,13 @@ const About = () => {
       id="about"
       className="px-6 py-24 mx-auto scroll-mt-24 max-w-7xl md:px-8"
     >
-      <SectionHead
-        index="01"
-        kicker="The Pirate"
-        title="A backend that behaves under pressure"
-      />
+      <SectionHead saga={SAGA} />
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_1fr]">
-        {/* the leader card */}
+        {/* Arc 01 — the leader card */}
         <TcgCard
+          saga={SAGA}
+          arc={0}
           tone="red"
           data-reveal
           max={9}
@@ -93,8 +95,9 @@ const About = () => {
           </p>
         </TcgCard>
 
-        {/* the log entry beside it */}
+        {/* Arc 02 — the log entry beside it */}
         <div data-reveal style={{ transitionDelay: "120ms" }}>
+          <ArcTag saga={SAGA} i={1} />
           <div className="space-y-4 text-lg leading-relaxed text-parch-light/85">
             {ABOUT_TEXT.split("\n\n").map((para) => (
               <p key={para.slice(0, 24)}>{para}</p>
@@ -103,9 +106,8 @@ const About = () => {
 
           <div className="my-7 hairline-gold" />
 
-          <p className="mb-4 text-xs tracking-[0.28em] uppercase font-mono text-gold">
-            Haki I fight with
-          </p>
+          {/* Arc 03 — the arc marker already names it */}
+          <ArcTag saga={SAGA} i={2} className="mb-4" />
           <div className="flex flex-wrap gap-2.5">
             {SKILLSETS.map((skill) => (
               <span key={skill} className="chip-dark">
@@ -122,8 +124,11 @@ const About = () => {
             <FiDownload /> Read the Log Book
           </a>
 
-          {/* DON!! deck */}
-          <div ref={ref} className="grid grid-cols-2 gap-4 mt-10 sm:grid-cols-4">
+          {/* Arc 04 — DON!! deck */}
+          <div className="mt-10">
+            <ArcTag saga={SAGA} i={3} />
+          </div>
+          <div ref={ref} className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {STATS.map((s) => (
               <Don key={s.label} {...s} run={run} />
             ))}
