@@ -43,7 +43,7 @@ const SectionHead = ({ saga, center }) => {
       </h2>
 
       {saga.blurb && (
-        <p className="mt-4 text-lg leading-relaxed text-parch-light/75">
+        <p className="mt-4 text-lg leading-relaxed text-parch-light/88">
           {saga.blurb}
         </p>
       )}

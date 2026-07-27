@@ -33,7 +33,8 @@ const Navbar = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="flex items-center justify-between h-16 px-4 mx-auto max-w-7xl md:px-8">
+      <span className="nav-veil" aria-hidden="true" />
+      <nav className="relative flex items-center justify-between h-16 px-4 mx-auto max-w-7xl md:px-8">
         {/* wordmark */}
         <a href="#home" className="flex items-center gap-2.5 group">
           <span className="relative flex items-center justify-center w-10 h-10">

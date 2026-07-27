@@ -1,3 +1,9 @@
+import { lazy, Suspense, useState } from "react";
+import { FiMaximize2 } from "react-icons/fi";
+
+// the full episode is only ever needed once something is clicked
+const EpModal = lazy(() => import("./EpModal"));
+
 /**
  * An episode card — one arc of a saga, laid out the way a streaming guide
  * lays out an episode.
@@ -13,6 +19,10 @@
  * previous trading-card build expensive to render twenty times over. The
  * wrapper exists only to carry width and the reveal transition, which must
  * stay off the card so the two transforms never fight.
+ *
+ * The face is the short version. Anything passed as `detail` turns the card
+ * into a button that opens the full episode in a modal — so the grid stays
+ * scannable and the depth is one click away rather than always on screen.
  */
 export default function EpCard({
   saga,
@@ -34,18 +44,27 @@ export default function EpCard({
   cost,
   costLabel = "COST",
   actions,
+  detail,
   className = "",
   wrapperClassName = "",
   style,
   children,
   ...props
 }) {
+  const [open, setOpen] = useState(false);
   const marked = saga != null && arc != null;
   const arcName = marked ? saga.arcs?.[arc]?.name : null;
 
+  const card = {
+    tone, saga, arc, image, imageAlt, glyph, metric, metricLabel, stamp,
+    cost, costLabel, type, code, name, sub, outcome, edge, attr, actions,
+  };
+
   return (
     <div className={`ep-slot ${wrapperClassName}`} style={style} {...props}>
-      <article className={`ep ep--${tone} ${className}`}>
+      <article
+        className={`ep ep--${tone} ${detail ? "ep--open" : ""} ${className}`}
+      >
         <div className="ep__thumb">
           {image && <img className="ep__photo" src={image} alt={imageAlt} />}
           {glyph && (
@@ -54,6 +73,12 @@ export default function EpCard({
             </span>
           )}
           <span className="ep__scrim" aria-hidden="true" />
+
+          {detail && (
+            <span className="ep__more" aria-hidden="true">
+              <FiMaximize2 size={12} /> FULL EPISODE
+            </span>
+          )}
 
           {/* the figure is a real one or the slot stays empty — nothing here
               is invented for the sake of filling it */}
@@ -109,7 +134,26 @@ export default function EpCard({
             </div>
           )}
         </div>
+
+        {/* the whole card is the click target, laid over it the way the
+            mini-chart does — the footer links sit above it and still win */}
+        {detail && (
+          <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="ep__hit"
+            aria-label={`Open the full episode — ${name || arcName || "this card"}`}
+          />
+        )}
       </article>
+
+      {open && (
+        <Suspense fallback={null}>
+          <EpModal {...card} onClose={() => setOpen(false)}>
+            {detail}
+          </EpModal>
+        </Suspense>
+      )}
     </div>
   );
 }
