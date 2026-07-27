@@ -78,9 +78,9 @@ body {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(4, 18, 31, 0.1) 0%,
-    rgba(4, 18, 31, 0.4) 52%,
-    rgba(4, 18, 31, 0.56) 100%
+    rgba(4, 18, 31, 0.38) 0%,
+    rgba(4, 18, 31, 0.72) 50%,
+    rgba(4, 18, 31, 0.86) 100%
   );
 }
 
@@ -284,9 +284,47 @@ body {
 }
 
 /* Dark "sea log" panel variant — for HUD / nav / anything over parchment feels wrong */
+/* Long-form prose has no panel of its own, so where it crosses the ship or a
+   lit island it needs one. A single soft radial, no blur, no border — the
+   text gets a dark bed and the sea still shows around the edges. */
+.log-scrim {
+  position: relative;
+}
+.log-scrim > * {
+  position: relative;
+}
+.log-scrim::before {
+  content: "";
+  position: absolute;
+  inset: -1.1rem -1.4rem;
+  border-radius: 18px;
+  pointer-events: none;
+  background: radial-gradient(
+    118% 100% at 30% 45%,
+    rgba(4, 18, 31, 0.93),
+    rgba(4, 18, 31, 0.6) 68%,
+    transparent 100%
+  );
+}
+
+/* the header floats over the page, so it carries its own scrim — without one,
+   card text slides under the wordmark and the two read as noise */
+.nav-veil {
+  position: absolute;
+  inset: -1px 0 auto 0;
+  height: 5.5rem;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(4, 18, 31, 0.96) 0%,
+    rgba(4, 18, 31, 0.8) 46%,
+    transparent 100%
+  );
+}
+
 .sea-panel {
   position: relative;
-  background: linear-gradient(158deg, rgba(10, 39, 64, 0.82), rgba(7, 29, 48, 0.9));
+  background: linear-gradient(158deg, rgba(10, 39, 64, 0.9), rgba(7, 29, 48, 0.94));
   border: 1px solid rgba(244, 196, 48, 0.28);
   border-radius: 12px;
   backdrop-filter: blur(8px);
@@ -429,7 +467,7 @@ body {
   padding: 0.55rem;
   border-radius: 14px;
   color: #f3e6cd;
-  background: linear-gradient(158deg, rgba(9, 34, 56, 0.95), rgba(5, 22, 38, 0.97));
+  background: linear-gradient(158deg, #0a2740, #05192c);
   border: 1px solid rgba(244, 196, 48, 0.3);
   /* the hard offset is what little thickness the panel has; the soft one
      is the shadow it casts */
@@ -511,10 +549,10 @@ body {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(4, 14, 24, 0.5) 0%,
-    rgba(4, 14, 24, 0.06) 34%,
-    rgba(4, 14, 24, 0.82) 78%,
-    rgba(4, 14, 24, 0.94) 100%
+    rgba(3, 11, 20, 0.72) 0%,
+    rgba(3, 11, 20, 0.18) 40%,
+    rgba(3, 11, 20, 0.88) 76%,
+    rgba(3, 11, 20, 0.96) 100%
   );
 }
 
@@ -531,17 +569,17 @@ body {
 .ep__metric b {
   font-family: "Cinzel", serif;
   font-weight: 900;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   line-height: 1;
   color: #fff;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95), 0 0 14px rgba(0, 0, 0, 0.8);
 }
 .ep__metric > span {
   font-family: "Special Elite", monospace;
-  font-size: 0.5rem;
+  font-size: 0.54rem;
   letter-spacing: 0.14em;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.85);
 }
 /* the stamp carries ownership — LEAD, SOLE, BACKEND — so it sizes to its word */
 .ep__stamp {
@@ -555,9 +593,10 @@ body {
   font-size: 0.56rem;
   letter-spacing: 0.12em;
   white-space: nowrap;
+  font-size: 0.58rem;
   color: #fff;
-  background: rgba(6, 18, 30, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(3, 11, 20, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
 /* the episode slug: arc number, then the arc's own name */
@@ -571,8 +610,9 @@ body {
   gap: 0.45rem;
   min-width: 0;
   font-family: "Special Elite", monospace;
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 .ep__no {
   flex: none;
@@ -587,7 +627,7 @@ body {
   min-width: 0;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.95);
+  color: #fff;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -600,7 +640,7 @@ body {
   font-size: 0.55rem;
   letter-spacing: 0.1em;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.92);
+  color: #fff;
 }
 .ep__run b {
   font-family: "Cinzel", serif;
@@ -637,9 +677,9 @@ body {
   white-space: nowrap;
   font-family: "Special Elite", monospace;
   font-weight: 400;
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
-  color: rgba(243, 230, 205, 0.68);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: rgba(243, 230, 205, 0.82);
 }
 .ep__kicker span::before {
   content: "· ";
@@ -650,22 +690,22 @@ body {
   font-size: 1.35rem;
   line-height: 1.1;
   letter-spacing: 0.02em;
-  color: #fbf3e2;
+  color: #fff8ea;
 }
 .ep__sub {
   margin-top: 0.25rem;
   font-family: "Special Elite", monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.06em;
-  color: rgba(243, 230, 205, 0.75);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: rgba(243, 230, 205, 0.88);
 }
 .ep__text {
   margin-top: 0.55rem;
   padding-top: 0.5rem;
   border-top: 1px dashed rgba(244, 196, 48, 0.22);
-  font-size: 0.8rem;
-  line-height: 1.55;
-  color: rgba(243, 230, 205, 0.94);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  color: #ece0c8;
 }
 /* the result, set apart from the description above it */
 .ep__outcome {
@@ -693,9 +733,9 @@ body {
   padding-top: 0.45rem;
   border-top: 1px dashed rgba(244, 196, 48, 0.22);
   font-family: "Special Elite", monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  color: rgba(243, 230, 205, 0.72);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: rgba(243, 230, 205, 0.85);
 }
 .ep__attr {
   display: inline-flex;
@@ -729,6 +769,194 @@ body {
 }
 .ep__actions a:hover {
   color: var(--gold);
+}
+
+/* ---- a card that opens: the click target and its cue ---- */
+.ep--open {
+  cursor: pointer;
+}
+/* laid over the whole card, the way the mini-chart lays one over its canvas.
+   The footer links sit above it, so "Set sail" still goes where it says. */
+.ep__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  cursor: pointer;
+}
+.ep__actions {
+  position: relative;
+  z-index: 2;
+}
+.ep__hit:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -4px;
+}
+/* the cue rides the still, the way a streaming guide floats a play button */
+.ep__more {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: "Special Elite", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: #0d1b26;
+  background: var(--gold);
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+  transition: opacity 0.28s, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ep--open:hover .ep__more,
+.ep--open:focus-within .ep__more {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+/* touch has no hover to reveal it, so there the cue simply stays on —
+   centred, where it already sits, so nothing else has to move aside */
+@media (hover: none) {
+  .ep__more {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ============================================================
+   THE FULL EPISODE — the card, opened.
+
+   Same panel, same hairline, same framed still, given room to say
+   everything the face summarised. It arrives on a real perspective:
+   tilted back and pushed away, settling flat. One transform on one
+   element — the 3D costs a compositor frame and nothing else.
+   ============================================================ */
+.ep-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+.ep-modal__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 10, 18, 0.86);
+  animation: epFade 0.3s ease-out both;
+}
+/* the perspective host — it must never carry the fade, or it flattens */
+.ep-modal__stage {
+  position: relative;
+  width: 100%;
+  max-width: 44rem;
+  perspective: 1400px;
+  perspective-origin: 50% 30%;
+}
+.ep-modal__panel {
+  max-height: min(88vh, 52rem);
+  /* the panel is a flex column; without this the scroll area refuses to
+     shrink and the whole dialog grows past the viewport instead */
+  min-height: 0;
+  cursor: default;
+  transform-origin: 50% 100%;
+  animation: epRise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* the modal is not a card in a grid: it does not tilt, lift or sheen */
+.ep-modal__panel:hover {
+  transform: none;
+  border-color: rgba(244, 196, 48, 0.3);
+  box-shadow:
+    0 2px 0 rgba(244, 196, 48, 0.16),
+    0 40px 70px -30px rgba(0, 0, 0, 1);
+}
+.ep-modal__panel::after {
+  content: none;
+}
+.ep-modal__panel .ep__body {
+  min-height: 0;
+}
+.ep-modal__thumb {
+  aspect-ratio: 21 / 9;
+}
+/* the close button takes the corner, so the stamp steps aside for it */
+.ep-modal__panel .ep__stamp {
+  right: 3.6rem;
+}
+.ep-modal__name {
+  font-size: 1.9rem;
+}
+/* the body scrolls, not the page behind it */
+.ep-modal__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 0.55rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(244, 196, 48, 0.22);
+  font-size: 0.86rem;
+  line-height: 1.62;
+  color: #ece0c8;
+  overscroll-behavior: contain;
+}
+.ep-modal__scroll::-webkit-scrollbar { width: 5px; }
+.ep-modal__scroll::-webkit-scrollbar-track { background: transparent; }
+.ep-modal__scroll::-webkit-scrollbar-thumb {
+  background: rgba(244, 196, 48, 0.35);
+  border-radius: 3px;
+}
+.ep-modal__x {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  color: #f3e6cd;
+  background: rgba(3, 11, 20, 0.85);
+  border: 1px solid rgba(244, 196, 48, 0.4);
+  transition: border-color 0.25s, color 0.25s;
+}
+.ep-modal__x:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.ep-modal__x:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@keyframes epFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes epRise {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateX(18deg) translate3d(0, 32px, -140px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1400px) rotateX(0deg) translate3d(0, 0, 0);
+  }
+}
+
+@media (min-width: 768px) {
+  .ep-modal__panel {
+    padding: 0.75rem;
+  }
+  .ep-modal__scroll {
+    font-size: 0.9rem;
+  }
 }
 
 /* ---- the wide finale card: no still, just the hail ---- */
@@ -803,9 +1031,9 @@ body {
   padding-top: 0.4rem;
   border-top: 1px dashed rgba(244, 196, 48, 0.22);
   font-family: "Special Elite", monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  color: rgba(243, 230, 205, 0.72);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: rgba(243, 230, 205, 0.85);
 }
 
 /* mono key/value row */

@@ -1,4 +1,5 @@
 import { EXPERIENCES } from "../constants";
+import { firstSentence } from "../utils";
 import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
 import EpCard from "./EpCard";
@@ -13,6 +14,17 @@ const OWNERSHIP = {
   BACKEND: "Backend",
   SOLO: "Built solo",
 };
+
+const Pills = ({ exp }) => (
+  <p className="mb-1.5">
+    <span className="pill pill--k">{OWNERSHIP[exp.ownership]}</span>
+    {exp.year.includes("Present") ? (
+      <span className="pill pill--g">Currently aboard</span>
+    ) : (
+      <span className="pill pill--b">Completed</span>
+    )}
+  </p>
+);
 
 const Experience = () => {
   return (
@@ -58,36 +70,30 @@ const Experience = () => {
                   type="PORT OF CALL"
                   name={exp.role}
                   sub={exp.company}
-                  glyph={<FiCompass size={88} aria-hidden="true" />}
-                  attr={<FiCompass size={14} />}
+                  glyph={<FiCompass size={104} aria-hidden="true" />}
+                  attr={<FiCompass size={15} />}
                   code={exp.year.toUpperCase()}
                   cost={exp.technologies.length}
                   costLabel="STACK"
                   edge={exp.company}
+                  detail={
+                    <>
+                      <Pills exp={exp} />
+                      <p>{exp.description}</p>
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {exp.technologies.map((t) => (
+                          <span key={t} className="chip-dark">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  }
                 >
-                  <p className="mb-1.5">
-                    <span className="pill pill--k">
-                      {OWNERSHIP[exp.ownership]}
-                    </span>
-                    {exp.year.includes("Present") ? (
-                      <span className="pill pill--g">Currently aboard</span>
-                    ) : (
-                      <span className="pill pill--b">Completed</span>
-                    )}
+                  <Pills exp={exp} />
+                  <p className="text-[0.8rem] leading-snug">
+                    {firstSentence(exp.description)}
                   </p>
-                  <p className="text-[0.78rem] leading-snug">
-                    {exp.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {exp.technologies.map((t) => (
-                      <span
-                        key={t}
-                        className="px-1.5 py-0.5 text-[0.62rem] font-semibold border rounded border-gold/25 bg-gold/[0.07] text-parch-light/75"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
                 </EpCard>
               </div>
             );

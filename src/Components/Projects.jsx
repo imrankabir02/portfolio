@@ -1,4 +1,5 @@
 import { PROJECTS } from "../constants";
+import { firstSentence } from "../utils";
 import { sagaById } from "../constants/sagas";
 import SectionHead from "./SectionHead";
 import EpCard from "./EpCard";
@@ -70,24 +71,40 @@ const Links = ({ project }) =>
     </>
   ) : null;
 
-const Effect = ({ project, compact, hideHighlights }) => (
+/* The face: what it is, in one line. Everything else waits behind the click. */
+const Face = ({ project }) => (
   <>
     <Pills project={project} />
-    <p className={compact ? "text-[0.78rem] leading-snug" : ""}>
-      {project.description}
+    <p className="text-[0.8rem] leading-snug">
+      {firstSentence(project.description)}
     </p>
-    {project.highlights && !hideHighlights && (
-      <ul className="mt-2 space-y-1 text-[0.72rem] leading-snug">
+  </>
+);
+
+/* The full episode: the whole description, what it took, and the stack. */
+const Detail = ({ project }) => (
+  <>
+    <Pills project={project} />
+    <p>{project.description}</p>
+    {project.highlights && (
+      <ul className="mt-3 space-y-1.5">
         {project.highlights.map((h) => (
-          <li key={h} className="flex gap-2">
-            <span className="mt-1.5 h-1 w-1 shrink-0 rotate-45 bg-gold/70" />
+          <li key={h} className="flex gap-2.5">
+            <span className="mt-2 h-1 w-1 shrink-0 rotate-45 bg-gold" />
             {h}
           </li>
         ))}
       </ul>
     )}
+    <div className="flex flex-wrap gap-2 mt-4">
+      {project.technologies.map((t) => (
+        <span key={t} className="chip-dark">
+          {t}
+        </span>
+      ))}
+    </div>
     {!isLive(project) && project.note && (
-      <p className="mt-2 text-[0.7rem] italic opacity-70">{project.note}</p>
+      <p className="mt-3 text-[0.78rem] italic opacity-75">{project.note}</p>
     )}
   </>
 );
@@ -123,12 +140,13 @@ const Projects = () => {
           costLabel="STACK"
           edge={featured.context}
           actions={<Links project={featured} />}
+          detail={<Detail project={featured} />}
         >
-          <Effect project={featured} compact hideHighlights />
+          <Face project={featured} />
         </EpCard>
 
         {/* the arc marker for this one already sits on its card */}
-        <div data-reveal style={{ transitionDelay: "120ms" }}>
+        <div data-reveal className="log-scrim" style={{ transitionDelay: "120ms" }}>
           <p className="eyebrow mb-3">&#9733; Highest bounty</p>
           <h3 className="text-3xl font-black font-display text-parch-light sm:text-4xl">
             {featured.title}
@@ -138,11 +156,11 @@ const Projects = () => {
               {featured.org}
             </p>
           )}
-          <p className="max-w-xl mt-5 leading-relaxed text-parch-light/80">
+          <p className="max-w-xl mt-5 leading-relaxed text-parch-light/90">
             {featured.description}
           </p>
           {featured.highlights && (
-            <ul className="mt-5 space-y-2.5 text-sm text-parch-light/70">
+            <ul className="mt-5 space-y-2.5 text-sm text-parch-light/85">
               {featured.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" />
@@ -185,8 +203,9 @@ const Projects = () => {
             costLabel="STACK"
             edge={project.context}
             actions={<Links project={project} />}
+            detail={<Detail project={project} />}
           >
-            <Effect project={project} compact />
+            <Face project={project} />
           </EpCard>
         ))}
       </div>

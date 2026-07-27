@@ -110,7 +110,7 @@ const About = () => {
         {/* Arc 02 — the log entry beside it */}
         <div data-reveal style={{ transitionDelay: "120ms" }}>
           <ArcTag saga={SAGA} i={1} />
-          <div className="space-y-4 text-lg leading-relaxed text-parch-light/85">
+          <div className="log-scrim space-y-4 text-lg leading-relaxed text-parch-light/90">
             {ABOUT_TEXT.split("\n\n").map((para) => (
               <p key={para.slice(0, 24)}>{para}</p>
             ))}
